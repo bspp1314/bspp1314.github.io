@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>golang on 白水飘萍</title>
+    <link>http://localhost:1313/categories/golang/</link>
+    <description>Recent content in golang on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 08 Nov 2020 16:25:32 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WaitGroup的使用和源码</title>
+      <link>http://localhost:1313/post/golang/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/waitgroup%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E6%BA%90%E7%A0%81/</link>
+      <pubDate>Sun, 08 Nov 2020 16:25:32 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/waitgroup%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E6%BA%90%E7%A0%81/</guid>
+      <description>WaitGroup 用途 sync.WaitGroup 它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成 A WaitGroup waits for a collection of goroutines to finish.The main goroutine calls</description>
+    </item>
+    
+    <item>
+      <title>Gin的学习笔记3 Context分析</title>
+      <link>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03-context%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 26 Oct 2020 16:50:45 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03-context%E5%88%86%E6%9E%90/</guid>
+      <description>Context是框架中非常重要的一点，它允许我们在中间件间共享变量，管理整个流程，验证请求的json以及提供一个json的响应体. 通常情况下</description>
+    </item>
+    
+    <item>
+      <title>Context的使用和源码</title>
+      <link>http://localhost:1313/post/golang/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/context%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E6%BA%90%E7%A0%81/</link>
+      <pubDate>Tue, 20 Oct 2020 10:57:12 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/context%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E6%BA%90%E7%A0%81/</guid>
+      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
+&lt;p&gt;看了很多了关于Context的介绍，感觉还是官方的博客最准确。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Gin的学习笔记2 中间件的使用</title>
+      <link>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 19 Oct 2020 10:41:16 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>&lt;h1 id=&#34;gin中间件的作用&#34;&gt;Gin中间件的作用&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Web请求到到达我们定义的HTTP请求处理方法之前，拦截请求并进行相应处理(比如：权限验证，数据过滤等)，这个可以类比为&lt;code&gt;前置拦截器&lt;/code&gt;或&lt;code&gt;前置过滤器&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Http源码学习1</title>
+      <link>http://localhost:1313/post/golang/http%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A01/</link>
+      <pubDate>Wed, 14 Oct 2020 11:14:24 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/http%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A01/</guid>
+      <description>&lt;h1 id=&#34;简单的使用&#34;&gt;简单的使用&lt;/h1&gt;
+&lt;p&gt;对于Golang来说，实现一个简单的&lt;code&gt;http server&lt;/code&gt;非常容易，只需要短短几行代码。我们直接来看一个简单的例子。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Gin的学习笔记1-简单的使用</title>
+      <link>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AE%80%E5%8D%95%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 09 Oct 2020 18:49:19 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AE%80%E5%8D%95%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>gin 是什么 Gin is a web framework written in Go (Golang). It features a martini-like API with much better performance, up to 40 times faster thanks to httprouter 简单的使用 1 2 3 4 5 6 7 8 9 10 11 12 13 14 func main() { r := gin.Default() r.GET(&amp;#34;/hello&amp;#34;, HelloAction) r.Run() // listen and serve on 0.0.0.0:8080} } func HelloAction(c *gin.Context) { name</description>
+    </item>
+    
+    <item>
+      <title>Go常见库之validator</title>
+      <link>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bvalidator/</link>
+      <pubDate>Fri, 09 Oct 2020 13:58:10 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bvalidator/</guid>
+      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;Validator&lt;/code&gt;是一个基于结构体tag用于对数据进行校验库，在 Web 开发中，对用户传过来的数据我们都需要进行严格校验，防止用户的恶意请求。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>反射</title>
+      <link>http://localhost:1313/post/golang/%E5%8F%8D%E5%B0%84/</link>
+      <pubDate>Wed, 30 Sep 2020 10:43:49 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/%E5%8F%8D%E5%B0%84/</guid>
+      <description>&lt;h1 id=&#34;反射的概念&#34;&gt;反射的概念&lt;/h1&gt;
+&lt;p&gt;在计算机科学领域，反射是指一类应用，它们能够自描述和自控制。也就是说，这类应用通过采用某种机制来实现对自己行为的描述（self-representation）和监测（examination），并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Golang反射的常见操作</title>
+      <link>http://localhost:1313/post/golang/golang%E5%8F%8D%E5%B0%84%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Tue, 29 Sep 2020 18:13:22 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/golang%E5%8F%8D%E5%B0%84%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Go常见库之logrus</title>
+      <link>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Blogrus/</link>
+      <pubDate>Tue, 15 Sep 2020 17:39:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Blogrus/</guid>
+      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
+&lt;p&gt;logrus 其是一个 golang 结构化后的日志包，API完全兼容标准包logger。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go常见库之cron</title>
+      <link>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bcron/</link>
+      <pubDate>Mon, 14 Sep 2020 10:37:34 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bcron/</guid>
+      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/robfig/cron&#34;&gt;&lt;code&gt;cron&lt;/code&gt;&lt;/a&gt;一个用于管理定时任务的库，用 Go 实现 Linux 中crontab这个命令的效果。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在Xorm中使用Join和Extends标记</title>
+      <link>http://localhost:1313/post/golang/%E5%9C%A8xorm%E4%B8%AD%E4%BD%BF%E7%94%A8join%E5%92%8Cextends%E6%A0%87%E8%AE%B0/</link>
+      <pubDate>Wed, 19 Aug 2020 15:03:01 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/%E5%9C%A8xorm%E4%B8%AD%E4%BD%BF%E7%94%A8join%E5%92%8Cextends%E6%A0%87%E8%AE%B0/</guid>
+      <description>&lt;p&gt;Xorm的基本操作都是比较简单的，可能大家也都比较熟悉了。这个文章主要讲解extends标记和join的使用。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>golang切片的原理和应用</title>
+      <link>http://localhost:1313/post/golang/golang%E5%88%87%E7%89%87%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/</link>
+      <pubDate>Tue, 18 Aug 2020 22:16:30 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/golang%E5%88%87%E7%89%87%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/</guid>
+      <description>&lt;p&gt;本文为转载&lt;/p&gt;
+&lt;h1 id=&#34;概述&#34;&gt;概述&lt;/h1&gt;
+&lt;p&gt;切片是 Go 中的一种基本的数据结构。切片的设计想法是由动态数组概念而来，为了开发者可以更加方便的使一个数据结构可以自动增加和减少。但是切片本身并不是动态数据或者数组指针。切片常见的操作有 reslice、append、copy。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>53最大子序和 - 白水飘萍</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="白水飘萍" /><meta name="description" content="题目 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 1 2 3 输入: [-2,1,-3,4,-1,2,1,-5,4] 输出: 6 解释: 连续子数组" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/leetcode/53%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.651e6917abb0239242daa570c2bec9867267bbcd83646da5a850afe573347b44.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="53最大子序和" />
+<meta property="og:description" content="题目 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 1 2 3 输入: [-2,1,-3,4,-1,2,1,-5,4] 输出: 6 解释: 连续子数组" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/leetcode/53%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/" />
+<meta property="article:published_time" content="2020-10-30T13:50:34+08:00" />
+<meta property="article:modified_time" content="2020-10-30T13:50:34+08:00" />
+<meta itemprop="name" content="53最大子序和">
+<meta itemprop="description" content="题目 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 1 2 3 输入: [-2,1,-3,4,-1,2,1,-5,4] 输出: 6 解释: 连续子数组">
+<meta itemprop="datePublished" content="2020-10-30T13:50:34+08:00" />
+<meta itemprop="dateModified" content="2020-10-30T13:50:34+08:00" />
+<meta itemprop="wordCount" content="739">
+
+
+
+<meta itemprop="keywords" content="数组,分治算法,动态规划,leetcode-easy," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="53最大子序和"/>
+<meta name="twitter:description" content="题目 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 1 2 3 输入: [-2,1,-3,4,-1,2,1,-5,4] 输出: 6 解释: 连续子数组"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">白水飘萍</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">白水飘萍</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">53最大子序和</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-10-30 </span>
+        <div class="post-category">
+            <a href="/categories/leetcode/"> leetcode </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#题目">题目</a></li>
+    <li><a href="#解答">解答</a></li>
+    <li><a href="#动态规划">动态规划</a></li>
+    <li><a href="#分治算法">分治算法</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="题目">题目</h1>
+<p>给定一个整数数组 <code>nums</code> ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p><strong>示例:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">输入: [-2,1,-3,4,-1,2,1,-5,4]
+输出: 6
+解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="解答">解答</h1>
+<h1 id="动态规划">动态规划</h1>
+<p><strong>用 dp(i) 代表以第 i 个数结尾的「连续子数组的最大和</strong>，那么我们要求的最大和为
+$$
+\max_{0 \leq i \leq n - 1} { dp(i) }
+$$
+动态转义方程为
+$$
+dp[i] = max(dp[i-1]+nums[i],nums[i])
+$$</p>
+<p>​</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">maxSubArray1</span><span class="p">(</span><span class="nx">nums</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="mi">0</span>
+	<span class="p">}</span>
+
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="p">}</span>
+
+	<span class="nx">dp</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">))</span>
+	<span class="nx">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+	<span class="nx">max</span> <span class="o">:=</span> <span class="nx">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+	<span class="k">for</span> <span class="nx">i</span><span class="o">:=</span><span class="mi">1</span><span class="p">;</span><span class="nx">i</span> <span class="p">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">);</span><span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>  <span class="p">&gt;</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">{</span>
+			<span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+			<span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span>  <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+		<span class="p">}</span>
+
+		<span class="k">if</span> <span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">&gt;</span> <span class="nx">max</span> <span class="p">{</span>
+			<span class="nx">max</span> <span class="p">=</span> <span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+
+	<span class="k">return</span> <span class="nx">max</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>时间复杂度 $ O(n) $</p>
+<p>空间复杂度 $ O(n) $</p>
+<p>空间复杂度优化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">maxSubArray</span><span class="p">(</span><span class="nx">nums</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="mi">0</span>
+	<span class="p">}</span>
+
+	<span class="nx">max</span> <span class="o">:=</span> <span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="nx">sum</span> <span class="o">:=</span> <span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+	<span class="k">for</span> <span class="nx">i</span><span class="o">:=</span><span class="mi">1</span><span class="p">;</span><span class="nx">i</span> <span class="p">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">);</span><span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">sum</span> <span class="o">+=</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+		<span class="k">if</span> <span class="nx">sum</span> <span class="p">&lt;</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">{</span>
+			<span class="nx">sum</span> <span class="p">=</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+		<span class="p">}</span>
+
+		<span class="k">if</span> <span class="nx">max</span> <span class="p">&lt;</span> <span class="nx">sum</span> <span class="p">{</span>
+			<span class="nx">max</span> <span class="p">=</span> <span class="nx">sum</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">max</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>时间复杂度 $ O(n) $</p>
+<p>空间复杂度 $ O(1) $</p>
+<h1 id="分治算法">分治算法</h1>
+<p>看了官方题解用线段树求解的方法，感觉比较有意思，这里记录一下</p>
+<p>对于一个区间 [l, r]，我们可以维护四个量：</p>
+<p>lSum   表示 [l, r][l,r] 内以 l  为左端点的最大子段和
+rSum   表示 [l, r][l,r] 内以 r 为右端点的最大子段和
+mSum 表示[l, r][l,r] 内的最大子段和
+iSum    表示 [l, r][l,r] 的区间和</p>
+<p>对于一个区间 [l, r][l,r]，我们取 $ m =\frac{l+r}{2} $对区间 [l, m] 和 [m+1,r] 分治求解。当递归逐层深入直到区间长度缩小为 11 的时候，递归「开始回升」。回归的公式为。</p>
+<p>我们这里假设要合并的两个左右数组为 Left 和 Right</p>
+<p>那么合并的公式为
+$$
+lSum = Max(Left.lSum,Left.iSum + Right.lSum)
+$$</p>
+<p>$$
+rSum = Max(Right.rSum,Right.iSum + Left.rSum)
+$$</p>
+<p>$$
+mSum = Max(Max(Left.mSum, Left.mSum),Left.rSum + Right.lSum)
+$$</p>
+<p>$$
+iSum = Left.iSum + Right.iSUm
+$$</p>
+<p>代码为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">maxSubArray</span><span class="p">(</span><span class="nx">nums</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">get</span><span class="p">(</span><span class="nx">nums</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="nx">mSum</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">pushUp</span><span class="p">(</span><span class="nx">l</span><span class="p">,</span> <span class="nx">r</span> <span class="nx">Status</span><span class="p">)</span> <span class="nx">Status</span> <span class="p">{</span>
+    <span class="nx">iSum</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">iSum</span> <span class="o">+</span> <span class="nx">r</span><span class="p">.</span><span class="nx">iSum</span>
+    <span class="nx">lSum</span> <span class="o">:=</span> <span class="nf">max</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">lSum</span><span class="p">,</span> <span class="nx">l</span><span class="p">.</span><span class="nx">iSum</span> <span class="o">+</span> <span class="nx">r</span><span class="p">.</span><span class="nx">lSum</span><span class="p">)</span>
+    <span class="nx">rSum</span> <span class="o">:=</span> <span class="nf">max</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">rSum</span><span class="p">,</span> <span class="nx">r</span><span class="p">.</span><span class="nx">iSum</span> <span class="o">+</span> <span class="nx">l</span><span class="p">.</span><span class="nx">rSum</span><span class="p">)</span>
+    <span class="nx">mSum</span> <span class="o">:=</span> <span class="nf">max</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">mSum</span><span class="p">,</span> <span class="nx">r</span><span class="p">.</span><span class="nx">mSum</span><span class="p">),</span> <span class="nx">l</span><span class="p">.</span><span class="nx">rSum</span> <span class="o">+</span> <span class="nx">r</span><span class="p">.</span><span class="nx">lSum</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">Status</span><span class="p">{</span><span class="nx">lSum</span><span class="p">,</span> <span class="nx">rSum</span><span class="p">,</span> <span class="nx">mSum</span><span class="p">,</span> <span class="nx">iSum</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">get</span><span class="p">(</span><span class="nx">nums</span> <span class="p">[]</span><span class="kt">int</span><span class="p">,</span> <span class="nx">l</span><span class="p">,</span> <span class="nx">r</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">Status</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">l</span> <span class="o">==</span> <span class="nx">r</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">Status</span><span class="p">{</span><span class="nx">nums</span><span class="p">[</span><span class="nx">l</span><span class="p">],</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">l</span><span class="p">],</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">l</span><span class="p">],</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">l</span><span class="p">]}</span>
+    <span class="p">}</span>
+    <span class="nx">m</span> <span class="o">:=</span> <span class="p">(</span><span class="nx">l</span> <span class="o">+</span> <span class="nx">r</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+    <span class="nx">lSub</span> <span class="o">:=</span> <span class="nf">get</span><span class="p">(</span><span class="nx">nums</span><span class="p">,</span> <span class="nx">l</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span>
+    <span class="nx">rSub</span> <span class="o">:=</span> <span class="nf">get</span><span class="p">(</span><span class="nx">nums</span><span class="p">,</span> <span class="nx">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nf">pushUp</span><span class="p">(</span><span class="nx">lSub</span><span class="p">,</span> <span class="nx">rSub</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">max</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">x</span> <span class="p">&gt;</span> <span class="nx">y</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">x</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">y</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Status</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">lSum</span><span class="p">,</span> <span class="nx">rSum</span><span class="p">,</span> <span class="nx">mSum</span><span class="p">,</span> <span class="nx">iSum</span> <span class="kt">int</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">白水飘萍</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-10-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
+          <a href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
+          <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+          <a href="/tags/leetcode-easy/">leetcode-easy</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/redis/redis%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Go-Redis数据类型使用</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/leetcode/516%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97/">
+            <span class="next-text nav-default">516最长回文子序列</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/bspp1314" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/3841870377" class="iconfont icon-weibo" title="weibo"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">白水飘萍</span>
+  </span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

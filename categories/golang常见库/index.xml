@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>golang常见库 on 白水飘萍</title>
+    <link>http://localhost:1313/categories/golang%E5%B8%B8%E8%A7%81%E5%BA%93/</link>
+    <description>Recent content in golang常见库 on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 09 Oct 2020 13:58:10 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/golang%E5%B8%B8%E8%A7%81%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go常见库之validator</title>
+      <link>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bvalidator/</link>
+      <pubDate>Fri, 09 Oct 2020 13:58:10 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bvalidator/</guid>
+      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;Validator&lt;/code&gt;是一个基于结构体tag用于对数据进行校验库，在 Web 开发中，对用户传过来的数据我们都需要进行严格校验，防止用户的恶意请求。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go常见库之logrus</title>
+      <link>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Blogrus/</link>
+      <pubDate>Tue, 15 Sep 2020 17:39:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Blogrus/</guid>
+      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
+&lt;p&gt;logrus 其是一个 golang 结构化后的日志包，API完全兼容标准包logger。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go常见库之cron</title>
+      <link>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bcron/</link>
+      <pubDate>Mon, 14 Sep 2020 10:37:34 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bcron/</guid>
+      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/robfig/cron&#34;&gt;&lt;code&gt;cron&lt;/code&gt;&lt;/a&gt;一个用于管理定时任务的库，用 Go 实现 Linux 中crontab这个命令的效果。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

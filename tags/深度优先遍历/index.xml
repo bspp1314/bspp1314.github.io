@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>深度优先遍历 on 白水飘萍</title>
+    <link>http://localhost:1313/tags/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86/</link>
+    <description>Recent content in 深度优先遍历 on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 18 Dec 2020 10:12:52 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>200岛屿数量</title>
+      <link>http://localhost:1313/post/leetcode/200%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/</link>
+      <pubDate>Fri, 18 Dec 2020 10:12:52 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/200%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/</guid>
+      <description>题目 给你一个由 &#39;1&#39;（陆地）和 &#39;0&#39;（水）组成的的二维网格，请你计算网格中岛屿的数量。 岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直</description>
+    </item>
+    
+    <item>
+      <title>130被围绕的区域</title>
+      <link>http://localhost:1313/post/leetcode/130%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/</link>
+      <pubDate>Thu, 10 Dec 2020 10:00:41 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/130%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/</guid>
+      <description>题目 给定一个二维的矩阵，包含 &#39;X&#39; 和 &#39;O&#39;（字母 O）。 找到所有被 &#39;X&#39; 围绕的区域，并将这些区域里所有的 &#39;O&#39; 用 &#39;X&#39; 填充。 示例: 1 2 3 4 X X X X X O O X X X</description>
+    </item>
+    
+    <item>
+      <title>687最长同值路径</title>
+      <link>http://localhost:1313/post/leetcode/687%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84/</link>
+      <pubDate>Wed, 09 Dec 2020 10:27:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/687%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84/</guid>
+      <description>题目 给定一个二叉树，找到最长的路径，这个路径中的每个节点具有相同值。 这条路径可以经过也可以不经过根节点。 注意：两个节点之间的路径长度由它们之</description>
+    </item>
+    
+    <item>
+      <title>124二叉树的最大路径和III</title>
+      <link>http://localhost:1313/post/leetcode/124%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8Ciii/</link>
+      <pubDate>Tue, 08 Dec 2020 21:15:49 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/124%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8Ciii/</guid>
+      <description>题目 给定一个非空二叉树，返回其最大路径和。 本题中，路径被定义为一条从树中任意节点出发，沿父节点-子节点连接，达到任意节点的序列。该路径至少包</description>
+    </item>
+    
+    <item>
+      <title>547朋友圈</title>
+      <link>http://localhost:1313/post/leetcode/547%E6%9C%8B%E5%8F%8B%E5%9C%88/</link>
+      <pubDate>Sun, 06 Dec 2020 21:21:09 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/547%E6%9C%8B%E5%8F%8B%E5%9C%88/</guid>
+      <description>题目 班上有 N 名学生。其中有些人是朋友，有些则不是。他们的友谊具有是传递性。如果已知 A 是 B 的朋友，B 是 C 的朋友，那么我们可以认为 A 也是 C 的朋友</description>
+    </item>
+    
+    <item>
+      <title>114二叉树展开为链表</title>
+      <link>http://localhost:1313/post/leetcode/114%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Wed, 07 Oct 2020 13:05:21 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/114%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，&lt;a href=&#34;https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/8010757&#34;&gt;原地&lt;/a&gt;将它展开为一个单链表。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>199二叉树的右视图</title>
+      <link>http://localhost:1313/post/leetcode/199%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8F%B3%E8%A7%86%E5%9B%BE/</link>
+      <pubDate>Thu, 17 Sep 2020 11:14:46 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/199%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8F%B3%E8%A7%86%E5%9B%BE/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>129求根到叶子节点数字之和</title>
+      <link>http://localhost:1313/post/leetcode/129%E6%B1%82%E6%A0%B9%E5%88%B0%E5%8F%B6%E5%AD%90%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/</link>
+      <pubDate>Wed, 16 Sep 2020 23:47:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/129%E6%B1%82%E6%A0%B9%E5%88%B0%E5%8F%B6%E5%AD%90%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，它的每个结点都存放一个 0-9 的数字，每条从根到叶子节点的路径都代表一个数字。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>112路径总和</title>
+      <link>http://localhost:1313/post/leetcode/112%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/</link>
+      <pubDate>Sun, 13 Sep 2020 19:54:03 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/112%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>111二叉树的最小深度</title>
+      <link>http://localhost:1313/post/leetcode/111%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6/</link>
+      <pubDate>Sun, 13 Sep 2020 19:40:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/111%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，找出其最小深度。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

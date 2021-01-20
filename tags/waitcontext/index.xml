@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WaitContext on 白水飘萍</title>
+    <link>http://localhost:1313/tags/waitcontext/</link>
+    <description>Recent content in WaitContext on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 08 Nov 2020 16:25:32 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/waitcontext/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WaitGroup的使用和源码</title>
+      <link>http://localhost:1313/post/golang/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/waitgroup%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E6%BA%90%E7%A0%81/</link>
+      <pubDate>Sun, 08 Nov 2020 16:25:32 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/waitgroup%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E6%BA%90%E7%A0%81/</guid>
+      <description>WaitGroup 用途 sync.WaitGroup 它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成 A WaitGroup waits for a collection of goroutines to finish.The main goroutine calls</description>
+    </item>
+    
+  </channel>
+</rss>

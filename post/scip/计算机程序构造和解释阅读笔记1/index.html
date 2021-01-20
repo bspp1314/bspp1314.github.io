@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>计算机程序构造和解释阅读笔记1 - 白水飘萍</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="白水飘萍" /><meta name="description" content="应用序和正则序 正则序 首先不计算运算对象的值，首先展开原有的式子，直到实际需要的时候再计算。缺陷是可能有重复计算。
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/scip/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E6%9E%84%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8A%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B01/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.651e6917abb0239242daa570c2bec9867267bbcd83646da5a850afe573347b44.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="计算机程序构造和解释阅读笔记1" />
+<meta property="og:description" content="应用序和正则序
+正则序
+首先不计算运算对象的值，首先展开原有的式子，直到实际需要的时候再计算。缺陷是可能有重复计算。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/scip/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E6%9E%84%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8A%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B01/" />
+<meta property="article:published_time" content="2020-08-14T17:47:49+08:00" />
+<meta property="article:modified_time" content="2020-08-14T17:47:49+08:00" />
+<meta itemprop="name" content="计算机程序构造和解释阅读笔记1">
+<meta itemprop="description" content="应用序和正则序
+正则序
+首先不计算运算对象的值，首先展开原有的式子，直到实际需要的时候再计算。缺陷是可能有重复计算。">
+<meta itemprop="datePublished" content="2020-08-14T17:47:49+08:00" />
+<meta itemprop="dateModified" content="2020-08-14T17:47:49+08:00" />
+<meta itemprop="wordCount" content="3586">
+
+
+
+<meta itemprop="keywords" content="SCIP," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="计算机程序构造和解释阅读笔记1"/>
+<meta name="twitter:description" content="应用序和正则序
+正则序
+首先不计算运算对象的值，首先展开原有的式子，直到实际需要的时候再计算。缺陷是可能有重复计算。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">白水飘萍</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">白水飘萍</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">计算机程序构造和解释阅读笔记1</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-14 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#应用序和正则序">应用序和正则序</a>
+      <ul>
+        <li><a href="#正则序">正则序</a></li>
+        <li><a href="#应用序">应用序</a></li>
+      </ul>
+    </li>
+    <li><a href="#过程与它们所产生的计算">过程与它们所产生的计算</a>
+      <ul>
+        <li><a href="#线性的递归和迭代">线性的递归和迭代</a></li>
+      </ul>
+    </li>
+    <li><a href="#用高阶函数做抽象">用高阶函数做抽象</a>
+      <ul>
+        <li><a href="#过程作为参赛">过程作为参赛</a></li>
+        <li><a href="#用lambda-构成过程">用lambda 构成过程</a></li>
+        <li><a href="#用let-创建局部变量">用let 创建局部变量</a></li>
+        <li><a href="#过程作为一般性方法">过程作为一般性方法</a>
+          <ul>
+            <li><a href="#通过区间折半寻找方程的根">通过区间折半寻找方程的根</a></li>
+            <li><a href="#不动点">不动点</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#参考连接">参考连接</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="应用序和正则序">应用序和正则序</h1>
+<h2 id="正则序">正则序</h2>
+<p><strong>首先不计算运算对象的值，首先展开原有的式子，直到实际需要的时候再计算</strong>。缺陷是可能有重复计算。</p>
+<p>展开</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="nf">sum_of_squares</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">5</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nb">* </span><span class="mi">5</span> <span class="mi">2</span> <span class="p">))</span>
+<span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">square</span><span class="p">(</span><span class="nb">+ </span><span class="mi">5</span> <span class="mi">1</span><span class="p">))</span> <span class="p">(</span><span class="nf">square</span><span class="p">(</span><span class="nb">* </span><span class="mi">5</span> <span class="mi">2</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nb">* </span><span class="p">(</span><span class="nb">+ </span><span class="mi">5</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">5</span> <span class="mi">1</span><span class="p">)</span> <span class="p">((</span><span class="nb">* </span><span class="mi">5</span> <span class="mi">2</span><span class="p">)</span> <span class="p">(</span><span class="nb">* </span><span class="mi">5</span> <span class="mi">2</span><span class="p">)))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>规约</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">(+ (* 6 6) (* 10 10))
+(+ 36 100)
+136 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="应用序">应用序</h2>
+<p>与正则序完全相反，<strong>首先求值，然后应用。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="nf">sum_of_squares</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">5</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nb">* </span><span class="mi">5</span> <span class="mi">2</span> <span class="p">))</span>
+<span class="p">(</span><span class="nf">sum_of_squares</span> <span class="mi">6</span> <span class="mi">10</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">+ </span><span class="nv">square</span> <span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="nv">square</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">+ </span><span class="mi">36</span> <span class="mi">100</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">136</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Lisp 采用应用序，部分的原因在于这样做能避免表达式的重复求值，从而提高一些效率。更重要的是，在超出了可以采用替换方式模式的过程之后，正则序的处理将变得更复杂得多。</p>
+<h1 id="过程与它们所产生的计算">过程与它们所产生的计算</h1>
+<p>程序设计的一些要素：</p>
+<p><strong>使用过许多基本的算术操作，对这种操作进行组合，通过定义各种复合过程，对复合进行抽象。</strong></p>
+<p>一个过程也就是一种模式，它描述了一个计算过程的局部演化方式，描述了这一计算过程中的每一个步骤是怎么基于前面步骤建立起来的。</p>
+<h2 id="线性的递归和迭代">线性的递归和迭代</h2>
+<p>阶乘函数表达式的定义</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">n! = n * (n - 1) * (n - 2) ..... 3 * 2 * 1
+</code></pre></td></tr></table>
+</div>
+</div><p>基于阶乘的定义，我们可以直接翻译成一个过程</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">factorial</span> <span class="nv">x</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span> <span class="nv">=</span> <span class="nv">x</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="mi">1</span>
+        <span class="p">(</span><span class="nb">* </span><span class="nv">x</span> <span class="p">(</span><span class="nf">factorial</span> <span class="p">(</span><span class="nb">- </span><span class="nv">x</span> <span class="mi">1</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nf">factorial</span> <span class="mi">6</span> <span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span> <span class="nv">factorial</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">(</span> <span class="nv">*</span> <span class="mi">6</span> <span class="p">(</span> <span class="nv">factorial</span> <span class="mi">5</span><span class="p">))</span>
+<span class="p">(</span> <span class="nv">*</span> <span class="mi">6</span> <span class="p">(</span><span class="nb">* </span><span class="mi">5</span> <span class="nv">factorial</span> <span class="mi">4</span><span class="p">)))</span>
+<span class="p">(</span> <span class="nv">*</span> <span class="mi">6</span> <span class="p">(</span><span class="nb">* </span><span class="mi">5</span> <span class="p">(</span><span class="nb">* </span><span class="mi">4</span> <span class="nv">factorial</span> <span class="mi">3</span><span class="p">))))</span>
+<span class="p">(</span> <span class="nv">*</span> <span class="mi">6</span> <span class="p">(</span><span class="nb">* </span><span class="mi">5</span> <span class="p">(</span><span class="nb">* </span><span class="mi">4</span> <span class="p">(</span><span class="nb">* </span><span class="mi">3</span> <span class="nv">factorial</span> <span class="mi">2</span><span class="p">)))))</span>
+<span class="p">(</span> <span class="nv">*</span> <span class="mi">6</span> <span class="p">(</span><span class="nb">* </span><span class="mi">5</span> <span class="p">(</span><span class="nb">* </span><span class="mi">4</span> <span class="p">(</span><span class="nb">* </span><span class="mi">3</span> <span class="p">(</span><span class="nb">* </span><span class="mi">2</span> <span class="nv">factorial</span> <span class="mi">1</span><span class="p">))))))</span>
+<span class="p">(</span> <span class="nv">*</span> <span class="mi">6</span> <span class="p">(</span><span class="nb">* </span><span class="mi">5</span> <span class="p">(</span><span class="nb">* </span><span class="mi">4</span> <span class="p">(</span><span class="nb">* </span><span class="mi">3</span> <span class="p">(</span><span class="nb">* </span><span class="mi">2</span>  <span class="mi">1</span><span class="p">)))))</span>
+<span class="p">(</span> <span class="nv">*</span> <span class="mi">6</span> <span class="p">(</span><span class="nb">* </span><span class="mi">5</span> <span class="p">(</span><span class="nb">* </span><span class="mi">4</span> <span class="p">(</span><span class="nb">* </span><span class="mi">3</span>  <span class="mi">2</span><span class="p">))))</span>
+<span class="p">(</span> <span class="nv">*</span> <span class="mi">6</span> <span class="p">(</span><span class="nb">* </span><span class="mi">5</span> <span class="p">(</span><span class="nb">* </span><span class="mi">4</span> <span class="mi">6</span><span class="p">)))</span>
+<span class="p">(</span> <span class="nv">*</span> <span class="mi">6</span> <span class="p">(</span><span class="nb">* </span><span class="mi">5</span> <span class="mi">24</span><span class="p">))</span>
+<span class="p">(</span> <span class="nv">*</span> <span class="mi">6</span> <span class="mi">120</span><span class="p">)</span>
+<span class="mi">720</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>现在让我们用另一种不同的观点来计算阶乘，我们可以将计算阶乘n!的规则描述为：先乘以1和2，而后将得到的结果乘以3，再4，直到n。根据这一规则可以重构阶乘模型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">fact_iter</span> <span class="nv">product</span> <span class="nv">counter</span> <span class="nv">max_count</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">counter</span> <span class="nv">max_count</span><span class="p">)</span>
+        <span class="nv">product</span>
+        <span class="p">(</span><span class="nf">fact_iter</span> <span class="p">(</span><span class="nb">* </span><span class="nv">product</span> <span class="nv">counter</span><span class="p">)</span>
+                   <span class="p">(</span><span class="nb">+ </span><span class="nv">counter</span> <span class="mi">1</span><span class="p">)</span> 
+                   <span class="nv">max_count</span><span class="p">)))</span>
+
+
+<span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">factorial</span> <span class="nv">x</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">fact_iter</span> <span class="mi">1</span> <span class="mi">1</span> <span class="nv">x</span><span class="p">))</span>
+
+
+<span class="p">(</span><span class="nf">factorial</span> <span class="mi">6</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="nf">factorial</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">fac_iter</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">fac_iter</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">fac_iter</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">fac_iter</span> <span class="mi">6</span> <span class="mi">4</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">fac_iter</span> <span class="mi">24</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">fac_iter</span> <span class="mi">120</span> <span class="mi">6</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">fac_iter</span> <span class="mi">720</span> <span class="mi">7</span> <span class="mi">6</span><span class="p">)</span>
+<span class="mi">720</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>考虑第一个计算过程。代换模型揭示一种先逐步展开而后收缩的形状。在展开阶段里，这一计算过程构造起一个推迟进行的操作所形成的链条，收缩阶段表现为这些运算的实际执行。这种类型的计算过程由一个推迟执行的运算链条可以，称为递归计算过程。要执行这种计算过程，解释器就需要维护好那些以后将要执行的操作轨迹，在计算阶乘n!时候，推迟执行的乘法链条的长度也就是为保存其轨迹需要保护的信息量，这个长度随着n值而线性增长。这样的一个计算过程称为一个线性递归过程。</strong></p>
+<p><strong>与之相对应，第二个计算过程里并没有任何增长或收缩。对于任何一个n,在计算过程中的每一步，在我们需要保存轨迹里，所有的东西就是变量product、counter 和max-count的当前值。我们称这种过程为一个迭代计算过程。一般来说，迭代过程就是那种其转态可以用固定数目的状态描述的计算过程，而与此同时，又存在一套固定规则，描述了计算过程在从一个转态到下一个状态转换时，这些变量的更新方式，还有一个结束检测，它描述这一计算过程终止的条件。在计算n!时，所需计算步骤随着n线下增长，这种过程称为线下迭代过程。</strong></p>
+<h1 id="用高阶函数做抽象">用高阶函数做抽象</h1>
+<h2 id="过程作为参赛">过程作为参赛</h2>
+<p>考虑下面的三个过程，第一个计算从a到b的各个整数之和</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">sum_intergers</span> <span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+   <span class="p">(</span><span class="k">if </span><span class="p">(</span> <span class="nv">&gt;</span> <span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+       <span class="mi">0</span>
+       <span class="nv">+</span> <span class="nv">a</span> <span class="p">(</span><span class="nf">sum_intergers</span> <span class="p">(</span><span class="nf">+a</span> <span class="mi">1</span><span class="p">)</span> <span class="nv">b</span> <span class="p">)))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>第二个计算给定范围内的整数的立方和</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">sum_cubes</span> <span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+        <span class="mi">0</span>
+        <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">cube</span> <span class="nv">a</span><span class="p">)</span>
+        <span class="p">(</span><span class="nf">sum-cubes</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">a</span> <span class="mi">1</span><span class="p">)</span> <span class="nv">b</span><span class="p">))))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>第三个计算下面序列之和
+$$
+\frac{1}{1 * 3} + \frac{1}{5 * 7} + \frac{1}{9 * 11} &hellip;&hellip;
+$$</p>
+<p>它将（非常缓慢的收敛到）$$\frac{\pi}{8}$$</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">pi_sum</span> <span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+            <span class="mi">0</span>
+            <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nb">/ </span><span class="mf">1.0</span> <span class="p">(</span><span class="nb">* </span><span class="nv">a</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">a</span> <span class="mi">2</span><span class="p">)))</span>
+            <span class="p">(</span><span class="nf">pi_sum</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">a</span> <span class="mi">4</span><span class="p">)</span> <span class="nv">b</span><span class="p">))))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以很明显的看出来，以上三个过程共享一种公共的基础模式。它们的很大一部分是共同的，只在所用的过程名字上一样：用于从a算出需要加的项的函数，还有用于提供下一个a值的函数。总的来说可以归纳成以下的模板</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="c1">;递归计算过程模式</span>
+<span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="err">⟨</span><span class="nv">name</span><span class="err">⟩</span> <span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+	<span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+			<span class="mi">0</span>
+			<span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="err">⟨</span><span class="nv">term</span><span class="err">⟩</span> <span class="nv">a</span><span class="p">)</span>
+				<span class="p">(</span><span class="err">⟨</span><span class="nv">name</span><span class="err">⟩</span> <span class="p">(</span><span class="err">⟨</span><span class="nv">next</span><span class="err">⟩</span> <span class="nv">a</span><span class="p">)</span> <span class="nv">b</span><span class="p">))))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>该模板在对应的数学公式</p>
+<p>$$
+\sum_{n=a}^{b} = f(a)+ f(a+1) &hellip;f(b)
+$$</p>
+<p>按照上面给出的模式，我们可以这种求和类型过程的公共模式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="c1">;递归计算过程模式</span>
+<span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">sum</span> <span class="nv">term</span> <span class="nv">a</span> <span class="nv">next</span> <span class="nv">b</span><span class="p">)</span>
+        <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+            <span class="mi">0</span>
+        <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">term</span> <span class="nv">a</span><span class="p">)</span>
+        <span class="p">(</span><span class="nf">sum</span> <span class="nv">term</span> <span class="p">(</span><span class="nf">next</span> <span class="nv">a</span><span class="p">)</span> <span class="nv">next</span> <span class="nv">b</span><span class="p">))))</span>
+
+<span class="c1">;迭代计算过程模式</span>
+<span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">sum</span> <span class="nv">term</span> <span class="nv">a</span> <span class="nv">next</span> <span class="nv">b</span><span class="p">)</span>
+        <span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">sum_iter</span> <span class="nv">a</span> <span class="nv">b</span> <span class="nv">result</span><span class="p">)</span>
+            <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+                <span class="nv">result</span>
+                <span class="p">(</span><span class="nf">sum_iter</span> <span class="p">(</span><span class="nf">next</span> <span class="nv">a</span><span class="p">)</span> <span class="nv">b</span> <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">term</span> <span class="nv">a</span><span class="p">)</span> <span class="nv">result</span><span class="p">))))</span>
+    <span class="p">(</span><span class="nf">sum_iter</span> <span class="nv">a</span> <span class="nv">b</span> <span class="mi">0</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>将上面三个模式改为公共模式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">inc</span> <span class="nv">n</span><span class="p">)</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">cube</span> <span class="nv">x</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">* </span><span class="nv">x</span> <span class="nv">x</span> <span class="nv">x</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">identity</span> <span class="nv">x</span><span class="p">)</span> <span class="nv">x</span>
+
+<span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">sum_cubes</span> <span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+        <span class="p">(</span><span class="nf">sum</span> <span class="nv">cube</span> <span class="nv">a</span> <span class="nv">inc</span> <span class="nv">b</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">sum_integers</span> <span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">sum</span> <span class="nv">identity</span> <span class="nv">a</span> <span class="nv">inc</span> <span class="nv">b</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">pi_sum</span> <span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">pi_next</span> <span class="nv">b</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">+ </span><span class="nv">b</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">pi_term</span> <span class="nv">a</span><span class="p">)</span>
+       <span class="p">(</span><span class="nb">/ </span><span class="mf">1.0</span> <span class="p">(</span><span class="nb">* </span><span class="nv">a</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">a</span> <span class="mi">2</span><span class="p">))))</span>
+    <span class="p">(</span><span class="nf">sum</span> <span class="nv">pi_term</span> <span class="nv">a</span> <span class="nv">pi_next</span> <span class="nv">b</span><span class="p">)</span> <span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="用lambda-构成过程">用lambda 构成过程</h2>
+<p>在上述中使用sum模式，必须定义一些如 pi_term 和 pi_next 一类简单的函数，以变它们作为高阶函数的参数，这种做法其实看起来比较不友好。如果不需要显示定义 pi_term 和 pi_next，而是一种方法去直接刻画”那个返回值加4的过程“和”那个返回其输入与它加2的乘积的倒数过程“，那么我们的程序看起来就有更优美。所以该书引入一种lambda 特殊形式完成这类描述，这种特殊形式能够创建锁需要的过程。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">pi2_sum</span> <span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">sum</span> <span class="p">(</span><span class="k">lambda </span><span class="p">(</span><span class="nf">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">/ </span><span class="mf">1.0</span> <span class="p">(</span><span class="nb">* </span><span class="nv">x</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">x</span> <span class="mi">2</span><span class="p">))))</span>
+          <span class="nv">a</span>
+          <span class="p">(</span><span class="k">lambda </span><span class="p">(</span><span class="nf">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">x</span> <span class="mi">4</span><span class="p">))</span>
+          <span class="nv">b</span>
+    <span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>一般而言 ，lambda 用于define 同样的方式创建过程，除了不为有关过程提供名字之外</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="k">lambda </span><span class="p">(</span><span class="err">⟨</span><span class="nv">formal-parameters</span><span class="err">⟩</span><span class="p">)</span> <span class="err">⟨</span><span class="nv">body</span><span class="err">⟩</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="用let-创建局部变量">用let 创建局部变量</h2>
+<p>Lambda 的另一个应用是创建局部变量。在一个过程里，处理使用那些已经约束为过程参数的变量外，我们常常还需要一些局部变量，假定需要计算函数</p>
+<p>$$
+f(x,y) = x(1+xy)^2 + y(1-y)+（1+xy）(1-y)
+$$</p>
+<p>可能希望将它表述为<br>
+$$
+a= 1+xy \ <br>
+b =1-y \<br>
+f(x,y) = xa^2 + yb + ab \<br>
+$$</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">f</span>  <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">f_helper</span> <span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">square</span> <span class="nv">a</span><span class="p">)</span>
+           <span class="p">(</span><span class="nb">* </span><span class="nv">y</span> <span class="nv">b</span><span class="p">)</span>
+           <span class="p">(</span><span class="nb">* </span><span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+        <span class="p">))</span>
+    <span class="p">(</span><span class="nf">f_helper</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="p">(</span><span class="nb">* </span><span class="nv">x</span> <span class="nv">y</span><span class="p">))</span> <span class="p">(</span><span class="nb">- </span><span class="mi">1</span> <span class="nv">y</span><span class="p">)</span> <span class="p">)</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用lambda调整</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">f</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
+    <span class="p">((</span><span class="k">lambda </span><span class="p">(</span><span class="nf">a</span> <span class="nv">b</span><span class="p">)</span> 
+    <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">square</span> <span class="nv">a</span><span class="p">)</span>
+           <span class="p">(</span><span class="nb">* </span><span class="nv">y</span> <span class="nv">b</span><span class="p">)</span>
+           <span class="p">(</span><span class="nb">* </span><span class="nv">a</span> <span class="nv">b</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="p">(</span><span class="nb">* </span><span class="nv">x</span> <span class="nv">y</span> <span class="p">))</span>
+    <span class="p">(</span><span class="nb">- </span><span class="mi">1</span> <span class="nv">y</span><span class="p">)</span>
+ <span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这一结构非常有用，因此，语言里有一个专门的特殊形式称为let，使这种编程方式更为方便。使用left,过程f可以写为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">f</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">let </span><span class="p">((</span><span class="nf">a</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="p">(</span><span class="nb">* </span><span class="nv">x</span> <span class="nv">y</span> <span class="p">)))</span>
+          <span class="p">(</span><span class="nf">b</span> <span class="p">(</span><span class="nb">- </span><span class="mi">1</span> <span class="nv">y</span><span class="p">))</span>
+         <span class="p">)</span>
+        <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nb">* </span><span class="nv">x</span> <span class="p">(</span><span class="nf">square</span> <span class="nv">a</span><span class="p">))</span>
+            <span class="p">(</span><span class="nb">* </span><span class="nv">y</span> <span class="nv">b</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">* </span><span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>        
+        <span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>let 表达的一般形式是</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">let </span><span class="p">((</span><span class="err">⟨</span><span class="nv">var1</span><span class="err">⟩</span> <span class="err">⟨</span><span class="nv">exp1</span><span class="err">⟩</span><span class="p">)</span>
+			<span class="p">(</span><span class="err">⟨</span><span class="nv">var2</span><span class="err">⟩</span> <span class="err">⟨</span><span class="nv">exp2</span><span class="err">⟩</span><span class="p">)</span>
+<span class="nv">:</span> <span class="nv">:</span> <span class="nv">:</span>
+			<span class="p">(</span><span class="err">⟨</span><span class="nv">varn</span><span class="err">⟩</span> <span class="err">⟨</span><span class="nv">expn</span><span class="err">⟩</span><span class="p">))</span>
+					<span class="err">⟨</span><span class="nv">body</span><span class="err">⟩</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>which can be thought of as saying</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="k">let </span><span class="err">⟨</span><span class="nv">var1</span><span class="err">⟩</span> <span class="nv">have</span> <span class="nv">the</span> <span class="nv">value</span> <span class="err">⟨</span><span class="nv">exp1</span><span class="err">⟩</span> <span class="nv">and</span>
+		<span class="err">⟨</span><span class="nv">var2</span><span class="err">⟩</span> <span class="nv">have</span> <span class="nv">the</span> <span class="nv">value</span> <span class="err">⟨</span><span class="nv">exp2</span><span class="err">⟩</span> <span class="nv">and</span>
+			<span class="nv">:</span> <span class="nv">:</span> <span class="nv">:</span>
+		<span class="err">⟨</span><span class="nv">varn</span><span class="err">⟩</span> <span class="nv">have</span> <span class="nv">the</span> <span class="nv">value</span> <span class="err">⟨</span><span class="nv">expn</span><span class="err">⟩</span>
+<span class="nv">in</span> <span class="err">⟨</span><span class="nv">body</span><span class="err">⟩</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上述Let 的语法形式实际上是以下lamdba的一种语法糖</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">((</span><span class="k">lambda </span><span class="p">(</span><span class="err">⟨</span><span class="nv">var1</span><span class="err">⟩</span> <span class="nv">:</span> <span class="nv">:</span> <span class="nv">:</span> <span class="err">⟨</span><span class="nv">varn</span><span class="err">⟩</span><span class="p">)</span>
+				<span class="err">⟨</span><span class="nv">body</span><span class="err">⟩</span><span class="p">)</span>
+<span class="err">⟨</span><span class="nv">exp1</span><span class="err">⟩</span>
+<span class="nv">:</span> <span class="nv">:</span> <span class="nv">:</span>
+<span class="err">⟨</span><span class="nv">expn</span><span class="err">⟩</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>let 使人能在尽可能接近其使用的地方建立局部变量约束。例如，如果x的值是5，下面的表达式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">(+ (let ((x 3))
+      (+ x (* x 10)))
+x)
+;out is 38 
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>变量的值是下let之外计算的，在为局部变量提供值得表达式依赖于某些与局部变量同名的变量时，这一规定就起作用。例如 想 x = 2,表达式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="err">（</span><span class="k">let </span><span class="p">((</span><span class="nf">x</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">y</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">x</span> <span class="mi">2</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nb">* </span><span class="nv">x</span> <span class="nv">y</span> <span class="p">)</span><span class="err">）</span>
+<span class="c1">;out 12</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="过程作为一般性方法">过程作为一般性方法</h2>
+<p>**复合过程是为了作为一种将若干操作的模式抽象出来的机制，使所描述的计算不在依赖于所涉及的特定数值。**而 有了高阶过程，我们可以看到一种更加强大的抽象，它们也是一类方法，也用于表述计算的一般性过程，与其所涉及的特定函数无关。</p>
+<h3 id="通过区间折半寻找方程的根">通过区间折半寻找方程的根</h3>
+<p><strong>问题：找区间里方程的根：</strong></p>
+<p>​			区间 [a, b]，若 f(a) &lt; 0 &lt; f(b)，[a, b] 中必有 f 零点（中值定理）</p>
+<p><strong>折半法</strong>：取区间中点 x 计算 f(x)</p>
+<ul>
+<li>
+<p>如果 f(x) 是根（在一定误差的意义下），计算结束</p>
+</li>
+<li>
+<p>否则根据 f(x) 的正负将区间缩短一半</p>
+</li>
+<li>
+<p>在缩短的区间里继续使用折半法</p>
+<p>上面操作做一次，区间长度减半假设初始区间的长度为 L，容许误差为 T,所需计算步数为 O(log(L/T)).是对数时间算法.而且不难定义一个 Scheme 过程实现这个算法.</p>
+<p>实现折折半法求零点的过程:</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">close_enough</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span> <span class="p">(</span><span class="nb">&lt; </span><span class="p">(</span><span class="nb">abs </span><span class="p">(</span><span class="nb">- </span><span class="nv">x</span> <span class="nv">y</span><span class="p">))</span> <span class="mf">0.001</span><span class="p">))</span>
+<span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">average</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span> <span class="p">(</span><span class="nb">/ </span><span class="p">(</span><span class="nb">+ </span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span>
+<span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">positive</span> <span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">&gt; </span><span class="nv">x</span> <span class="mi">0</span><span class="p">))</span>
+<span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">negative</span> <span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">&lt; </span><span class="nv">x</span> <span class="mi">0</span><span class="p">))</span>
+<span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nb">abs </span><span class="nv">x</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span> <span class="nv">&lt;</span> <span class="nv">x</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">- </span><span class="nv">x</span><span class="p">)</span>
+        <span class="nv">x</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">search</span>  <span class="nv">f</span> <span class="nv">net_point</span> <span class="nv">pos_point</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">let </span><span class="p">((</span><span class="nf">midpoint</span> <span class="p">(</span><span class="nf">average</span> <span class="nv">net_point</span> <span class="nv">pos_point</span><span class="p">)))</span>
+        <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">close_enough</span> <span class="nv">net_point</span> <span class="nv">pos_point</span><span class="p">)</span>
+            <span class="nv">midpoint</span>
+            <span class="p">(</span><span class="k">let </span><span class="p">((</span><span class="nf">test_value</span> <span class="p">(</span><span class="nf">f</span> <span class="nv">midpoint</span><span class="p">)))</span>
+                <span class="p">(</span><span class="k">cond </span><span class="p">((</span><span class="nf">positive</span> <span class="nv">test_value</span><span class="p">)</span> <span class="p">(</span><span class="nf">search</span> <span class="nv">f</span> <span class="nv">net_point</span> <span class="nv">midpoint</span><span class="p">))</span>
+                      <span class="p">((</span><span class="nf">negative</span>  <span class="nv">test_value</span><span class="p">)(</span><span class="nf">search</span> <span class="nv">f</span> <span class="nv">midpoint</span>  <span class="nv">pos_point</span><span class="p">))</span>
+                      <span class="p">(</span><span class="k">else </span><span class="nv">midpoint</span><span class="p">))))))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>编程原则（注:问题的分解）：</strong></p>
+<ul>
+<li>总采用功能分解技术，最高层的过程实现算法框架</li>
+<li>把具有独立逻辑意义的子计算抽象为子过程调用</li>
+<li>过程的实现另行考虑</li>
+</ul>
+<p>把判断区间满足要求的方法抽象为过程，另行定义，<strong>优点</strong>：</p>
+<ul>
+<li>可以单独研究判断的技术，选择适当的方法</li>
+<li>容易通过替代的方法，独立改进程序中的重要部分</li>
+</ul>
+<p>当然上述的过程还是有一点问题的，因为在x 和 y 之间可能不存在根，所以我们需要对上述的过程进行改进</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">half_interval_method</span> <span class="nv">f</span> <span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">let </span><span class="p">((</span><span class="nf">a_value</span> <span class="p">(</span><span class="nf">f</span> <span class="nv">a</span><span class="p">))</span>
+          <span class="p">(</span><span class="nf">b_value</span> <span class="p">(</span><span class="nf">f</span> <span class="nv">b</span><span class="p">)))</span>
+        <span class="p">(</span><span class="k">cond </span><span class="p">((</span><span class="k">and </span><span class="p">(</span><span class="nf">negative</span> <span class="nv">a_value</span><span class="p">)</span> <span class="p">(</span><span class="nf">positive</span> <span class="nv">b_value</span><span class="p">))</span> <span class="p">(</span><span class="nf">search</span> <span class="nv">f</span> <span class="nv">a</span> <span class="nv">b</span><span class="p">))</span>
+            <span class="p">((</span><span class="k">and </span><span class="p">(</span><span class="nf">negative</span> <span class="nv">b_value</span><span class="p">)</span> <span class="p">(</span><span class="nf">positive</span> <span class="nv">a_value</span><span class="p">))</span> <span class="p">(</span><span class="nf">search</span> <span class="nv">f</span> <span class="nv">b</span> <span class="nv">a</span><span class="p">))</span>
+            <span class="p">(</span><span class="k">else </span><span class="p">(</span><span class="nf">error</span> <span class="err">“</span><span class="nv">Values</span> <span class="nv">are</span> <span class="nv">not</span> <span class="nv">of</span> <span class="nv">opposite</span> <span class="nv">sign</span><span class="err">”</span> <span class="nv">a</span> <span class="nv">b</span><span class="p">)))))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="不动点">不动点</h3>
+<p>如果 $$ x $$ 满足$$ f(x) = x $$ ,那么数x称为函数f的不动点。</p>
+<p>根据这个定义可以写出以下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">fix_point</span> <span class="nv">f</span> <span class="nv">first_guess</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nf">try</span> <span class="nv">guess</span><span class="p">)</span>
+        <span class="p">(</span><span class="k">let </span><span class="p">((</span><span class="nf">next</span> <span class="p">(</span><span class="nf">f</span> <span class="nv">guess</span><span class="p">)))</span>
+            <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">close_enough</span> <span class="nv">guess</span> <span class="nv">next</span><span class="p">)</span>
+                <span class="nv">next</span>
+                <span class="p">(</span><span class="nf">try</span> <span class="nv">next</span><span class="p">))</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+ <span class="p">(</span><span class="nf">try</span> <span class="nv">first_guess</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>来看一个例子，x 的平方根可看作 f(y) = x/y的不动点，考虑用下面求平方根过程：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">(define (sqrt x)
+
+  (fix_point (lambda (y) (/ x y)) 1.0 ))
+</code></pre></td></tr></table>
+</div>
+</div><p>经过测试，这个不动点函数是不收敛的。必须 y = 0.5 x = 1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="nv">y</span> <span class="nv">=</span> <span class="nv">x/y</span> <span class="nv">=</span> <span class="mi">1</span><span class="nv">/0</span><span class="o">.</span><span class="mi">5</span> <span class="nv">=</span> <span class="mi">2</span>
+<span class="nv">y</span> <span class="nv">=</span> <span class="nv">x/y</span> <span class="nv">=</span> <span class="mi">1</span><span class="nv">/2</span> <span class="nv">=</span> <span class="mf">0.5</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>修正改过程</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-scheme" data-lang="scheme"><span class="p">(</span><span class="k">define </span><span class="p">(</span><span class="nb">sqrt </span><span class="nv">x</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">fix_point</span> <span class="p">(</span><span class="k">lambda </span><span class="p">(</span><span class="nf">y</span><span class="p">)</span> <span class="p">(</span><span class="nf">average</span> <span class="nv">y</span> <span class="p">(</span><span class="nb">/ </span><span class="nv">x</span> <span class="nv">y</span><span class="p">)))</span>
+<span class="mf">1.0</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>经过测试，该函数确实可以收敛，至于怎么证明可以收敛，这不是我们主要关心的问题。</p>
+<h1 id="参考连接">参考连接</h1>
+<p>SICP学习笔记及题解—构造过程抽象(三) <a href="https://blog.csdn.net/hu1020935219/article/details/39271241">https://blog.csdn.net/hu1020935219/article/details/39271241</a></p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">白水飘萍</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-08-14
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/scip/">SCIP</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/leetcode/61%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">61旋转链表</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/elk/elk%E9%83%A8%E7%BD%B2/">
+            <span class="next-text nav-default"></span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/bspp1314" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/3841870377" class="iconfont icon-weibo" title="weibo"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">白水飘萍</span>
+  </span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

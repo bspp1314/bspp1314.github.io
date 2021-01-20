@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gin on 白水飘萍</title>
+    <link>http://localhost:1313/categories/gin/</link>
+    <description>Recent content in gin on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 26 Oct 2020 16:50:45 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/gin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gin的学习笔记3 Context分析</title>
+      <link>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03-context%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 26 Oct 2020 16:50:45 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03-context%E5%88%86%E6%9E%90/</guid>
+      <description>Context是框架中非常重要的一点，它允许我们在中间件间共享变量，管理整个流程，验证请求的json以及提供一个json的响应体. 通常情况下</description>
+    </item>
+    
+    <item>
+      <title>Gin的学习笔记2 中间件的使用</title>
+      <link>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 19 Oct 2020 10:41:16 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>&lt;h1 id=&#34;gin中间件的作用&#34;&gt;Gin中间件的作用&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Web请求到到达我们定义的HTTP请求处理方法之前，拦截请求并进行相应处理(比如：权限验证，数据过滤等)，这个可以类比为&lt;code&gt;前置拦截器&lt;/code&gt;或&lt;code&gt;前置过滤器&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Gin的学习笔记1-简单的使用</title>
+      <link>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AE%80%E5%8D%95%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 09 Oct 2020 18:49:19 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AE%80%E5%8D%95%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>gin 是什么 Gin is a web framework written in Go (Golang). It features a martini-like API with much better performance, up to 40 times faster thanks to httprouter 简单的使用 1 2 3 4 5 6 7 8 9 10 11 12 13 14 func main() { r := gin.Default() r.GET(&amp;#34;/hello&amp;#34;, HelloAction) r.Run() // listen and serve on 0.0.0.0:8080} } func HelloAction(c *gin.Context) { name</description>
+    </item>
+    
+  </channel>
+</rss>

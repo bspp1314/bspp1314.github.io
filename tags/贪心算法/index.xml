@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>贪心算法 on 白水飘萍</title>
+    <link>http://localhost:1313/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 贪心算法 on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 20 Dec 2020 17:37:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>354俄罗斯套娃信封问题</title>
+      <link>http://localhost:1313/post/leetcode/354%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Sun, 20 Dec 2020 17:37:57 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/354%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98/</guid>
+      <description>题目 给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信</description>
+    </item>
+    
+    <item>
+      <title>646最长数对链</title>
+      <link>http://localhost:1313/post/leetcode/646%E6%9C%80%E9%95%BF%E6%95%B0%E5%AF%B9%E9%93%BE/</link>
+      <pubDate>Sun, 20 Dec 2020 17:17:31 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/646%E6%9C%80%E9%95%BF%E6%95%B0%E5%AF%B9%E9%93%BE/</guid>
+      <description>题目 给出 n 个数对。 在每一个数对中，第一个数字总是比第二个数字小。 现在，我们定义一种跟随关系，当且仅当 b &amp;lt; c 时，数对(c, d) 才可以跟在 (a, b) 后面</description>
+    </item>
+    
+    <item>
+      <title>334递增的三元子序列</title>
+      <link>http://localhost:1313/post/leetcode/334%E9%80%92%E5%A2%9E%E7%9A%84%E4%B8%89%E5%85%83%E5%AD%90%E5%BA%8F%E5%88%97/</link>
+      <pubDate>Tue, 15 Dec 2020 21:09:16 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/334%E9%80%92%E5%A2%9E%E7%9A%84%E4%B8%89%E5%85%83%E5%AD%90%E5%BA%8F%E5%88%97/</guid>
+      <description>题目 给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。 数学表达式如下: 如果存在这样的 i, j, k, 且满足 0 ≤ i &amp;lt; j &amp;lt; k ≤ n-1， 使得</description>
+    </item>
+    
+    <item>
+      <title>300最长递增子序列</title>
+      <link>http://localhost:1313/post/leetcode/300%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</link>
+      <pubDate>Tue, 15 Dec 2020 13:35:36 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/300%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</guid>
+      <description>题目 给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。 子序列是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。</description>
+    </item>
+    
+    <item>
+      <title>121买卖股票的最佳时机</title>
+      <link>http://localhost:1313/post/leetcode/122%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</link>
+      <pubDate>Sun, 08 Nov 2020 18:51:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/122%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</guid>
+      <description>题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一</description>
+    </item>
+    
+  </channel>
+</rss>

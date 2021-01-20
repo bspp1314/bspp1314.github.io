@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Redis源码阅读之skiplist - 白水飘萍</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="白水飘萍" /><meta name="description" content="Redis里面使用skiplist是为了实现sorted set这种对外的数据结构。 我们知道在一般的有序链表中，我们需要查找数据的时间复杂度为" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/redis/redis%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B9%8Bskiplist/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.651e6917abb0239242daa570c2bec9867267bbcd83646da5a850afe573347b44.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Redis源码阅读之skiplist" />
+<meta property="og:description" content="Redis里面使用skiplist是为了实现sorted set这种对外的数据结构。 我们知道在一般的有序链表中，我们需要查找数据的时间复杂度为" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/redis/redis%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B9%8Bskiplist/" />
+<meta property="article:published_time" content="2020-11-27T21:11:55+08:00" />
+<meta property="article:modified_time" content="2020-11-27T21:11:55+08:00" />
+<meta itemprop="name" content="Redis源码阅读之skiplist">
+<meta itemprop="description" content="Redis里面使用skiplist是为了实现sorted set这种对外的数据结构。 我们知道在一般的有序链表中，我们需要查找数据的时间复杂度为">
+<meta itemprop="datePublished" content="2020-11-27T21:11:55+08:00" />
+<meta itemprop="dateModified" content="2020-11-27T21:11:55+08:00" />
+<meta itemprop="wordCount" content="1643">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Redis源码阅读之skiplist"/>
+<meta name="twitter:description" content="Redis里面使用skiplist是为了实现sorted set这种对外的数据结构。 我们知道在一般的有序链表中，我们需要查找数据的时间复杂度为"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">白水飘萍</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">白水飘萍</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Redis源码阅读之skiplist</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-27 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#redis-中skiplist">Redis 中Skiplist</a></li>
+    <li><a href="#创建跳跃表">创建跳跃表</a></li>
+    <li><a href="#插入数据">插入数据</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Redis里面使用skiplist是为了实现sorted set这种对外的数据结构。</p>
+<p>我们知道在一般的有序链表中，我们需要查找数据的时间复杂度为 $ O(n) $ 。但如果是数组的话，可以使用二分查找达到O(lgn)。可以在链表中使用二分查找吗？</p>
+<p>不可以，因为二分查找需要用到中间位置的节点，而链表不能随机访问。而skiplist就是为了让链表的达到log(n)的时间复杂度一种改造。</p>
+<p>skiplist相邻两个节点增加一个指针，让指针指向下下个节点,如下图所示</p>
+<p><img src="image-20201127211835472.png" alt="image-20201127211835472"></p>
+<p>原来的链表写成了三个链表，记从下到上的编号为0、1、2，可以发现0号链表就是原始链表，1号链表是原始链表四等分点，2号链表是原始链表的二等分点。</p>
+<p>我们再来查找7，初始搜索范围为(H, T)：</p>
+<ol>
+<li>在2号链表中与4比较，7&gt;4，更新搜索范围为(4, T)</li>
+<li>在1号链表中与6比较，7&gt;6，更新搜索范围为(6, T)</li>
+<li>在0号链表中与7比较，7=7，查找成功。</li>
+</ol>
+<ul>
+<li>skipList结合了链表和二分查找的思想</li>
+<li>将原始链表和一些通过“跳跃”生成的链表组成层</li>
+<li>第0层是原始链表，越上层“跳跃”的步距越大，链表元素越少</li>
+<li>上层链表是下层链表的子序列</li>
+<li>查找时从顶层向下，不断缩小搜索范围</li>
+</ul>
+<h1 id="redis-中skiplist">Redis 中Skiplist</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cm">/* ZSETs use a specialized version of Skiplists */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">zskiplistNode</span> <span class="p">{</span>
+  	<span class="c1">// key 值
+</span><span class="c1"></span>    <span class="n">sds</span> <span class="n">ele</span><span class="p">;</span>
+  	<span class="c1">// value 值
+</span><span class="c1"></span>    <span class="kt">double</span> <span class="n">score</span><span class="p">;</span>
+  	<span class="c1">//后退指针 
+</span><span class="c1"></span>    <span class="k">struct</span> <span class="n">zskiplistNode</span> <span class="o">*</span><span class="n">backward</span><span class="p">;</span>
+   <span class="c1">//各层的前进指针
+</span><span class="c1"></span>    <span class="k">struct</span> <span class="n">zskiplistLevel</span> <span class="p">{</span>
+         <span class="c1">// 前进指针
+</span><span class="c1"></span>        <span class="k">struct</span> <span class="n">zskiplistNode</span> <span class="o">*</span><span class="n">forward</span><span class="p">;</span>
+        <span class="c1">//跨度  
+</span><span class="c1"></span>       <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">span</span><span class="p">;</span>
+    <span class="p">}</span> <span class="n">level</span><span class="p">[];</span>
+<span class="p">}</span> <span class="n">zskiplistNode</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">zskiplist</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">zskiplistNode</span> <span class="o">*</span><span class="n">header</span><span class="p">,</span> <span class="o">*</span><span class="n">tail</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">length</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">level</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">zskiplist</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>节点的分值(score属性)是一个double类型的浮点数，跳跃表中的所有节点都按分值从小到大来排序。</li>
+<li>节点的后退指针 ( backward 属性 ) 用于从表尾向表头方向访问节点：跟可以一次跳过多个节点的前进指针不同，因为每个节点只有一个后退指针，所以每次只能后退至前一个节点。</li>
+</ul>
+<h1 id="创建跳跃表">创建跳跃表</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cm">/* Create a new skiplist. */</span>
+<span class="n">zskiplist</span> <span class="o">*</span><span class="nf">zslCreate</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+    <span class="n">zskiplist</span> <span class="o">*</span><span class="n">zsl</span><span class="p">;</span>
+
+    <span class="n">zsl</span> <span class="o">=</span> <span class="n">zmalloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">zsl</span><span class="p">));</span>
+    <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">level</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  	<span class="c1">//创建头节点
+</span><span class="c1"></span>    <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">header</span> <span class="o">=</span> <span class="n">zslCreateNode</span><span class="p">(</span><span class="n">ZSKIPLIST_MAXLEVEL</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+  	<span class="c1">//ZSKIPLIST_MAXLEVEL 32 ，也就是说可以容纳 2^64个值
+</span><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">ZSKIPLIST_MAXLEVEL</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">header</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">forward</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">header</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">span</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">header</span><span class="o">-&gt;</span><span class="n">backward</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">tail</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">zsl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Create a skiplist node with the specified number of levels.
+</span><span class="cm"> * The SDS string &#39;ele&#39; is referenced by the node after the call. */</span>
+<span class="n">zskiplistNode</span> <span class="o">*</span><span class="nf">zslCreateNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">level</span><span class="p">,</span> <span class="kt">double</span> <span class="n">score</span><span class="p">,</span> <span class="n">sds</span> <span class="n">ele</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">zskiplistNode</span> <span class="o">*</span><span class="n">zn</span> <span class="o">=</span>
+        <span class="n">zmalloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">zn</span><span class="p">)</span><span class="o">+</span><span class="n">level</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">zskiplistLevel</span><span class="p">));</span>
+    <span class="n">zn</span><span class="o">-&gt;</span><span class="n">score</span> <span class="o">=</span> <span class="n">score</span><span class="p">;</span>
+    <span class="n">zn</span><span class="o">-&gt;</span><span class="n">ele</span> <span class="o">=</span> <span class="n">ele</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">zn</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="插入数据">插入数据</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cm">/* Insert a new node in the skiplist. Assumes the element does not already
+</span><span class="cm"> * exist (up to the caller to enforce that). The skiplist takes ownership
+</span><span class="cm"> * of the passed SDS string &#39;ele&#39;. */</span>
+<span class="n">zskiplistNode</span> <span class="o">*</span><span class="nf">zslInsert</span><span class="p">(</span><span class="n">zskiplist</span> <span class="o">*</span><span class="n">zsl</span><span class="p">,</span> <span class="kt">double</span> <span class="n">score</span><span class="p">,</span> <span class="n">sds</span> <span class="n">ele</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">zskiplistNode</span> <span class="o">*</span><span class="n">update</span><span class="p">[</span><span class="n">ZSKIPLIST_MAXLEVEL</span><span class="p">],</span> <span class="o">*</span><span class="n">x</span><span class="p">;</span><span class="c1">//插入节点函数的实现中有一个 update 数组，它里面记录的是每一层中位于插入节点的前一个节
+</span><span class="c1"></span>    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">rank</span><span class="p">[</span><span class="n">ZSKIPLIST_MAXLEVEL</span><span class="p">];</span><span class="c1">//记录的是每一层中位于插入节点的前一个节点的排名，也就是 update 数组中每个节点的排名，
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">level</span><span class="p">;</span>
+
+    <span class="n">serverAssert</span><span class="p">(</span><span class="o">!</span><span class="n">isnan</span><span class="p">(</span><span class="n">score</span><span class="p">));</span>
+   <span class="c1">// 在各个层中查找节点的插入位置
+</span><span class="c1"></span>    <span class="n">x</span> <span class="o">=</span> <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">;</span>
+   <span class="c1">// 从高往低进行查找
+</span><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">level</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="cm">/* store rank that is crossed to reach the insert position */</span>
+        <span class="n">rank</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">==</span> <span class="p">(</span><span class="n">zsl</span><span class="o">-&gt;</span><span class="n">level</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">rank</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+      	<span class="c1">//  前向指针不为空，前向指针所指节点的分值小于score   或者
+</span><span class="c1"></span>        <span class="c1">// 前向指针所指节点的分值相等，但成员的值小于ele的值   时 
+</span><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">forward</span> <span class="o">&amp;&amp;</span>
+                <span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">forward</span><span class="o">-&gt;</span><span class="n">score</span> <span class="o">&lt;</span> <span class="n">score</span> <span class="o">||</span>
+                    <span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">forward</span><span class="o">-&gt;</span><span class="n">score</span> <span class="o">==</span> <span class="n">score</span> <span class="o">&amp;&amp;</span>
+                    <span class="n">sdscmp</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">forward</span><span class="o">-&gt;</span><span class="n">ele</span><span class="p">,</span><span class="n">ele</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)))</span>
+        <span class="p">{</span>
+            <span class="n">rank</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">span</span><span class="p">;</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">forward</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">update</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/* we assume the element is not already inside, since we allow duplicated
+</span><span class="cm">     * scores, reinserting the same element should never happen since the
+</span><span class="cm">     * caller of zslInsert() should test in the hash table if the element is
+</span><span class="cm">     * already inside or not. */</span>
+  	 <span class="c1">// 获取一个随机值作为新节点的层数
+</span><span class="c1"></span>    <span class="n">level</span> <span class="o">=</span> <span class="n">zslRandomLevel</span><span class="p">();</span>
+  	 <span class="cm">/* 如果新节点的层数比表中其他节点的层数都要大
+</span><span class="cm">     * 那么初始化表头节点中对应未使用的层，并记录到 update 数组中 */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">&gt;</span> <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">level</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> 
+            <span class="n">rank</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">update</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">;</span>
+            <span class="n">update</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">span</span> <span class="o">=</span> <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span><span class="p">;</span>
+    <span class="p">}</span>
+	 <span class="c1">//创建一个节点
+</span><span class="c1"></span>    <span class="n">x</span> <span class="o">=</span> <span class="n">zslCreateNode</span><span class="p">(</span><span class="n">level</span><span class="p">,</span><span class="n">score</span><span class="p">,</span><span class="n">ele</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">level</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+         <span class="c1">// 设置新节点每一层的前向指针
+</span><span class="c1"></span>        <span class="n">x</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">forward</span> <span class="o">=</span> <span class="n">update</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">forward</span><span class="p">;</span>
+        <span class="n">update</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">forward</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+
+        <span class="cm">/* update span covered by update[i] as x is inserted here */</span>
+        <span class="n">x</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">span</span> <span class="o">=</span> <span class="n">update</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">span</span> <span class="o">-</span> <span class="p">(</span><span class="n">rank</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">rank</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">update</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">span</span> <span class="o">=</span> <span class="p">(</span><span class="n">rank</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">rank</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* increment span for untouched levels */</span>
+		<span class="cm">/* 如果新节点的层数比表中其他节点的层数都要大，
+</span><span class="cm">     * 那么 update 数组中那些之前指向NULL，
+</span><span class="cm">     * 现在指向新节点的数组元素的 span 值也要加1 */</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">level</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">update</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">span</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+ 
+		<span class="c1">//设置前向指针和后向指针
+</span><span class="c1"></span>    <span class="n">x</span><span class="o">-&gt;</span><span class="n">backward</span> <span class="o">=</span> <span class="p">(</span><span class="n">update</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">)</span> <span class="o">?</span> <span class="nb">NULL</span> <span class="o">:</span> <span class="n">update</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">forward</span><span class="p">)</span>
+        <span class="n">x</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">forward</span><span class="o">-&gt;</span><span class="n">backward</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">tail</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">length</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>参考</p>
+<p><a href="https://www.w3cschool.cn/hdclil/pea3uozt.html">https://www.w3cschool.cn/hdclil/pea3uozt.html</a></p>
+<p>Redis内部数据结构详解(6)——skiplist <a href="http://zhangtielei.com/posts/blog-redis-skiplist.html">http://zhangtielei.com/posts/blog-redis-skiplist.html</a></p>
+<p>Redis源码阅读笔记&ndash;跳跃表zskiplist <a href="https://zhuanlan.zhihu.com/p/49295806">https://zhuanlan.zhihu.com/p/49295806</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">白水飘萍</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-27
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8Bbitmap/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Redis数据类型之bitmap</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/leetcode/307%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E5%8F%AF%E4%BF%AE%E6%94%B9/">
+            <span class="next-text nav-default">307区域和检索 数组可修改</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/bspp1314" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/3841870377" class="iconfont icon-weibo" title="weibo"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">白水飘萍</span>
+  </span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

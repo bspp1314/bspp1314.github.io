@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>leetcode-easy on 白水飘萍</title>
+    <link>http://localhost:1313/tags/leetcode-easy/</link>
+    <description>Recent content in leetcode-easy on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 24 Dec 2020 10:01:40 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/leetcode-easy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>697数组中的度</title>
+      <link>http://localhost:1313/post/leetcode/697%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%BA%A6/</link>
+      <pubDate>Thu, 24 Dec 2020 10:01:40 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/697%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%BA%A6/</guid>
+      <description>题目 给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。 你的任务是找到与 nums 拥有相同大小的度的最短连续子数</description>
+    </item>
+    
+    <item>
+      <title>657机器人能否返回原点</title>
+      <link>http://localhost:1313/post/leetcode/657%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%83%BD%E5%90%A6%E8%BF%94%E5%9B%9E%E5%8E%9F%E7%82%B9/</link>
+      <pubDate>Mon, 14 Dec 2020 10:15:14 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/657%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%83%BD%E5%90%A6%E8%BF%94%E5%9B%9E%E5%8E%9F%E7%82%B9/</guid>
+      <description>题目 在二维平面上，有一个机器人从原点 (0, 0) 开始。给出它的移动顺序，判断这个机器人在完成移动后是否在 (0, 0) 处结束。 移动顺序由字符串表示。字符 move[i] 表示</description>
+    </item>
+    
+    <item>
+      <title>303区域和检索 数组不可变</title>
+      <link>http://localhost:1313/post/leetcode/303%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/</link>
+      <pubDate>Mon, 23 Nov 2020 21:28:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/303%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/</guid>
+      <description># 题目 难度简单210收藏分享切换为英文接收动态反馈 给定一个整数数组 nums，求出数组从索引 i 到 j（i ≤ j）范围内元素的总和，包含 i、j 两点。</description>
+    </item>
+    
+    <item>
+      <title>198打家劫舍</title>
+      <link>http://localhost:1313/post/leetcode/198%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</link>
+      <pubDate>Wed, 11 Nov 2020 21:34:45 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/198%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</guid>
+      <description>题目 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间</description>
+    </item>
+    
+    <item>
+      <title>121买卖股票的最佳时机</title>
+      <link>http://localhost:1313/post/leetcode/121%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</link>
+      <pubDate>Sun, 08 Nov 2020 18:51:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/121%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</guid>
+      <description>题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所</description>
+    </item>
+    
+    <item>
+      <title>121买卖股票的最佳时机</title>
+      <link>http://localhost:1313/post/leetcode/122%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</link>
+      <pubDate>Sun, 08 Nov 2020 18:51:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/122%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</guid>
+      <description>题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一</description>
+    </item>
+    
+    <item>
+      <title>70爬楼梯</title>
+      <link>http://localhost:1313/post/leetcode/70%E7%88%AC%E6%A5%BC%E6%A2%AF/</link>
+      <pubDate>Sun, 08 Nov 2020 17:41:52 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/70%E7%88%AC%E6%A5%BC%E6%A2%AF/</guid>
+      <description>题目 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ **注意：**给定 n 是一个正整数</description>
+    </item>
+    
+    <item>
+      <title>53最大子序和</title>
+      <link>http://localhost:1313/post/leetcode/53%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/</link>
+      <pubDate>Fri, 30 Oct 2020 13:50:34 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/53%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/</guid>
+      <description>题目 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 1 2 3 输入: [-2,1,-3,4,-1,2,1,-5,4] 输出: 6 解释: 连续子数组</description>
+    </item>
+    
+    <item>
+      <title>617合并二叉树</title>
+      <link>http://localhost:1313/post/leetcode/617%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Sat, 26 Sep 2020 16:16:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/617%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定两个二叉树，想象当你将它们中的一个覆盖到另一个上时，两个二叉树的一些节点便会重叠。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>112路径总和</title>
+      <link>http://localhost:1313/post/leetcode/112%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/</link>
+      <pubDate>Sun, 13 Sep 2020 19:54:03 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/112%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>111二叉树的最小深度</title>
+      <link>http://localhost:1313/post/leetcode/111%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6/</link>
+      <pubDate>Sun, 13 Sep 2020 19:40:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/111%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，找出其最小深度。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>110平衡二叉树</title>
+      <link>http://localhost:1313/post/leetcode/110%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Sun, 13 Sep 2020 19:26:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/110%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，判断它是否是高度平衡的二叉树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>108将有序数组转换为二叉搜索树</title>
+      <link>http://localhost:1313/post/leetcode/108%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link>
+      <pubDate>Sun, 13 Sep 2020 18:32:44 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/108%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>104二叉树的最大深度</title>
+      <link>http://localhost:1313/post/leetcode/104%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/</link>
+      <pubDate>Sun, 13 Sep 2020 00:16:12 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/104%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，找出其最大深度。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>101对称二叉树</title>
+      <link>http://localhost:1313/post/leetcode/101%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Thu, 10 Sep 2020 13:57:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/101%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，检查它是否是镜像对称的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>100相同的树</title>
+      <link>http://localhost:1313/post/leetcode/100%E7%9B%B8%E5%90%8C%E7%9A%84%E6%A0%91/</link>
+      <pubDate>Thu, 10 Sep 2020 12:58:43 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/100%E7%9B%B8%E5%90%8C%E7%9A%84%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定两个二叉树，编写一个函数来检验它们是否相同。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>345反转字符串中的元音字母</title>
+      <link>http://localhost:1313/post/leetcode/345%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%85%83%E9%9F%B3%E5%AD%97%E6%AF%8D/</link>
+      <pubDate>Mon, 31 Aug 2020 16:03:32 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/345%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%85%83%E9%9F%B3%E5%AD%97%E6%AF%8D/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;编写一个函数，以字符串作为输入，反转该字符串中的元音字母。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>167两数之和</title>
+      <link>http://localhost:1313/post/leetcode/167%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</link>
+      <pubDate>Mon, 31 Aug 2020 13:03:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/167%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>27移除元素</title>
+      <link>http://localhost:1313/post/leetcode/27%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Fri, 28 Aug 2020 17:06:04 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/27%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>26删除排序数组中的重复项</title>
+      <link>http://localhost:1313/post/leetcode/26%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/</link>
+      <pubDate>Fri, 28 Aug 2020 16:32:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/26%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>141环形链表</title>
+      <link>http://localhost:1313/post/leetcode/141%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Wed, 19 Aug 2020 00:25:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/141%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个链表，判断链表中是否有环。&lt;/p&gt;
+&lt;p&gt;为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

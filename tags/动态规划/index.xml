@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>动态规划 on 白水飘萍</title>
+    <link>http://localhost:1313/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link>
+    <description>Recent content in 动态规划 on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 21 Dec 2020 10:19:44 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>673最长递增子序列的个数</title>
+      <link>http://localhost:1313/post/leetcode/673%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0/</link>
+      <pubDate>Mon, 21 Dec 2020 10:19:44 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/673%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0/</guid>
+      <description>题目 给定一个未排序的整数数组，找到最长递增子序列的个数。 示例 1: 1 2 3 输入: [1,3,5,4,7] 输出: 2 解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7</description>
+    </item>
+    
+    <item>
+      <title>354俄罗斯套娃信封问题</title>
+      <link>http://localhost:1313/post/leetcode/354%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Sun, 20 Dec 2020 17:37:57 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/354%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98/</guid>
+      <description>题目 给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信</description>
+    </item>
+    
+    <item>
+      <title>646最长数对链</title>
+      <link>http://localhost:1313/post/leetcode/646%E6%9C%80%E9%95%BF%E6%95%B0%E5%AF%B9%E9%93%BE/</link>
+      <pubDate>Sun, 20 Dec 2020 17:17:31 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/646%E6%9C%80%E9%95%BF%E6%95%B0%E5%AF%B9%E9%93%BE/</guid>
+      <description>题目 给出 n 个数对。 在每一个数对中，第一个数字总是比第二个数字小。 现在，我们定义一种跟随关系，当且仅当 b &amp;lt; c 时，数对(c, d) 才可以跟在 (a, b) 后面</description>
+    </item>
+    
+    <item>
+      <title>300最长递增子序列</title>
+      <link>http://localhost:1313/post/leetcode/300%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</link>
+      <pubDate>Tue, 15 Dec 2020 13:35:36 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/300%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</guid>
+      <description>题目 给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。 子序列是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。</description>
+    </item>
+    
+    <item>
+      <title>338比特位计数</title>
+      <link>http://localhost:1313/post/leetcode/338%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/</link>
+      <pubDate>Sun, 06 Dec 2020 18:56:19 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/338%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/</guid>
+      <description># 题目 给定一个非负整数 num。对于 0 ≤ i ≤ num 范围中的每个数字 i ，计算其二进制数中的 1 的数目并将它们作为数组返回。 示例 1: 1 2 输入: 2 输出: [0,1,1] 示</description>
+    </item>
+    
+    <item>
+      <title>303区域和检索 数组不可变</title>
+      <link>http://localhost:1313/post/leetcode/303%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/</link>
+      <pubDate>Mon, 23 Nov 2020 21:28:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/303%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/</guid>
+      <description># 题目 难度简单210收藏分享切换为英文接收动态反馈 给定一个整数数组 nums，求出数组从索引 i 到 j（i ≤ j）范围内元素的总和，包含 i、j 两点。</description>
+    </item>
+    
+    <item>
+      <title>139单词拆分</title>
+      <link>http://localhost:1313/post/leetcode/139%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/</link>
+      <pubDate>Thu, 12 Nov 2020 21:38:23 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/139%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/</guid>
+      <description>题目 给定一个非空字符串 s 和一个包含非空单词的列表 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。 说明： 拆分时可以重</description>
+    </item>
+    
+    <item>
+      <title>213打家劫舍II</title>
+      <link>http://localhost:1313/post/leetcode/213%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Dii/</link>
+      <pubDate>Wed, 11 Nov 2020 21:43:04 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/213%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Dii/</guid>
+      <description>题目 你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都 围成一圈 ，这意味着第一个房屋和最后一个房屋是紧挨着</description>
+    </item>
+    
+    <item>
+      <title>198打家劫舍</title>
+      <link>http://localhost:1313/post/leetcode/198%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</link>
+      <pubDate>Wed, 11 Nov 2020 21:34:45 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/198%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</guid>
+      <description>题目 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间</description>
+    </item>
+    
+    <item>
+      <title>91解码方法</title>
+      <link>http://localhost:1313/post/leetcode/91%E8%A7%A3%E7%A0%81%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Mon, 09 Nov 2020 17:05:35 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/91%E8%A7%A3%E7%A0%81%E6%96%B9%E6%B3%95/</guid>
+      <description>题目 一条包含字母 A-Z 的消息通过以下方式进行了编码： 1 2 3 4 &amp;#39;A&amp;#39; -&amp;gt; 1 &amp;#39;B&amp;#39; -&amp;gt; 2 ... &amp;#39;Z&amp;#39; -&amp;gt; 26 给定一个只包含数字的非空字符串，请计算解码方法的总数。 题目数据保</description>
+    </item>
+    
+    <item>
+      <title>309最佳买卖股票时期含冷冻期</title>
+      <link>http://localhost:1313/post/leetcode/309%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%9F%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F/</link>
+      <pubDate>Mon, 09 Nov 2020 11:38:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/309%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%9F%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F/</guid>
+      <description>题目 给定一个整数数组，其中第 i 个元素代表了第 i 天的股票价格 。 设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（</description>
+    </item>
+    
+    <item>
+      <title>714买卖股票的最佳时机含手续费</title>
+      <link>http://localhost:1313/post/leetcode/714%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9/</link>
+      <pubDate>Sun, 08 Nov 2020 21:24:40 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/714%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9/</guid>
+      <description>题目 给定一个整数数组 prices，其中第 i 个元素代表了第 i 天的股票价格 ；非负整数 fee 代表了交易股票的手续费用。 你可以无限次地完成交易，但是你每</description>
+    </item>
+    
+    <item>
+      <title>188买卖股票的最佳时机IV</title>
+      <link>http://localhost:1313/post/leetcode/188%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAiv/</link>
+      <pubDate>Sun, 08 Nov 2020 20:28:23 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/188%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAiv/</guid>
+      <description>题目 给定一个整数数组 prices ，它的第 i 个元素 prices[i] 是一支给定的股票在第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你最多可以完成 k 笔交易。 注意</description>
+    </item>
+    
+    <item>
+      <title>123买卖股票的最佳时机III</title>
+      <link>http://localhost:1313/post/leetcode/123%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAiii/</link>
+      <pubDate>Sun, 08 Nov 2020 19:49:40 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/123%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAiii/</guid>
+      <description>题目 给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你最多可以完成 两笔 交易。 注意: 你不能</description>
+    </item>
+    
+    <item>
+      <title>121买卖股票的最佳时机</title>
+      <link>http://localhost:1313/post/leetcode/121%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</link>
+      <pubDate>Sun, 08 Nov 2020 18:51:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/121%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</guid>
+      <description>题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所</description>
+    </item>
+    
+    <item>
+      <title>121买卖股票的最佳时机</title>
+      <link>http://localhost:1313/post/leetcode/122%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</link>
+      <pubDate>Sun, 08 Nov 2020 18:51:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/122%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</guid>
+      <description>题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一</description>
+    </item>
+    
+    <item>
+      <title>120三角形最小路径和</title>
+      <link>http://localhost:1313/post/leetcode/120%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</link>
+      <pubDate>Sun, 08 Nov 2020 17:55:08 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/120%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</guid>
+      <description>给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。 相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层</description>
+    </item>
+    
+    <item>
+      <title>70爬楼梯</title>
+      <link>http://localhost:1313/post/leetcode/70%E7%88%AC%E6%A5%BC%E6%A2%AF/</link>
+      <pubDate>Sun, 08 Nov 2020 17:41:52 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/70%E7%88%AC%E6%A5%BC%E6%A2%AF/</guid>
+      <description>题目 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ **注意：**给定 n 是一个正整数</description>
+    </item>
+    
+    <item>
+      <title>64最小路径和</title>
+      <link>http://localhost:1313/post/leetcode/64%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</link>
+      <pubDate>Sun, 08 Nov 2020 17:25:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/64%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</guid>
+      <description>题目 给定一个包含非负整数的 m x n 网格，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。 **说明：**每次只能向下或者向右移动一</description>
+    </item>
+    
+    <item>
+      <title>63不同路径II</title>
+      <link>http://localhost:1313/post/leetcode/63%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84ii/</link>
+      <pubDate>Sun, 08 Nov 2020 17:08:21 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/63%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84ii/</guid>
+      <description>题目 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下</description>
+    </item>
+    
+    <item>
+      <title>62不同路径</title>
+      <link>http://localhost:1313/post/leetcode/62%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/</link>
+      <pubDate>Wed, 04 Nov 2020 17:57:13 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/62%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/</guid>
+      <description>题目 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下</description>
+    </item>
+    
+    <item>
+      <title>53最大子序和</title>
+      <link>http://localhost:1313/post/leetcode/53%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/</link>
+      <pubDate>Fri, 30 Oct 2020 13:50:34 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/53%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/</guid>
+      <description>题目 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 1 2 3 输入: [-2,1,-3,4,-1,2,1,-5,4] 输出: 6 解释: 连续子数组</description>
+    </item>
+    
+    <item>
+      <title>516最长回文子序列</title>
+      <link>http://localhost:1313/post/leetcode/516%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97/</link>
+      <pubDate>Tue, 27 Oct 2020 00:32:50 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/516%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97/</guid>
+      <description>题目 给定一个字符串 s ，找到其中最长的回文子序列，并返回该序列的长度。可以假设 s 的最大长度为 1000 。 示例 1: 输入: 1 &amp;#34;bbbab&amp;#34; 输出: 1 4 一个可能的最长回文子</description>
+    </item>
+    
+    <item>
+      <title>647回文子串</title>
+      <link>http://localhost:1313/post/leetcode/647%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</link>
+      <pubDate>Sat, 26 Sep 2020 19:32:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/647%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个字符串，你的任务是计算这个字符串中有多少个回文子串。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>5最长回文串</title>
+      <link>http://localhost:1313/post/leetcode/5%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E4%B8%B2/</link>
+      <pubDate>Sat, 26 Sep 2020 18:07:04 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/5%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E4%B8%B2/</guid>
+      <description>&lt;h2 id=&#34;题目&#34;&gt;题目&lt;/h2&gt;
+&lt;p&gt;给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>96不同的二叉搜索树</title>
+      <link>http://localhost:1313/post/leetcode/96%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link>
+      <pubDate>Mon, 07 Sep 2020 23:46:54 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/96%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个整数 n，求以 1 &amp;hellip; n 为节点组成的二叉搜索树有多少种？&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

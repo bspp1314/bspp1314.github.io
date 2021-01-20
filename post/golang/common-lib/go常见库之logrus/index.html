@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Go常见库之logrus - 白水飘萍</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="白水飘萍" /><meta name="description" content="简介 logrus 其是一个 golang 结构化后的日志包，API完全兼容标准包logger。
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Blogrus/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.651e6917abb0239242daa570c2bec9867267bbcd83646da5a850afe573347b44.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Go常见库之logrus" />
+<meta property="og:description" content="简介
+logrus 其是一个 golang 结构化后的日志包，API完全兼容标准包logger。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Blogrus/" />
+<meta property="article:published_time" content="2020-09-15T17:39:25+08:00" />
+<meta property="article:modified_time" content="2020-09-15T17:39:25+08:00" />
+<meta itemprop="name" content="Go常见库之logrus">
+<meta itemprop="description" content="简介
+logrus 其是一个 golang 结构化后的日志包，API完全兼容标准包logger。">
+<meta itemprop="datePublished" content="2020-09-15T17:39:25+08:00" />
+<meta itemprop="dateModified" content="2020-09-15T17:39:25+08:00" />
+<meta itemprop="wordCount" content="3309">
+
+
+
+<meta itemprop="keywords" content="日志," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go常见库之logrus"/>
+<meta name="twitter:description" content="简介
+logrus 其是一个 golang 结构化后的日志包，API完全兼容标准包logger。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">白水飘萍</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">白水飘萍</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Go常见库之logrus</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-09-15 </span>
+        <div class="post-category">
+            <a href="/categories/golang/"> golang </a>
+            <a href="/categories/golang%E5%B8%B8%E8%A7%81%E5%BA%93/"> golang常见库 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#简单使用">简单使用</a></li>
+    <li><a href="#输出文件名和方法">输出文件名和方法</a></li>
+    <li><a href="#添加字段">添加字段</a></li>
+    <li><a href="#日志格式">日志格式</a></li>
+    <li><a href="#设置钩子">设置钩子</a></li>
+    <li><a href="#源码分析">源码分析</a>
+      <ul>
+        <li><a href="#logger-结构体">Logger 结构体</a></li>
+        <li><a href="#一个简单的-logger-logger-info调用过程">一个简单的 (logger *Logger) Info调用过程</a></li>
+        <li><a href="#newentry--releaseentry">newEntry &amp;&amp; releaseEntry</a></li>
+        <li><a href="#entry">Entry</a></li>
+        <li><a href="#创建-entry">创建 Entry</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考连接">参考连接</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="简介">简介</h1>
+<p>logrus 其是一个 golang 结构化后的日志包，API完全兼容标准包logger。</p>
+<h1 id="简单使用">简单使用</h1>
+<p>下载包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="k">go</span> <span class="nx">get</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">sirupsen</span><span class="o">/</span><span class="nx">logrus</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	 <span class="s">&#34;github.com/sirupsen/logrus&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">logrus</span><span class="p">.</span><span class="nf">SetLevel</span><span class="p">(</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">TraceLevel</span><span class="p">)</span>
+	<span class="nx">logrus</span><span class="p">.</span><span class="nf">Trace</span><span class="p">(</span><span class="s">&#34;trace msg&#34;</span><span class="p">)</span>
+	<span class="nx">logrus</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;debug msg&#34;</span><span class="p">)</span>
+	<span class="nx">logrus</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;info msg&#34;</span><span class="p">)</span>
+	<span class="nx">logrus</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="s">&#34;warn msg&#34;</span><span class="p">)</span>
+	<span class="nx">logrus</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;error msg&#34;</span><span class="p">)</span>
+	<span class="nx">logrus</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;fatal msg&#34;</span><span class="p">)</span>
+	<span class="nx">logrus</span><span class="p">.</span><span class="nf">Panic</span><span class="p">(</span><span class="s">&#34;panic msg&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>out</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">TRAC</span><span class="p">[</span><span class="mo">0000</span><span class="p">]</span> <span class="nx">trace</span> <span class="nx">msg</span>                                    
+<span class="nx">DEBU</span><span class="p">[</span><span class="mo">0000</span><span class="p">]</span> <span class="nx">debug</span> <span class="nx">msg</span>                                    
+<span class="nx">INFO</span><span class="p">[</span><span class="mo">0000</span><span class="p">]</span> <span class="nx">info</span> <span class="nx">msg</span>                                     
+<span class="nx">WARN</span><span class="p">[</span><span class="mo">0000</span><span class="p">]</span> <span class="nx">warn</span> <span class="nx">msg</span>                                     
+<span class="nx">ERRO</span><span class="p">[</span><span class="mo">0000</span><span class="p">]</span> <span class="kt">error</span> <span class="nx">msg</span>                                    
+<span class="nx">FATA</span><span class="p">[</span><span class="mo">0000</span><span class="p">]</span> <span class="nx">fatal</span> <span class="nx">msg</span>     
+</code></pre></td></tr></table>
+</div>
+</div><p>备注：由于logrus.Fatal 会导致程序退出，下面的 logrus.Panic不会执行到。</p>
+<p>logrus 的使用非常简单，与标准库 log 类似。logrus支持更多的日志级别。日志级别从上向下依次增加，Trace 最大，Panic 最小。 logrus 有一个日志级别，高于这个级别的日志不会输出。 默认的级别为 InfoLevel。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// These are the different logging levels. You can set the logging level to log
+</span><span class="c1">// on your instance of logger, obtained with `logrus.New()`.
+</span><span class="c1"></span><span class="kd">const</span> <span class="p">(</span>
+	<span class="c1">// PanicLevel level, highest level of severity. Logs and then calls panic with the
+</span><span class="c1"></span>	<span class="c1">// message passed to Debug, Info, ...
+</span><span class="c1"></span>	<span class="nx">PanicLevel</span> <span class="nx">Level</span> <span class="p">=</span> <span class="kc">iota</span>
+	<span class="c1">// FatalLevel level. Logs and then calls `logger.Exit(1)`. It will exit even if the
+</span><span class="c1"></span>	<span class="c1">// logging level is set to Panic.
+</span><span class="c1"></span>	<span class="nx">FatalLevel</span>
+	<span class="c1">// ErrorLevel level. Logs. Used for errors that should definitely be noted.
+</span><span class="c1"></span>	<span class="c1">// Commonly used for hooks to send errors to an error tracking service.
+</span><span class="c1"></span>	<span class="nx">ErrorLevel</span>
+	<span class="c1">// WarnLevel level. Non-critical entries that deserve eyes.
+</span><span class="c1"></span>	<span class="nx">WarnLevel</span>
+	<span class="c1">// InfoLevel level. General operational entries about what&#39;s going on inside the
+</span><span class="c1"></span>	<span class="c1">// application.
+</span><span class="c1"></span>	<span class="nx">InfoLevel</span>
+	<span class="c1">// DebugLevel level. Usually only enabled when debugging. Very verbose logging.
+</span><span class="c1"></span>	<span class="nx">DebugLevel</span>
+	<span class="c1">// TraceLevel level. Designates finer-grained informational events than the Debug.
+</span><span class="c1"></span>	<span class="nx">TraceLevel</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="输出文件名和方法">输出文件名和方法</h1>
+<p>调用 SetReportCaller(true) 设置在输出日志中添加文件名和方法信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">NewLogger</span><span class="p">()</span> <span class="o">*</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">Logger</span> <span class="p">{</span>
+	<span class="nx">f</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">OpenFile</span><span class="p">(</span><span class="s">&#34;./out.log&#34;</span><span class="p">,</span><span class="nx">os</span><span class="p">.</span><span class="nx">O_RDWR</span> <span class="p">|</span> <span class="nx">os</span><span class="p">.</span><span class="nx">O_CREATE</span><span class="p">,</span><span class="mo">0664</span><span class="p">)</span>
+
+	<span class="nx">l</span> <span class="o">:=</span> <span class="nx">logrus</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+	<span class="nx">l</span><span class="p">.</span><span class="nx">Out</span> <span class="p">=</span> <span class="nx">f</span>
+
+	<span class="k">return</span> <span class="nx">l</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">logger</span> <span class="o">:=</span> <span class="nf">NewLogger</span><span class="p">()</span>
+	<span class="nx">logger</span><span class="p">.</span><span class="nf">SetReportCaller</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+	<span class="nx">logger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;info msg&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>out</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">time=&#34;2020-09-15T18:50:53+08:00&#34; level=info msg=&#34;info msg&#34; func=main.main file=&#34;/Users/linyuanpeng/workplace/go/src/github.com/bspp1314/go-common-lib/logrus-lib/ex2.go:20&#34;
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="添加字段">添加字段</h1>
+<p>有时候需要在输出中添加一些字段，可以通过调用 WithField 和 WithFields 实现。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">NewLogger</span><span class="p">()</span> <span class="o">*</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">Logger</span> <span class="p">{</span>
+	<span class="nx">f</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">OpenFile</span><span class="p">(</span><span class="s">&#34;./out.log&#34;</span><span class="p">,</span><span class="nx">os</span><span class="p">.</span><span class="nx">O_RDWR</span> <span class="p">|</span> <span class="nx">os</span><span class="p">.</span><span class="nx">O_CREATE</span><span class="p">,</span><span class="mo">0664</span><span class="p">)</span>
+
+	<span class="nx">l</span> <span class="o">:=</span> <span class="nx">logrus</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+	<span class="nx">l</span><span class="p">.</span><span class="nx">Out</span> <span class="p">=</span> <span class="nx">f</span>
+
+	<span class="k">return</span> <span class="nx">l</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">logger</span> <span class="o">:=</span> <span class="nf">NewLogger</span><span class="p">()</span>
+	<span class="nx">logger</span><span class="p">.</span><span class="nf">SetReportCaller</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+	<span class="nx">fieldLogger</span> <span class="o">:=</span> <span class="nx">logger</span><span class="p">.</span><span class="nf">WithFields</span><span class="p">(</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">Fields</span><span class="p">{</span>
+		<span class="s">&#34;user_id&#34;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span>
+	<span class="p">})</span>
+	<span class="nx">fieldLogger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;info msg&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>out :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">time=&#34;2020-09-15T19:04:10+08:00&#34; level=info msg=&#34;info msg&#34; func=main.main file=&#34;/Users/linyuanpeng/workplace/go/src/github.com/bspp1314/go-common-lib/logrus-lib/ex3.go:23&#34; user_id=10
+</code></pre></td></tr></table>
+</div>
+</div><p>调用WithFields 或 WithField 会生成一个 Entry 的结构体，该结构体中包含Logger 结构体</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">logger</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">WithFields</span><span class="p">(</span><span class="nx">fields</span> <span class="nx">Fields</span><span class="p">)</span> <span class="o">*</span><span class="nx">Entry</span> <span class="p">{</span>
+	<span class="nx">entry</span> <span class="o">:=</span> <span class="nx">logger</span><span class="p">.</span><span class="nf">newEntry</span><span class="p">()</span>
+	<span class="k">defer</span> <span class="nx">logger</span><span class="p">.</span><span class="nf">releaseEntry</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">entry</span><span class="p">.</span><span class="nf">WithFields</span><span class="p">(</span><span class="nx">fields</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">logger</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">WithField</span><span class="p">(</span><span class="nx">key</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">value</span> <span class="kd">interface</span><span class="p">{})</span> <span class="o">*</span><span class="nx">Entry</span> <span class="p">{</span>
+	<span class="nx">entry</span> <span class="o">:=</span> <span class="nx">logger</span><span class="p">.</span><span class="nf">newEntry</span><span class="p">()</span>
+	<span class="k">defer</span> <span class="nx">logger</span><span class="p">.</span><span class="nf">releaseEntry</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">entry</span><span class="p">.</span><span class="nf">WithField</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Entry</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Logger</span> <span class="o">*</span><span class="nx">Logger</span>
+
+	<span class="c1">// Contains all the fields set by the user.
+</span><span class="c1"></span>	<span class="nx">Data</span> <span class="nx">Fields</span>
+
+	<span class="c1">// Time at which the log entry was created
+</span><span class="c1"></span>	<span class="nx">Time</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
+
+	<span class="c1">// Level the log entry was logged at: Trace, Debug, Info, Warn, Error, Fatal or Panic
+</span><span class="c1"></span>	<span class="c1">// This field will be set on entry firing and the value will be equal to the one in Logger struct field.
+</span><span class="c1"></span>	<span class="nx">Level</span> <span class="nx">Level</span>
+
+	<span class="c1">// Calling method, with package name
+</span><span class="c1"></span>	<span class="nx">Caller</span> <span class="o">*</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">Frame</span>
+
+	<span class="c1">// Message passed to Trace, Debug, Info, Warn, Error, Fatal or Panic
+</span><span class="c1"></span>	<span class="nx">Message</span> <span class="kt">string</span>
+
+	<span class="c1">// When formatter is called in entry.log(), a Buffer may be set to entry
+</span><span class="c1"></span>	<span class="nx">Buffer</span> <span class="o">*</span><span class="nx">bytes</span><span class="p">.</span><span class="nx">Buffer</span>
+
+	<span class="c1">// Contains the context set by the user. Useful for hook processing etc.
+</span><span class="c1"></span>	<span class="nx">Context</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span>
+
+	<span class="c1">// err may contain a field formatting error
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="kt">string</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="日志格式">日志格式</h1>
+<p>logrus 支持两种日志格式，文本和 JSON，默认为文本格式。可以通过 Formatter 设置日志格式。由于在日常开发中，比较常用到的Json格式，所以这里主要关注的是Json格式。</p>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 将日志中记录的文件名 file 和方法名 func 转成短名字
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">CallerPretty</span><span class="p">(</span><span class="nx">caller</span> <span class="o">*</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">Frame</span><span class="p">)</span> <span class="p">(</span><span class="nx">function</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">file</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">caller</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span>
+	<span class="p">}</span>
+
+	<span class="nx">short</span> <span class="o">:=</span> <span class="nx">caller</span><span class="p">.</span><span class="nx">File</span>
+	<span class="nx">i</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">LastIndex</span><span class="p">(</span><span class="nx">caller</span><span class="p">.</span><span class="nx">File</span><span class="p">,</span> <span class="s">&#34;/&#34;</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">i</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">caller</span><span class="p">.</span><span class="nx">File</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="p">{</span>
+		<span class="nx">short</span> <span class="p">=</span> <span class="nx">caller</span><span class="p">.</span><span class="nx">File</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+	<span class="p">}</span>
+
+	<span class="nx">fun</span> <span class="o">:=</span> <span class="nx">caller</span><span class="p">.</span><span class="nx">Function</span>
+	<span class="nx">j</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">LastIndex</span><span class="p">(</span><span class="nx">caller</span><span class="p">.</span><span class="nx">Function</span><span class="p">,</span> <span class="s">&#34;/&#34;</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">j</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">j</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">caller</span><span class="p">.</span><span class="nx">Function</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="p">{</span>
+		<span class="nx">fun</span> <span class="p">=</span> <span class="nx">caller</span><span class="p">.</span><span class="nx">Function</span><span class="p">[</span><span class="nx">j</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">fun</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s:%d&#34;</span><span class="p">,</span> <span class="nx">short</span><span class="p">,</span> <span class="nx">caller</span><span class="p">.</span><span class="nx">Line</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">NewLogger</span><span class="p">()</span> <span class="o">*</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">Logger</span> <span class="p">{</span>
+	<span class="nx">l</span> <span class="o">:=</span> <span class="nx">logrus</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+	<span class="nx">l</span><span class="p">.</span><span class="nx">Out</span> <span class="p">=</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span>
+	<span class="nx">l</span><span class="p">.</span><span class="nx">Formatter</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">JSONFormatter</span><span class="p">{</span>
+		<span class="nx">TimestampFormat</span><span class="p">:</span>   <span class="s">&#34;2006-01-02 15:04:05&#34;</span><span class="p">,</span>
+		<span class="nx">DisableTimestamp</span><span class="p">:</span>  <span class="kc">false</span><span class="p">,</span>
+		<span class="nx">DisableHTMLEscape</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+		<span class="nx">DataKey</span><span class="p">:</span>           <span class="s">&#34;UserField&#34;</span><span class="p">,</span>
+		<span class="nx">FieldMap</span><span class="p">:</span> <span class="nx">logrus</span><span class="p">.</span><span class="nx">FieldMap</span><span class="p">{</span>
+			<span class="nx">logrus</span><span class="p">.</span><span class="nx">FieldKeyLevel</span><span class="p">:</span>       <span class="s">&#34;Level&#34;</span><span class="p">,</span>
+			<span class="nx">logrus</span><span class="p">.</span><span class="nx">FieldKeyFunc</span><span class="p">:</span>        <span class="s">&#34;Func&#34;</span><span class="p">,</span>
+			<span class="nx">logrus</span><span class="p">.</span><span class="nx">FieldKeyFile</span><span class="p">:</span>        <span class="s">&#34;File&#34;</span><span class="p">,</span>
+			<span class="nx">logrus</span><span class="p">.</span><span class="nx">FieldKeyMsg</span><span class="p">:</span>         <span class="s">&#34;Msg&#34;</span><span class="p">,</span>
+			<span class="nx">logrus</span><span class="p">.</span><span class="nx">FieldKeyLogrusError</span><span class="p">:</span> <span class="s">&#34;Time&#34;</span><span class="p">,</span>
+		<span class="p">},</span>
+		<span class="nx">CallerPrettyfier</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span>
+		<span class="nx">PrettyPrint</span><span class="p">:</span>      <span class="kc">true</span><span class="p">,</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">l</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">logger</span> <span class="o">:=</span> <span class="nf">NewLogger</span><span class="p">()</span>
+	<span class="nx">logger</span><span class="p">.</span><span class="nf">SetReportCaller</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+	<span class="nx">fieldLogger</span> <span class="o">:=</span> <span class="nx">logger</span><span class="p">.</span><span class="nf">WithFields</span><span class="p">(</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">Fields</span><span class="p">{</span>
+		<span class="s">&#34;user_id&#34;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+	<span class="p">})</span>
+	<span class="nx">fieldLogger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;info msg&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>out</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="p">{</span>
+  <span class="s">&#34;File&#34;</span><span class="p">:</span> <span class="s">&#34;ex4.go:61&#34;</span><span class="p">,</span>
+  <span class="s">&#34;Func&#34;</span><span class="p">:</span> <span class="s">&#34;main.main&#34;</span><span class="p">,</span>
+  <span class="s">&#34;Level&#34;</span><span class="p">:</span> <span class="s">&#34;info&#34;</span><span class="p">,</span>
+  <span class="s">&#34;Msg&#34;</span><span class="p">:</span> <span class="s">&#34;info msg&#34;</span><span class="p">,</span>
+  <span class="s">&#34;UserField&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&#34;user_id&#34;</span><span class="p">:</span> <span class="mi">10</span>
+  <span class="p">},</span>
+  <span class="s">&#34;time&#34;</span><span class="p">:</span> <span class="s">&#34;2020-09-15 23:46:29&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>JSONFormatter 格式如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">JSONFormatter</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="c1">// TimestampFormat sets the format used for marshaling timestamps.
+</span><span class="c1"></span>	<span class="nx">TimestampFormat</span> <span class="kt">string</span> 
+
+	<span class="c1">// DisableTimestamp allows disabling automatic timestamps in output
+</span><span class="c1"></span>	<span class="nx">DisableTimestamp</span> <span class="kt">bool</span>
+
+	<span class="c1">// DisableHTMLEscape allows disabling html escaping in output
+</span><span class="c1"></span>	<span class="nx">DisableHTMLEscape</span> <span class="kt">bool</span>
+
+	<span class="c1">// DataKey allows users to put all the log entry parameters into a nested dictionary at a given key.
+</span><span class="c1"></span>	<span class="nx">DataKey</span> <span class="kt">string</span>
+
+	<span class="c1">// FieldMap allows users to customize the names of keys for default fields.
+</span><span class="c1"></span>	<span class="c1">// As an example:
+</span><span class="c1"></span>	<span class="c1">// formatter := &amp;JSONFormatter{
+</span><span class="c1"></span>	<span class="c1">//   	FieldMap: FieldMap{
+</span><span class="c1"></span>	<span class="c1">// 		 FieldKeyTime:  &#34;@timestamp&#34;,
+</span><span class="c1"></span>	<span class="c1">// 		 FieldKeyLevel: &#34;@level&#34;,
+</span><span class="c1"></span>	<span class="c1">// 		 FieldKeyMsg:   &#34;@message&#34;,
+</span><span class="c1"></span>	<span class="c1">// 		 FieldKeyFunc:  &#34;@caller&#34;,
+</span><span class="c1"></span>	<span class="c1">//    },
+</span><span class="c1"></span>	<span class="c1">// }
+</span><span class="c1"></span>	<span class="nx">FieldMap</span> <span class="nx">FieldMap</span>
+
+	<span class="c1">// CallerPrettyfier can be set by the user to modify the content
+</span><span class="c1"></span>	<span class="c1">// of the function and file keys in the json data when ReportCaller is
+</span><span class="c1"></span>	<span class="c1">// activated. If any of the returned value is the empty string the
+</span><span class="c1"></span>	<span class="c1">// corresponding key will be removed from json fields.
+</span><span class="c1"></span>	<span class="nx">CallerPrettyfier</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">Frame</span><span class="p">)</span> <span class="p">(</span><span class="nx">function</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">file</span> <span class="kt">string</span><span class="p">)</span>
+
+	<span class="c1">// PrettyPrint will indent all json logs
+</span><span class="c1"></span>	<span class="nx">PrettyPrint</span> <span class="kt">bool</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>TimestampFormat 设置时间格式</p>
+<p>DisableTimestamp 是否关闭时间输出</p>
+<p>DisableHTMLEscape 是否关闭HTML 转义</p>
+<p>DataKey    许用户将所有日志条目参数放入一个嵌套字典中，并按给定的键。</p>
+<p>FieldMap允许用户自定义默认字段的键的名称。</p>
+<p>CallerPrettyfier 用来修正代码所在的函数名和文件</p>
+<p>PrettyPrint 是否进行Json 缩进</p>
+<h1 id="设置钩子">设置钩子</h1>
+<p>还可以为 logrus 设置钩子，每条日志输出前都会执行钩子的特定方法。所以，我们可以添加输出字段、根据级别将日志输出到不同的目的地。</p>
+<p>钩子需要实现 logrus.Hook 接口：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Hook</span> <span class="kd">interface</span> <span class="p">{</span>
+  <span class="nf">Levels</span><span class="p">()</span> <span class="p">[]</span><span class="nx">Level</span>
+  <span class="nf">Fire</span><span class="p">(</span><span class="o">*</span><span class="nx">Entry</span><span class="p">)</span> <span class="kt">error</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Levels() 方法返回感兴趣的日志级别，输出其他日志时不会触发钩子。Fire是日志输出前调用的钩子方法。我们可以自己实现一个简单的Hook 接口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 将日志中记录的文件名 file 和方法名 func 转成短名字
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">CallerPretty</span><span class="p">(</span><span class="nx">caller</span> <span class="o">*</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">Frame</span><span class="p">)</span> <span class="p">(</span><span class="nx">function</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">file</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">caller</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span>
+	<span class="p">}</span>
+
+	<span class="nx">short</span> <span class="o">:=</span> <span class="nx">caller</span><span class="p">.</span><span class="nx">File</span>
+	<span class="nx">i</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">LastIndex</span><span class="p">(</span><span class="nx">caller</span><span class="p">.</span><span class="nx">File</span><span class="p">,</span> <span class="s">&#34;/&#34;</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">i</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">caller</span><span class="p">.</span><span class="nx">File</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="p">{</span>
+		<span class="nx">short</span> <span class="p">=</span> <span class="nx">caller</span><span class="p">.</span><span class="nx">File</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+	<span class="p">}</span>
+
+	<span class="nx">fun</span> <span class="o">:=</span> <span class="nx">caller</span><span class="p">.</span><span class="nx">Function</span>
+	<span class="nx">j</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">LastIndex</span><span class="p">(</span><span class="nx">caller</span><span class="p">.</span><span class="nx">Function</span><span class="p">,</span> <span class="s">&#34;/&#34;</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">j</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">j</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">caller</span><span class="p">.</span><span class="nx">Function</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="p">{</span>
+		<span class="nx">fun</span> <span class="p">=</span> <span class="nx">caller</span><span class="p">.</span><span class="nx">Function</span><span class="p">[</span><span class="nx">j</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">fun</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s:%d&#34;</span><span class="p">,</span> <span class="nx">short</span><span class="p">,</span> <span class="nx">caller</span><span class="p">.</span><span class="nx">Line</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">ServerName</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">ServerName</span> <span class="kt">string</span> <span class="s">`json:&#34;server_name&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">ServerName</span><span class="p">)</span> <span class="nf">Levels</span><span class="p">()[]</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">Level</span>  <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">logrus</span><span class="p">.</span><span class="nx">AllLevels</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">ServerName</span><span class="p">)</span> <span class="nf">Fire</span><span class="p">(</span><span class="nx">entry</span> <span class="o">*</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">Entry</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">entry</span><span class="p">.</span><span class="nx">Data</span><span class="p">[</span><span class="s">&#34;server-name&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">ServerName</span>
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+
+<span class="kd">func</span> <span class="nf">NewLogger</span><span class="p">()</span> <span class="o">*</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">Logger</span> <span class="p">{</span>
+	<span class="nx">l</span> <span class="o">:=</span> <span class="nx">logrus</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+	<span class="nx">l</span><span class="p">.</span><span class="nx">Out</span> <span class="p">=</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span>
+	<span class="nx">l</span><span class="p">.</span><span class="nx">Formatter</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">JSONFormatter</span><span class="p">{</span>
+		<span class="nx">TimestampFormat</span><span class="p">:</span>   <span class="s">&#34;2006-01-02 15:04:05&#34;</span><span class="p">,</span>
+		<span class="nx">DisableTimestamp</span><span class="p">:</span>  <span class="kc">false</span><span class="p">,</span>
+		<span class="nx">DisableHTMLEscape</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+		<span class="nx">DataKey</span><span class="p">:</span>           <span class="s">&#34;UserField&#34;</span><span class="p">,</span>
+		<span class="nx">FieldMap</span><span class="p">:</span> <span class="nx">logrus</span><span class="p">.</span><span class="nx">FieldMap</span><span class="p">{</span>
+			<span class="nx">logrus</span><span class="p">.</span><span class="nx">FieldKeyLevel</span><span class="p">:</span>       <span class="s">&#34;Level&#34;</span><span class="p">,</span>
+			<span class="nx">logrus</span><span class="p">.</span><span class="nx">FieldKeyFunc</span><span class="p">:</span>        <span class="s">&#34;Func&#34;</span><span class="p">,</span>
+			<span class="nx">logrus</span><span class="p">.</span><span class="nx">FieldKeyFile</span><span class="p">:</span>        <span class="s">&#34;File&#34;</span><span class="p">,</span>
+			<span class="nx">logrus</span><span class="p">.</span><span class="nx">FieldKeyMsg</span><span class="p">:</span>         <span class="s">&#34;Msg&#34;</span><span class="p">,</span>
+			<span class="nx">logrus</span><span class="p">.</span><span class="nx">FieldKeyLogrusError</span><span class="p">:</span> <span class="s">&#34;Time&#34;</span><span class="p">,</span>
+		<span class="p">},</span>
+		<span class="nx">CallerPrettyfier</span><span class="p">:</span> <span class="nx">CallerPretty</span><span class="p">,</span>
+		<span class="nx">PrettyPrint</span><span class="p">:</span>      <span class="kc">true</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="nx">l</span><span class="p">.</span><span class="nf">AddHook</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ServerName</span><span class="p">{</span><span class="nx">ServerName</span><span class="p">:</span> <span class="s">&#34;polaris&#34;</span><span class="p">})</span>
+
+	<span class="k">return</span> <span class="nx">l</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>out</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="p">{</span>
+  <span class="s">&#34;File&#34;</span><span class="p">:</span> <span class="s">&#34;ex5.go:76&#34;</span><span class="p">,</span>
+  <span class="s">&#34;Func&#34;</span><span class="p">:</span> <span class="s">&#34;main.main&#34;</span><span class="p">,</span>
+  <span class="s">&#34;Level&#34;</span><span class="p">:</span> <span class="s">&#34;info&#34;</span><span class="p">,</span>
+  <span class="s">&#34;Msg&#34;</span><span class="p">:</span> <span class="s">&#34;info msg&#34;</span><span class="p">,</span>
+  <span class="s">&#34;UserField&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&#34;server-name&#34;</span><span class="p">:</span> <span class="s">&#34;polaris&#34;</span><span class="p">,</span>
+    <span class="s">&#34;user_id&#34;</span><span class="p">:</span> <span class="mi">10</span>
+  <span class="p">},</span>
+  <span class="s">&#34;time&#34;</span><span class="p">:</span> <span class="s">&#34;2020-09-15 23:57:09&#34;</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>logrus的第三方 Hook 很多，我们可以使用一些 Hook 将日志发送到 redis/mongodb 等存储中：</p>
+<ul>
+<li><a href="https://github.com/weekface/mgorus">mgorus</a>：将日志发送到 mongodb；</li>
+<li><a href="https://github.com/rogierlommers/logrus-redis-hook">logrus-redis-hook</a>：将日志发送到 redis；</li>
+<li><a href="https://github.com/vladoatanasov/logrus_amqp">logrus-amqp</a>：将日志发送到 ActiveMQ。</li>
+</ul>
+<h1 id="源码分析">源码分析</h1>
+<h2 id="logger-结构体">Logger 结构体</h2>
+<p>Logger 是logrus 中重要的一个结构体，可以通过New 来创建</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Logger</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="c1">// The logs are `io.Copy`&#39;d to this in a mutex. It&#39;s common to set this to a
+</span><span class="c1"></span>	<span class="c1">// file, or leave it default which is `os.Stderr`. You can also set this to
+</span><span class="c1"></span>	<span class="c1">// something more adventurous, such as logging to Kafka.
+</span><span class="c1"></span>	<span class="nx">Out</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span>
+	<span class="c1">// Hooks for the logger instance. These allow firing events based on logging
+</span><span class="c1"></span>	<span class="c1">// levels and log entries. For example, to send errors to an error tracking
+</span><span class="c1"></span>	<span class="c1">// service, log to StatsD or dump the core on fatal errors.
+</span><span class="c1"></span>	<span class="nx">Hooks</span> <span class="nx">LevelHooks</span>
+	<span class="c1">// All log entries pass through the formatter before logged to Out. The
+</span><span class="c1"></span>	<span class="c1">// included formatters are `TextFormatter` and `JSONFormatter` for which
+</span><span class="c1"></span>	<span class="c1">// TextFormatter is the default. In development (when a TTY is attached) it
+</span><span class="c1"></span>	<span class="c1">// logs with colors, but to a file it wouldn&#39;t. You can easily implement your
+</span><span class="c1"></span>	<span class="c1">// own that implements the `Formatter` interface, see the `README` or included
+</span><span class="c1"></span>	<span class="c1">// formatters for examples.
+</span><span class="c1"></span>	<span class="nx">Formatter</span> <span class="nx">Formatter</span>
+
+	<span class="c1">// Flag for whether to log caller info (off by default)
+</span><span class="c1"></span>	<span class="nx">ReportCaller</span> <span class="kt">bool</span>
+
+	<span class="c1">// The logging level the logger should log at. This is typically (and defaults
+</span><span class="c1"></span>	<span class="c1">// to) `logrus.Info`, which allows Info(), Warn(), Error() and Fatal() to be
+</span><span class="c1"></span>	<span class="c1">// logged.
+</span><span class="c1"></span>	<span class="nx">Level</span> <span class="nx">Level</span>
+	<span class="c1">// Used to sync writing to the log. Locking is enabled by Default
+</span><span class="c1"></span>	<span class="nx">mu</span> <span class="nx">MutexWrap</span>
+	<span class="c1">// Reusable empty entry
+</span><span class="c1"></span>	<span class="nx">entryPool</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">Pool</span>
+	<span class="c1">// Function to exit the application, defaults to `os.Exit()`
+</span><span class="c1"></span>	<span class="nx">ExitFunc</span> <span class="nx">exitFunc</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>Out  输出的IO 接口</p>
+<p>Hooks 钩子接口</p>
+<p>Formatter 格式化接口</p>
+<p>ReportCaller 是否输出日志中添加文件名和方法信息</p>
+<p>Level 级别</p>
+<p>mu 用于同步写入到日志。默认情况下是启用锁定的</p>
+<p>entryPool  用来解决Entry gc压</p>
+<h2 id="一个简单的-logger-logger-info调用过程">一个简单的 (logger *Logger) Info调用过程</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// first 
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">logger</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">Info</span><span class="p">(</span><span class="nx">args</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>
+	<span class="nx">logger</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="nx">InfoLevel</span><span class="p">,</span> <span class="nx">args</span><span class="o">...</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">//second 
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">logger</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">Log</span><span class="p">(</span><span class="nx">level</span> <span class="nx">Level</span><span class="p">,</span> <span class="nx">args</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">logger</span><span class="p">.</span><span class="nf">IsLevelEnabled</span><span class="p">(</span><span class="nx">level</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">entry</span> <span class="o">:=</span> <span class="nx">logger</span><span class="p">.</span><span class="nf">newEntry</span><span class="p">()</span>  
+		<span class="nx">entry</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span> <span class="nx">args</span><span class="o">...</span><span class="p">)</span>
+		<span class="nx">logger</span><span class="p">.</span><span class="nf">releaseEntry</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//third 
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">entry</span> <span class="o">*</span><span class="nx">Entry</span><span class="p">)</span> <span class="nf">Log</span><span class="p">(</span><span class="nx">level</span> <span class="nx">Level</span><span class="p">,</span> <span class="nx">args</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">entry</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nf">IsLevelEnabled</span><span class="p">(</span><span class="nx">level</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">entry</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprint</span><span class="p">(</span><span class="nx">args</span><span class="o">...</span><span class="p">))</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//four 
+</span><span class="c1"></span><span class="nf">ffunc</span> <span class="p">(</span><span class="nx">entry</span> <span class="nx">Entry</span><span class="p">)</span> <span class="nf">log</span><span class="p">(</span><span class="nx">level</span> <span class="nx">Level</span><span class="p">,</span> <span class="nx">msg</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+	<span class="o">...</span><span class="p">..</span>
+  
+	<span class="nx">entry</span><span class="p">.</span><span class="nx">Level</span> <span class="p">=</span> <span class="nx">level</span>
+	<span class="nx">entry</span><span class="p">.</span><span class="nx">Message</span> <span class="p">=</span> <span class="nx">msg</span>
+	<span class="nx">entry</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
+  <span class="c1">//判断是否需要调用函数
+</span><span class="c1"></span>	<span class="k">if</span> <span class="nx">entry</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">ReportCaller</span> <span class="p">{</span>
+		<span class="nx">entry</span><span class="p">.</span><span class="nx">Caller</span> <span class="p">=</span> <span class="nf">getCaller</span><span class="p">()</span>
+	<span class="p">}</span>
+	<span class="nx">entry</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
+
+  <span class="c1">//执行钩子
+</span><span class="c1"></span>	<span class="nx">entry</span><span class="p">.</span><span class="nf">fireHooks</span><span class="p">()</span>
+
+ <span class="c1">// 写日志
+</span><span class="c1"></span>	<span class="nx">entry</span><span class="p">.</span><span class="nf">write</span><span class="p">()</span>
+
+	<span class="nx">entry</span><span class="p">.</span><span class="nx">Buffer</span> <span class="p">=</span> <span class="kc">nil</span>
+	<span class="o">...</span><span class="p">.</span> 
+<span class="p">}</span>
+
+<span class="c1">// five 
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">entry</span> <span class="o">*</span><span class="nx">Entry</span><span class="p">)</span> <span class="nf">write</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">entry</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
+	<span class="k">defer</span> <span class="nx">entry</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
+  <span class="c1">// 格式化日志
+</span><span class="c1"></span>	<span class="nx">serialized</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">entry</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">Formatter</span><span class="p">.</span><span class="nf">Format</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+    <span class="c1">// 日志输出
+</span><span class="c1"></span>		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stderr</span><span class="p">,</span> <span class="s">&#34;Failed to obtain reader, %v\n&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+	<span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">entry</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">Out</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="nx">serialized</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stderr</span><span class="p">,</span> <span class="s">&#34;Failed to write to log, %v\n&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>虽说我们New出来的是Logger类型, 但logrus真正执行者却是 Entry 。Logger 有两个比较重要的函数 newEntry, releaseEntry, logrus所有的log函数, 比如:  Info, Error&hellip;. 最终都会调用这两个函数</p>
+<h2 id="newentry--releaseentry">newEntry &amp;&amp; releaseEntry</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">logger</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">newEntry</span><span class="p">()</span> <span class="o">*</span><span class="nx">Entry</span> <span class="p">{</span>
+	<span class="nx">entry</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">logger</span><span class="p">.</span><span class="nx">entryPool</span><span class="p">.</span><span class="nf">Get</span><span class="p">().(</span><span class="o">*</span><span class="nx">Entry</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">ok</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">entry</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nf">NewEntry</span><span class="p">(</span><span class="nx">logger</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">logger</span> <span class="o">*</span><span class="nx">Logger</span><span class="p">)</span> <span class="nf">releaseEntry</span><span class="p">(</span><span class="nx">entry</span> <span class="o">*</span><span class="nx">Entry</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">entry</span><span class="p">.</span><span class="nx">Data</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}{}</span>
+	<span class="nx">logger</span><span class="p">.</span><span class="nx">entryPool</span><span class="p">.</span><span class="nf">Put</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>Logger使用到了 sync.Pool, 用来解决频繁创建/释放Entry对象造成的gc的压力。</p>
+<p>当我们使用logrus log相关函数时, 必定会调用到 logger.Log() 函数, 该函数会调用 newEntry() 来申请Pool内存, 调用完成后会再调用 releaseEntry() 返还给PoolEnrty</p>
+<h2 id="entry">Entry</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Entry</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Logger</span> <span class="o">*</span><span class="nx">Logger</span>  
+
+	<span class="c1">// Contains all the fields set by the user.
+</span><span class="c1"></span>	<span class="nx">Data</span> <span class="nx">Fields</span>
+
+	<span class="c1">// Time at which the log entry was created
+</span><span class="c1"></span>	<span class="nx">Time</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
+
+	<span class="c1">// Level the log entry was logged at: Trace, Debug, Info, Warn, Error, Fatal or Panic
+</span><span class="c1"></span>	<span class="c1">// This field will be set on entry firing and the value will be equal to the one in Logger struct field.
+</span><span class="c1"></span>	<span class="nx">Level</span> <span class="nx">Level</span>
+
+	<span class="c1">// Calling method, with package name
+</span><span class="c1"></span>	<span class="nx">Caller</span> <span class="o">*</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">Frame</span>
+
+	<span class="c1">// Message passed to Trace, Debug, Info, Warn, Error, Fatal or Panic
+</span><span class="c1"></span>	<span class="nx">Message</span> <span class="kt">string</span>
+
+	<span class="c1">// When formatter is called in entry.log(), a Buffer may be set to entry
+</span><span class="c1"></span>	<span class="nx">Buffer</span> <span class="o">*</span><span class="nx">bytes</span><span class="p">.</span><span class="nx">Buffer</span>
+
+	<span class="c1">// Contains the context set by the user. Useful for hook processing etc.
+</span><span class="c1"></span>	<span class="nx">Context</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span>
+
+	<span class="c1">// err may contain a field formatting error
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="kt">string</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Logger 指向创建 Logger 结构体的指针</p>
+<p>Entry    Entry 的创建时间</p>
+<p>Level   级别</p>
+<p>Caller 和调用方法所在的文件和函数相关</p>
+<p>Message 需要输出的信息</p>
+<p>Buffer 提供给各种Formatter使用, 其实就是真正要打印的日志的内存地址</p>
+<p>Context  提供给logrus.WithTime, logrus.WithContext使用</p>
+<p>err string   提供一个能够包含错误信息的字段</p>
+<h2 id="创建-entry">创建 Entry</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">func NewEntry(logger *Logger) *Entry {
+	return &amp;Entry{
+		Logger: logger,
+		// Default is three fields, plus one optional.  Give a little extra room.
+		Data: make(Fields, 6),
+	}
+}
+
+</code></pre></td></tr></table>
+</div>
+</div><p>注意到到Data其实就是map[string]interface{}, 其预先分配了6个空间(预先给make函数⼀一个合理元素数量参数，有助于提升性能。因为事先申请⼀一⼤大块内存， 可避免后续操作时频繁扩张。</p>
+<h1 id="参考连接">参考连接</h1>
+<p>源码 <a href="https://github.com/sirupsen/logrus">https://github.com/sirupsen/logrus</a></p>
+<p>官方文档 <a href="https://godoc.org/github.com/sirupsen/logrus">https://godoc.org/github.com/sirupsen/logrus</a></p>
+<p>Logrus源码阅读(2)&ndash;logrus生命周期 <a href="https://www.haohongfan.com/post/2019-10-05-logrus-life-cycle/">https://www.haohongfan.com/post/2019-10-05-logrus-life-cycle/</a></p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">白水飘萍</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-09-15
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%97%A5%E5%BF%97/">日志</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/leetcode/129%E6%B1%82%E6%A0%B9%E5%88%B0%E5%8F%B6%E5%AD%90%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">129求根到叶子节点数字之和</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bcron/">
+            <span class="next-text nav-default">Go常见库之cron</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/bspp1314" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/3841870377" class="iconfont icon-weibo" title="weibo"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">白水飘萍</span>
+  </span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

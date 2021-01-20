@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>二叉树的遍历 - 白水飘萍</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="白水飘萍" /><meta name="description" content="概述 一般意义上来说，二叉树由很多个树节点构成的，非线性的数据结构。每个节点都拥有两个“子节点”，这个节点也被称之为子节点的“父节点”。通常地" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/datastruct/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.651e6917abb0239242daa570c2bec9867267bbcd83646da5a850afe573347b44.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="二叉树的遍历" />
+<meta property="og:description" content="概述 一般意义上来说，二叉树由很多个树节点构成的，非线性的数据结构。每个节点都拥有两个“子节点”，这个节点也被称之为子节点的“父节点”。通常地" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/datastruct/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/" />
+<meta property="article:published_time" content="2020-10-25T16:49:44+08:00" />
+<meta property="article:modified_time" content="2020-10-25T16:49:44+08:00" />
+<meta itemprop="name" content="二叉树的遍历">
+<meta itemprop="description" content="概述 一般意义上来说，二叉树由很多个树节点构成的，非线性的数据结构。每个节点都拥有两个“子节点”，这个节点也被称之为子节点的“父节点”。通常地">
+<meta itemprop="datePublished" content="2020-10-25T16:49:44+08:00" />
+<meta itemprop="dateModified" content="2020-10-25T16:49:44+08:00" />
+<meta itemprop="wordCount" content="1325">
+
+
+
+<meta itemprop="keywords" content="树,二叉树," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="二叉树的遍历"/>
+<meta name="twitter:description" content="概述 一般意义上来说，二叉树由很多个树节点构成的，非线性的数据结构。每个节点都拥有两个“子节点”，这个节点也被称之为子节点的“父节点”。通常地"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">白水飘萍</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">白水飘萍</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">二叉树的遍历</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-10-25 </span>
+        <div class="post-category">
+            <a href="/categories/datastruct/"> datastruct </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#递归法遍历">递归法遍历</a>
+      <ul>
+        <li><a href="#中序遍历">中序遍历</a></li>
+        <li><a href="#后序遍历">后序遍历</a></li>
+      </ul>
+    </li>
+    <li><a href="#迭代法遍历">迭代法遍历</a>
+      <ul>
+        <li><a href="#先序遍历">先序遍历</a></li>
+        <li><a href="#中序遍历-1">中序遍历</a></li>
+        <li><a href="#后序遍历-1">后序遍历</a></li>
+        <li><a href="#层序遍历">层序遍历</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="概述">概述</h1>
+<p>一般意义上来说，二叉树由很多个树节点构成的，非线性的数据结构。每个节点都拥有两个“子节点”，这个节点也被称之为子节点的“父节点”。通常地，我们称没有父节点的节点为“根节点”，两个子节点均为null的节点为“叶子节点”。而为了将这种非线性结构转化为线性结构使用，各种遍历顺序应运而生，一般包括：</p>
+<ul>
+<li>先序遍历  &mdash;&mdash;&mdash;-&gt; 中左右</li>
+<li>中序遍历  &mdash;&mdash;&mdash;-&gt; 左中右</li>
+<li>后序遍历  &mdash;&mdash;&mdash;-&gt; 左右中</li>
+<li>层序遍历 &mdash;&mdash;&mdash;&ndash;&gt; 层层遍历</li>
+</ul>
+<h1 id="递归法遍历">递归法遍历</h1>
+<p>利用递归处理二叉树的遍历问题非常方便，只要按照遍历的定义进行遍历即可</p>
+<p>##先序遍历</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">preorderTraversal</span><span class="p">(</span><span class="nx">root</span> <span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span> <span class="p">[]</span><span class="kt">int</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">root</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">nil</span> 
+    <span class="p">}</span>
+
+    <span class="nx">res</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nx">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">Val</span> 
+    <span class="nx">leftValues</span> <span class="o">:=</span> <span class="nf">preorderTraversal</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">Left</span><span class="p">)</span>
+    <span class="nx">rightValus</span> <span class="o">:=</span> <span class="nf">preorderTraversal</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">Right</span><span class="p">)</span>
+    <span class="nx">res</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span><span class="nx">leftValues</span><span class="o">...</span><span class="p">)</span>
+    <span class="nx">res</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span><span class="nx">rightValus</span><span class="o">...</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nx">res</span> 
+<span class="p">}</span>
+
+
+</code></pre></td></tr></table>
+</div>
+</div><p>时间复杂度 $ O(n) $</p>
+<p>空间复杂度 $ O(n) $</p>
+<h2 id="中序遍历">中序遍历</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">func inorderTraversal(root *TreeNode) []int {
+    if root == nil {
+        return nil 
+    }
+
+
+    res := make([]int,0)
+    leftValues := inorderTraversal(root.Left)
+    rightValus := inorderTraversal(root.Right)
+    res = append(res,leftValues...)
+    res = append(res,root.Val)
+    res = append(res,rightValus...)
+
+    return res 
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>时间复杂度 $ O(n) $</p>
+<p>空间复杂度 $ O(n) $</p>
+<h2 id="后序遍历">后序遍历</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">func postorderTraversal(root *TreeNode) []int {
+    if root == nil {
+        return nil 
+    }
+
+
+    res := make([]int,0)
+    leftValues := postorderTraversal(root.Left)
+    rightValus := postorderTraversal(root.Right)
+    res = append(res,leftValues...)
+    res = append(res,rightValus...)
+    res = append(res,root.Val)
+   
+    return res 
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>时间复杂度 $ O(n) $</p>
+<p>空间复杂度 $ O(n) $</p>
+<h1 id="迭代法遍历">迭代法遍历</h1>
+<p>为使用非递归遍历方法遍历整个二叉树，往往需要借助栈/队列等数据结构辅助实现。</p>
+<h2 id="先序遍历">先序遍历</h2>
+<p>迭代法的先序遍历，我们需要结束一个stack,来保存节点。从根节点开始，每次迭代弹出当前栈顶元素，并将其孩子节点压入栈中，先压右孩子再压左孩子。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">preorderTraversal</span><span class="p">(</span><span class="nx">root</span> <span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span> <span class="p">[]</span><span class="kt">int</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">root</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{}</span>
+    <span class="p">}</span>
+
+
+
+    <span class="nx">stack</span> <span class="o">:=</span> <span class="p">[]</span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">{</span><span class="nx">root</span><span class="p">}</span>
+    <span class="nx">res</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="nb">len</span><span class="p">(</span><span class="nx">stack</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">{</span>
+        <span class="nx">root</span> <span class="p">=</span> <span class="nx">stack</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">stack</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="nx">stack</span> <span class="p">=</span> <span class="nx">stack</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="nx">stack</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="nx">res</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span><span class="nx">root</span><span class="p">.</span><span class="nx">Val</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nx">root</span><span class="p">.</span><span class="nx">Right</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+            <span class="nx">stack</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">stack</span><span class="p">,</span><span class="nx">root</span><span class="p">.</span><span class="nx">Right</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="nx">root</span><span class="p">.</span><span class="nx">Left</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+            <span class="nx">stack</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">stack</span><span class="p">,</span><span class="nx">root</span><span class="p">.</span><span class="nx">Left</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">res</span> 
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>时间复杂度 $ O(n) $</p>
+<p>空间复杂度 $ O(n) $</p>
+<h2 id="中序遍历-1">中序遍历</h2>
+<p>中序遍历迭代主要思想如下</p>
+<ol>
+<li>若节点还有左子树，就要先把左子树访问完，并将当前节点压入栈中。</li>
+<li>没有左子树可访问时，访问该节点，并尝试访问右子树。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">inorderTraversal</span><span class="p">(</span><span class="nx">root</span> <span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span> <span class="p">[]</span><span class="kt">int</span> <span class="p">{</span>
+    <span class="nx">res</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">root</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span>  
+    <span class="p">}</span>
+
+
+    <span class="nx">stack</span> <span class="o">:=</span> <span class="p">[]</span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">{}</span>
+    <span class="nx">current</span> <span class="o">:=</span> <span class="nx">root</span> 
+
+	<span class="k">for</span> <span class="nx">current</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">stack</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">{</span>
+    <span class="c1">//将
+</span><span class="c1"></span>		<span class="k">for</span> <span class="nx">current</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">stack</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">stack</span><span class="p">,</span><span class="nx">current</span><span class="p">)</span>
+			<span class="nx">current</span> <span class="p">=</span> <span class="nx">current</span><span class="p">.</span><span class="nx">Left</span>
+		<span class="p">}</span>
+      
+      <span class="nx">current</span> <span class="p">=</span> <span class="nx">stack</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">stack</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+      <span class="nx">stack</span> <span class="p">=</span> <span class="nx">stack</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="nx">stack</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+      <span class="nx">res</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span><span class="nx">current</span><span class="p">.</span><span class="nx">Val</span><span class="p">)</span>
+      <span class="nx">current</span> <span class="p">=</span> <span class="nx">current</span><span class="p">.</span><span class="nx">Right</span> 	
+	<span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">res</span> 
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>时间复杂度 $ O(n) $</p>
+<p>空间复杂度 $ O(n) $</p>
+<h2 id="后序遍历-1">后序遍历</h2>
+<p>后序遍历从想法上是最难实现的，其主要思想是：</p>
+<ol>
+<li>尝试按顺序访问该节点的左右子树</li>
+<li>当左右子树都访问完毕时，才可以访问该节点</li>
+</ol>
+<p>因此可以考虑采用栈的方式，依次将根节点、右孩子、左孩子入栈，以保证访问次序。由于后续遍历的回溯过程只可能上升一层，因此可以添加临时变量prev记录刚刚访问的节点，如果当前节点是上次访问节点的父节点，则说明子树访问完成，可以访问当前节点了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">postorderTraversal</span><span class="p">(</span><span class="nx">root</span> <span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span> <span class="p">[]</span><span class="kt">int</span> <span class="p">{</span>
+    <span class="nx">res</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">root</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span>  
+    <span class="p">}</span>
+    <span class="nx">stack</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nx">prev</span> <span class="o">*</span><span class="nx">TreeNode</span>
+
+    <span class="k">for</span> <span class="nx">root</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nb">len</span><span class="p">(</span><span class="nx">stack</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="nx">root</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+            <span class="nx">stack</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">stack</span><span class="p">,</span><span class="nx">root</span><span class="p">)</span>
+            <span class="nx">root</span> <span class="p">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">Left</span>
+        <span class="p">}</span>
+
+        <span class="nx">root</span> <span class="p">=</span>  <span class="nx">stack</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">stack</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="nx">stack</span> <span class="p">=</span> <span class="nx">stack</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="nx">stack</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1">// root.Right == prev 说明 root.Right 被遍历过
+</span><span class="c1"></span>        <span class="k">if</span> <span class="nx">root</span><span class="p">.</span><span class="nx">Right</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">root</span><span class="p">.</span><span class="nx">Right</span> <span class="o">==</span> <span class="nx">prev</span> <span class="p">{</span>
+            <span class="nx">res</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span><span class="nx">root</span><span class="p">.</span><span class="nx">Val</span><span class="p">)</span>
+            <span class="nx">prev</span> <span class="p">=</span> <span class="nx">root</span> 
+            <span class="nx">root</span> <span class="p">=</span> <span class="kc">nil</span> 
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="nx">stack</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">stack</span><span class="p">,</span><span class="nx">root</span><span class="p">)</span>
+            <span class="nx">root</span> <span class="p">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">Right</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">res</span> 
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>时间复杂度 $ O(n) $</p>
+<p>空间复杂度 $ O(n) $</p>
+<h2 id="层序遍历">层序遍历</h2>
+<p>层序遍历需要利用队列来辅助实现。</p>
+<ol>
+<li>
+<p>将根节点放入当前的队列 currentLeve 中</p>
+</li>
+<li>
+<p>遍历当前队列，并将队列中左右节点依次放入队列 nextLevel 中</p>
+</li>
+<li>
+<p>将 currentLeve 设置为  nextLevel ，返回步骤2</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">levelOrder</span><span class="p">(</span><span class="nx">root</span> <span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span> <span class="p">[][]</span><span class="kt">int</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">res</span> <span class="p">[][]</span><span class="kt">int</span>
+	<span class="k">if</span> <span class="nx">root</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">res</span>
+	<span class="p">}</span>
+	<span class="nx">currentLevel</span> <span class="o">:=</span> <span class="p">[]</span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">{</span><span class="nx">root</span><span class="p">}</span>
+	<span class="nx">level</span> <span class="o">:=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="p">{</span>
+		<span class="nx">res</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">res</span><span class="p">,[]</span><span class="kt">int</span><span class="p">{})</span>
+		<span class="kd">var</span> <span class="nx">nextLevel</span> <span class="p">[]</span><span class="o">*</span><span class="nx">TreeNode</span>
+		<span class="k">for</span> <span class="nx">i</span><span class="o">:=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="p">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="nx">currentLevel</span><span class="p">);</span><span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+			<span class="nx">node</span> <span class="o">:=</span> <span class="nx">currentLevel</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+			<span class="nx">res</span><span class="p">[</span><span class="nx">level</span><span class="p">]</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">res</span><span class="p">[</span><span class="nx">level</span><span class="p">],</span><span class="nx">node</span><span class="p">.</span><span class="nx">Val</span><span class="p">)</span>
+			
+			<span class="k">if</span> <span class="nx">node</span><span class="p">.</span><span class="nx">Left</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+				<span class="nx">nextLevel</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">nextLevel</span><span class="p">,</span><span class="nx">node</span><span class="p">.</span><span class="nx">Left</span><span class="p">)</span>
+			<span class="p">}</span>
+
+			<span class="k">if</span> <span class="nx">node</span><span class="p">.</span><span class="nx">Right</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+				<span class="nx">nextLevel</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">nextLevel</span><span class="p">,</span><span class="nx">node</span><span class="p">.</span><span class="nx">Right</span><span class="p">)</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+
+		<span class="nx">level</span><span class="o">++</span>
+		<span class="nx">currentLevel</span> <span class="p">=</span> <span class="nx">nextLevel</span>
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">currentLevel</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+			<span class="k">break</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">res</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>时间复杂度 $ O(n) $</p>
+<p>空间复杂度 $ O(n) $</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">白水飘萍</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-10-25
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%A0%91/">树</a>
+          <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03-context%E5%88%86%E6%9E%90/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Gin的学习笔记3 Context分析</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/leetcode/226%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/">
+            <span class="next-text nav-default">226翻转二叉树</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/bspp1314" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/3841870377" class="iconfont icon-weibo" title="weibo"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">白水飘萍</span>
+  </span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

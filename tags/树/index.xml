@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>树 on 白水飘萍</title>
+    <link>http://localhost:1313/tags/%E6%A0%91/</link>
+    <description>Recent content in 树 on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 09 Dec 2020 10:27:28 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%A0%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>687最长同值路径</title>
+      <link>http://localhost:1313/post/leetcode/687%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84/</link>
+      <pubDate>Wed, 09 Dec 2020 10:27:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/687%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84/</guid>
+      <description>题目 给定一个二叉树，找到最长的路径，这个路径中的每个节点具有相同值。 这条路径可以经过也可以不经过根节点。 注意：两个节点之间的路径长度由它们之</description>
+    </item>
+    
+    <item>
+      <title>437路径总和III</title>
+      <link>http://localhost:1313/post/leetcode/437%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8Ciii/</link>
+      <pubDate>Tue, 08 Dec 2020 21:39:45 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/437%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8Ciii/</guid>
+      <description>题目 给定一个二叉树，它的每个结点都存放着一个整数值。 找出路径和等于给定数值的路径总数。 路径不需要从根节点开始，也不需要在叶子节点结束，但是路</description>
+    </item>
+    
+    <item>
+      <title>124二叉树的最大路径和III</title>
+      <link>http://localhost:1313/post/leetcode/124%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8Ciii/</link>
+      <pubDate>Tue, 08 Dec 2020 21:15:49 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/124%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8Ciii/</guid>
+      <description>题目 给定一个非空二叉树，返回其最大路径和。 本题中，路径被定义为一条从树中任意节点出发，沿父节点-子节点连接，达到任意节点的序列。该路径至少包</description>
+    </item>
+    
+    <item>
+      <title>337打家劫舍III</title>
+      <link>http://localhost:1313/post/leetcode/337%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Diii/</link>
+      <pubDate>Wed, 11 Nov 2020 21:50:18 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/337%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Diii/</guid>
+      <description>题目 在上次打劫完一条街道之后和一圈房屋后，小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为“根”。 除了“根”之外，每栋房子</description>
+    </item>
+    
+    <item>
+      <title>二叉树的遍历</title>
+      <link>http://localhost:1313/post/datastruct/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Sun, 25 Oct 2020 16:49:44 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/datastruct/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/</guid>
+      <description>概述 一般意义上来说，二叉树由很多个树节点构成的，非线性的数据结构。每个节点都拥有两个“子节点”，这个节点也被称之为子节点的“父节点”。通常地</description>
+    </item>
+    
+    <item>
+      <title>226翻转二叉树</title>
+      <link>http://localhost:1313/post/leetcode/226%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Sun, 25 Oct 2020 15:58:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/226%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;翻转一棵二叉树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>114二叉树展开为链表</title>
+      <link>http://localhost:1313/post/leetcode/114%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Wed, 07 Oct 2020 13:05:21 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/114%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，&lt;a href=&#34;https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/8010757&#34;&gt;原地&lt;/a&gt;将它展开为一个单链表。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>617合并二叉树</title>
+      <link>http://localhost:1313/post/leetcode/617%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Sat, 26 Sep 2020 16:16:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/617%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定两个二叉树，想象当你将它们中的一个覆盖到另一个上时，两个二叉树的一些节点便会重叠。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>199二叉树的右视图</title>
+      <link>http://localhost:1313/post/leetcode/199%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8F%B3%E8%A7%86%E5%9B%BE/</link>
+      <pubDate>Thu, 17 Sep 2020 11:14:46 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/199%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8F%B3%E8%A7%86%E5%9B%BE/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>173二叉搜索树迭代器</title>
+      <link>http://localhost:1313/post/leetcode/173%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BF%AD%E4%BB%A3%E5%99%A8/</link>
+      <pubDate>Thu, 17 Sep 2020 10:23:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/173%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BF%AD%E4%BB%A3%E5%99%A8/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;实现一个二叉搜索树迭代器。你将使用二叉搜索树的根节点初始化迭代器。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>129求根到叶子节点数字之和</title>
+      <link>http://localhost:1313/post/leetcode/129%E6%B1%82%E6%A0%B9%E5%88%B0%E5%8F%B6%E5%AD%90%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/</link>
+      <pubDate>Wed, 16 Sep 2020 23:47:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/129%E6%B1%82%E6%A0%B9%E5%88%B0%E5%8F%B6%E5%AD%90%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，它的每个结点都存放一个 0-9 的数字，每条从根到叶子节点的路径都代表一个数字。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>112路径总和</title>
+      <link>http://localhost:1313/post/leetcode/112%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/</link>
+      <pubDate>Sun, 13 Sep 2020 19:54:03 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/112%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>111二叉树的最小深度</title>
+      <link>http://localhost:1313/post/leetcode/111%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6/</link>
+      <pubDate>Sun, 13 Sep 2020 19:40:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/111%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，找出其最小深度。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>110平衡二叉树</title>
+      <link>http://localhost:1313/post/leetcode/110%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Sun, 13 Sep 2020 19:26:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/110%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，判断它是否是高度平衡的二叉树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>109将有序链表转换为二叉搜索树</title>
+      <link>http://localhost:1313/post/leetcode/109%E5%B0%86%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link>
+      <pubDate>Sun, 13 Sep 2020 18:56:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/109%E5%B0%86%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>108将有序数组转换为二叉搜索树</title>
+      <link>http://localhost:1313/post/leetcode/108%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link>
+      <pubDate>Sun, 13 Sep 2020 18:32:44 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/108%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>106从前序与中序遍历序列构造二叉树</title>
+      <link>http://localhost:1313/post/leetcode/106%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Sun, 13 Sep 2020 17:19:19 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/106%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;根据一棵树的中序遍历与后序遍历构造二叉树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>105从前序与中序遍历序列构造二叉树</title>
+      <link>http://localhost:1313/post/leetcode/105%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Sun, 13 Sep 2020 16:49:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/105%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;根据一棵树的前序遍历与中序遍历构造二叉树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>104二叉树的最大深度</title>
+      <link>http://localhost:1313/post/leetcode/104%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/</link>
+      <pubDate>Sun, 13 Sep 2020 00:16:12 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/104%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，找出其最大深度。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>103二叉树的锯齿形层次遍历</title>
+      <link>http://localhost:1313/post/leetcode/103%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Sat, 12 Sep 2020 23:57:42 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/103%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，返回其节点值的锯齿形层次遍历。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>101对称二叉树</title>
+      <link>http://localhost:1313/post/leetcode/101%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Thu, 10 Sep 2020 13:57:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/101%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，检查它是否是镜像对称的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>100相同的树</title>
+      <link>http://localhost:1313/post/leetcode/100%E7%9B%B8%E5%90%8C%E7%9A%84%E6%A0%91/</link>
+      <pubDate>Thu, 10 Sep 2020 12:58:43 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/100%E7%9B%B8%E5%90%8C%E7%9A%84%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定两个二叉树，编写一个函数来检验它们是否相同。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>102二叉树的层序遍历</title>
+      <link>http://localhost:1313/post/leetcode/102%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Tue, 08 Sep 2020 23:26:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/102%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给你一个二叉树，请你返回其按 层序遍历 得到的节点值。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>98验证二叉搜索树</title>
+      <link>http://localhost:1313/post/leetcode/98%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link>
+      <pubDate>Mon, 07 Sep 2020 18:08:53 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/98%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，判断其是否是一个有效的二叉搜索树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>94二叉树的中序遍历</title>
+      <link>http://localhost:1313/post/leetcode/94%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Mon, 07 Sep 2020 09:58:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/94%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，返回它的中序 遍历。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

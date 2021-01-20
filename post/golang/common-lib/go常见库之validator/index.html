@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Go常见库之validator - 白水飘萍</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="白水飘萍" /><meta name="description" content="简介 Validator是一个基于结构体tag用于对数据进行校验库，在 Web 开发中，对用户传过来的数据我们都需要进行严格校验，防止用户的恶意请求。
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bvalidator/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.651e6917abb0239242daa570c2bec9867267bbcd83646da5a850afe573347b44.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Go常见库之validator" />
+<meta property="og:description" content="简介
+Validator是一个基于结构体tag用于对数据进行校验库，在 Web 开发中，对用户传过来的数据我们都需要进行严格校验，防止用户的恶意请求。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bvalidator/" />
+<meta property="article:published_time" content="2020-10-09T13:58:10+08:00" />
+<meta property="article:modified_time" content="2020-10-09T13:58:10+08:00" />
+<meta itemprop="name" content="Go常见库之validator">
+<meta itemprop="description" content="简介
+Validator是一个基于结构体tag用于对数据进行校验库，在 Web 开发中，对用户传过来的数据我们都需要进行严格校验，防止用户的恶意请求。">
+<meta itemprop="datePublished" content="2020-10-09T13:58:10+08:00" />
+<meta itemprop="dateModified" content="2020-10-09T13:58:10+08:00" />
+<meta itemprop="wordCount" content="2091">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go常见库之validator"/>
+<meta name="twitter:description" content="简介
+Validator是一个基于结构体tag用于对数据进行校验库，在 Web 开发中，对用户传过来的数据我们都需要进行严格校验，防止用户的恶意请求。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">白水飘萍</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">白水飘萍</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Go常见库之validator</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-10-09 </span>
+        <div class="post-category">
+            <a href="/categories/golang/"> golang </a>
+            <a href="/categories/golang%E5%B8%B8%E8%A7%81%E5%BA%93/"> golang常见库 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#简单的使用">简单的使用</a></li>
+    <li><a href="#约束">约束</a>
+      <ul>
+        <li><a href="#常见的约束单字段">常见的约束单字段</a></li>
+        <li><a href="#跨字段约束">跨字段约束</a>
+          <ul>
+            <li><a href="#跨字段约束-平级字段">跨字段约束-平级字段</a></li>
+            <li><a href="#跨字段约束-非平级字段">跨字段约束-非平级字段</a></li>
+          </ul>
+        </li>
+        <li><a href="#字符串">字符串</a>
+          <ul>
+            <li><a href="#唯一性">唯一性</a></li>
+          </ul>
+        </li>
+        <li><a href="#更多约束">更多约束</a></li>
+      </ul>
+    </li>
+    <li><a href="#自定义约束">自定义约束</a></li>
+    <li><a href="#错误翻译">错误翻译</a></li>
+    <li><a href="#一些使用中的问题">一些使用中的问题</a></li>
+    <li><a href="#参考连接">参考连接</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="简介">简介</h1>
+<p><code>Validator</code>是一个基于结构体tag用于对数据进行校验库，在 Web 开发中，对用户传过来的数据我们都需要进行严格校验，防止用户的恶意请求。</p>
+<h1 id="简单的使用">简单的使用</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">UserName</span> <span class="kt">string</span> <span class="s">`validate:&#34;required,max=16&#34;`</span>
+	<span class="nx">ID</span>       <span class="kt">int64</span>  <span class="s">`validate:&#34;required&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">v</span> <span class="o">:=</span> <span class="nx">validator</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Struct</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span>
+		<span class="nx">UserName</span><span class="p">:</span> <span class="s">&#34;test0001&#34;</span><span class="p">,</span>
+		<span class="nx">ID</span><span class="p">:</span>       <span class="mi">10</span><span class="p">,</span>
+	<span class="p">})</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Struct</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span>
+		<span class="nx">UserName</span><span class="p">:</span> <span class="s">&#34;test000000000000000000000002&#34;</span><span class="p">,</span>
+		<span class="nx">ID</span><span class="p">:</span>       <span class="mi">10</span><span class="p">,</span>
+	<span class="p">})</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Struct</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span>
+		<span class="nx">UserName</span><span class="p">:</span> <span class="s">&#34;test0003&#34;</span><span class="p">,</span>
+		<span class="nx">ID</span><span class="p">:</span>       <span class="mi">0</span><span class="p">,</span>
+	<span class="p">})</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>out</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Key: &#39;User.UserName&#39; Error:Field validation for &#39;UserName&#39; failed on the &#39;max&#39; tag
+Key: &#39;User.ID&#39; Error:Field validation for &#39;ID&#39; failed on the &#39;required&#39; tag
+</code></pre></td></tr></table>
+</div>
+</div><p><code>validator</code>在结构体标签（<code>struct tag</code>）中定义字段的<strong>约束</strong>。使用<code>validator</code>验证数据之前，我们需要调用<code>validator.New()</code>创建一个<strong>验证器</strong>，然后通过调用它的<code>Struct()</code>方法来验证各种结构对象的字段是否符合定义的约束。</p>
+<p>上面的代码中 对 User 做了以下的约束</p>
+<ul>
+<li>UserName 不能为空，且最大长度不超过16。</li>
+<li>ID 必须存在</li>
+</ul>
+<p>属于出现了两个错误，第一个错误违反了UserName最大长度不超过16约束，第二个错误违反了ID必须存在的约束。</p>
+<h1 id="约束">约束</h1>
+<p>validator中提供了非常丰富的约束，这里我们来介绍一些非常常见的约束</p>
+<h2 id="常见的约束单字段">常见的约束单字段</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Tag</th>
+<th>Description</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">eq</td>
+<td>Equals</td>
+<td>ID       int64  <code>validate:&quot;eq=10&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">gt</td>
+<td>Greater than</td>
+<td>ID       int64  <code>validate:&quot;gt=10&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">gte</td>
+<td>Greater than or equal</td>
+<td>ID       int64  <code>validate:&quot;gte=10&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">lt</td>
+<td>Less Than</td>
+<td>ID       int64  <code>validate:&quot;lt=10&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">lte</td>
+<td>Less Than or Equal</td>
+<td>ID       int64  <code>validate:&quot;lte=10&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">ne</td>
+<td>Not Equal</td>
+<td>ID       int64  <code>validate:&quot;ne=10&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">max</td>
+<td>Maximum</td>
+<td>ID       int64  <code>validate:&quot;max=100&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">min</td>
+<td>Minimum</td>
+<td>ID       int64  <code>validate:&quot;min=10&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">required</td>
+<td>Required</td>
+<td>ID       int64  <code>validate:&quot;required&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="跨字段约束">跨字段约束</h2>
+<p>validator允许定义跨字段的约束，即该字段与其他字段之间的关系。这种约束实际上分为两种，一种是参数字段就是同一个结构中的平级字段，另一种是参数字段为结构中其他字段的字段。</p>
+<h3 id="跨字段约束-平级字段">跨字段约束-平级字段</h3>
+<p>跨字段约束-平级字段约束语法很简单，只要在单个字段里面加上field上即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">UserName</span>  <span class="kt">string</span> <span class="s">`validate:&#34;required,max=16&#34;`</span>
+	<span class="nx">UserName2</span> <span class="kt">string</span> <span class="s">`validate:&#34;required,eqfield=UserName&#34;`</span>
+	<span class="nx">ID</span>        <span class="kt">int64</span>  <span class="s">`validate:&#34;required&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">v</span> <span class="o">:=</span> <span class="nx">validator</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Struct</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span>
+		<span class="nx">UserName</span><span class="p">:</span>  <span class="s">&#34;test0001&#34;</span><span class="p">,</span>
+		<span class="nx">UserName2</span><span class="p">:</span> <span class="s">&#34;test001&#34;</span><span class="p">,</span>
+		<span class="nx">ID</span><span class="p">:</span>        <span class="mi">10</span><span class="p">,</span>
+	<span class="p">})</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Struct</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span>
+		<span class="nx">UserName</span><span class="p">:</span>  <span class="s">&#34;test0002&#34;</span><span class="p">,</span>
+		<span class="nx">UserName2</span><span class="p">:</span> <span class="s">&#34;test0002&#34;</span><span class="p">,</span>
+		<span class="nx">ID</span><span class="p">:</span>        <span class="mi">10</span><span class="p">,</span>
+	<span class="p">})</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>out</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">Key: <span class="s1">&#39;User.UserName2&#39;</span> Error:Field validation <span class="k">for</span> <span class="s1">&#39;UserName2&#39;</span> failed on the <span class="s1">&#39;eqfield&#39;</span> tag
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="跨字段约束-非平级字段">跨字段约束-非平级字段</h3>
+<p>跨字段约束-非平级字段在<code>field</code>之前还需要加上<code>cs</code>（可以理解为<code>cross-struct</code>），<code>eq</code>就变为<code>eqcsfield</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">UserName</span>  <span class="kt">string</span> <span class="s">`validate:&#34;required,max=16&#34;`</span>
+	<span class="nx">ID</span>        <span class="kt">int64</span>  <span class="s">`validate:&#34;required&#34;`</span>
+	<span class="nx">Class</span>     <span class="nx">Class</span>  <span class="s">`validate:&#34;required&#34;`</span>
+	<span class="nx">ClassName</span> <span class="kt">string</span> <span class="s">`validate:&#34;eqcsfield=Class.Name&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Class</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Name</span> <span class="kt">string</span> <span class="s">`json:&#34;name&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">v</span> <span class="o">:=</span> <span class="nx">validator</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Struct</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span>
+		<span class="nx">UserName</span><span class="p">:</span>  <span class="s">&#34;test0001&#34;</span><span class="p">,</span>
+		<span class="nx">ClassName</span><span class="p">:</span> <span class="s">&#34;class1&#34;</span><span class="p">,</span>
+		<span class="nx">Class</span><span class="p">:</span> <span class="nx">Class</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;class1&#34;</span><span class="p">},</span>
+		<span class="nx">ID</span><span class="p">:</span>        <span class="mi">1</span><span class="p">,</span>
+	<span class="p">})</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;test1 failed :&#34;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Struct</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span>
+		<span class="nx">UserName</span><span class="p">:</span>  <span class="s">&#34;test0002&#34;</span><span class="p">,</span>
+		<span class="nx">ID</span><span class="p">:</span>        <span class="mi">2</span><span class="p">,</span>
+		<span class="nx">ClassName</span><span class="p">:</span> <span class="s">&#34;class1&#34;</span><span class="p">,</span>
+		<span class="nx">Class</span><span class="p">:</span> <span class="nx">Class</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;class2&#34;</span><span class="p">},</span>
+	<span class="p">})</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;test2 failed :&#34;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>out</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">test2</span> <span class="nx">failed</span> <span class="p">:</span> <span class="nx">Key</span><span class="p">:</span> <span class="err">&#39;</span><span class="nx">User</span><span class="p">.</span><span class="nx">ClassName</span><span class="err">&#39;</span> <span class="nx">Error</span><span class="p">:</span><span class="nx">Field</span> <span class="nx">validation</span> <span class="k">for</span> <span class="err">&#39;</span><span class="nx">ClassName</span><span class="err">&#39;</span> <span class="nx">failed</span> <span class="nx">on</span> <span class="nx">the</span> <span class="err">&#39;</span><span class="nx">eqcsfield</span><span class="err">&#39;</span> <span class="nx">tag</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="字符串">字符串</h2>
+<p><code>validator</code>中关于字符串的约束有很多，我们这里介绍一些常用的。</p>
+<table>
+<thead>
+<tr>
+<th>Tag</th>
+<th>Description</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>contains</td>
+<td>Contains</td>
+<td>contains=zz</td>
+</tr>
+<tr>
+<td>containsany</td>
+<td>Contains Any (包含参数中任意的 UNICODE 字符)</td>
+<td>containsany=abcd</td>
+</tr>
+<tr>
+<td>endswith</td>
+<td>Ends With</td>
+<td></td>
+</tr>
+<tr>
+<td>lowercase</td>
+<td>Lowercase</td>
+<td></td>
+</tr>
+<tr>
+<td>startswith</td>
+<td>Starts With</td>
+<td></td>
+</tr>
+<tr>
+<td>uppercase</td>
+<td>Uppercase</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="唯一性">唯一性</h3>
+<p>使用<code>unqiue</code>来指定唯一性约束，对不同类型的处理如下：</p>
+<ul>
+<li>对于数组和切片，<code>unique</code>约束没有重复的元素；</li>
+<li>对于<code>map</code>，<code>unique</code>约束没有重复的<strong>值</strong>；</li>
+<li>对于元素类型为结构体的切片，<code>unique</code>约束结构体对象的某个字段不重复，通过<code>unqiue=field</code>指定这个字段名。</li>
+</ul>
+<h2 id="更多约束">更多约束</h2>
+<p><code>validator</code>提供了大量的、各个方面的、丰富的约束，如<code>ASCII/UNICODE</code>字母、数字、十六进制、十六进制颜色值、大小写、RBG 颜色值，HSL 颜色值、HSLA 颜色值、JSON 格式、文件路径、URL、base64 编码串、ip 地址、ipv4、ipv6、UUID、经纬度等等。可以直接参考官方文档。</p>
+<h1 id="自定义约束">自定义约束</h1>
+<p>除了使用<code>validator</code>提供的约束外，还可以定义自己的约束。比如用户必须使用回文串作为用户名。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">UserName</span> <span class="kt">string</span> <span class="s">`validate:&#34;required,palindrome&#34;`</span>
+	<span class="nx">ID</span>       <span class="kt">int64</span>  <span class="s">`validate:&#34;required&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">IsPalindrome</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">bool</span>  <span class="p">{</span>
+	<span class="nx">left</span> <span class="o">:=</span> <span class="mi">0</span>
+	<span class="nx">right</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span>
+
+	<span class="k">for</span> <span class="nx">left</span> <span class="p">&lt;</span> <span class="nx">right</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="nx">s</span><span class="p">[</span><span class="nx">left</span><span class="p">]</span> <span class="o">!=</span> <span class="nx">s</span><span class="p">[</span><span class="nx">right</span><span class="p">]</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="kc">false</span>
+		<span class="p">}</span>
+
+		<span class="nx">left</span><span class="o">++</span>
+		<span class="nx">right</span><span class="o">--</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="kc">true</span>
+<span class="p">}</span>
+
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">v</span> <span class="o">:=</span> <span class="nx">validator</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+	<span class="nx">v</span><span class="p">.</span><span class="nf">RegisterValidation</span><span class="p">(</span><span class="s">&#34;palindrome&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">fl</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">FieldLevel</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nf">IsPalindrome</span><span class="p">(</span><span class="nx">fl</span><span class="p">.</span><span class="nf">Field</span><span class="p">().</span><span class="nf">String</span><span class="p">())</span>
+	<span class="p">})</span>
+
+	<span class="nx">u</span> <span class="o">:=</span> <span class="nx">User</span><span class="p">{</span>
+		<span class="nx">UserName</span><span class="p">:</span> <span class="s">&#34;test0001&#34;</span><span class="p">,</span>
+		<span class="nx">ID</span><span class="p">:</span>       <span class="mi">1</span><span class="p">,</span>
+	<span class="p">}</span>
+
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Struct</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">u</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;test1 failed %v \n&#34;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="nx">u2</span> <span class="o">:=</span> <span class="nx">User</span><span class="p">{</span>
+		<span class="nx">UserName</span><span class="p">:</span> <span class="s">&#34;test00022000tset&#34;</span><span class="p">,</span>
+		<span class="nx">ID</span><span class="p">:</span>       <span class="mi">2</span><span class="p">,</span>
+	<span class="p">}</span>
+
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Struct</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">u2</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;test2 failed %v \n&#34;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>out</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">test1 failed Key: <span class="s1">&#39;User.UserName&#39;</span> Error:Field validation <span class="k">for</span> <span class="s1">&#39;UserName&#39;</span> failed on the <span class="s1">&#39;palindrome&#39;</span> tag 
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="错误翻译">错误翻译</h1>
+<p>在使用<code>validator</code>进行约束的时候，返回的错误都是英文的信息，而且字段名字也是英文，有时候我们不想要用户知道字段或错误的信息，就需要进行翻译。其代码如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;github.com/go-playground/validator/v10/translations/en&#34;</span>
+	<span class="s">&#34;github.com/go-playground/validator/v10/translations/zh&#34;</span>
+	<span class="s">&#34;reflect&#34;</span>
+	<span class="s">&#34;strings&#34;</span>
+
+	<span class="nx">et</span> <span class="s">&#34;github.com/go-playground/locales/en&#34;</span>
+	<span class="nx">zt</span> <span class="s">&#34;github.com/go-playground/locales/zh&#34;</span>
+	<span class="nx">ut</span> <span class="s">&#34;github.com/go-playground/universal-translator&#34;</span>
+	<span class="s">&#34;github.com/go-playground/validator/v10&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">UserName</span> <span class="kt">string</span> <span class="s">`validate:&#34;required,max=16&#34; label:&#34;用户名&#34;`</span>
+	<span class="nx">ID</span>       <span class="kt">int64</span>  <span class="s">`validate:&#34;required&#34; label:&#34;用户ID&#34;`</span>
+<span class="p">}</span>
+
+<span class="c1">// 定义一个全局翻译器T
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">trans</span> <span class="nx">ut</span><span class="p">.</span><span class="nx">Translator</span>
+
+<span class="c1">// InitTrans 初始化翻译器
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">InitTrans</span><span class="p">(</span><span class="nx">v</span> <span class="o">*</span><span class="nx">validator</span><span class="p">.</span><span class="nx">Validate</span><span class="p">,</span> <span class="nx">locale</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">v</span><span class="p">.</span><span class="nf">RegisterTagNameFunc</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">fld</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">StructField</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+		<span class="nx">name</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">SplitN</span><span class="p">(</span><span class="nx">fld</span><span class="p">.</span><span class="nx">Tag</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;label&#34;</span><span class="p">),</span> <span class="s">&#34;,&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+		<span class="k">if</span> <span class="nx">name</span> <span class="o">==</span> <span class="s">&#34;-&#34;</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="s">&#34;&#34;</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="nx">name</span>
+	<span class="p">})</span>
+
+	<span class="nx">zhT</span> <span class="o">:=</span> <span class="nx">zt</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span> <span class="c1">// 中文翻译器
+</span><span class="c1"></span>	<span class="nx">enT</span> <span class="o">:=</span> <span class="nx">et</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span> <span class="c1">// 英文翻译器
+</span><span class="c1"></span>
+	<span class="c1">// 第一个参数是备用（fallback）的语言环境
+</span><span class="c1"></span>	<span class="c1">// 后面的参数是应该支持的语言环境（支持多个）
+</span><span class="c1"></span>	<span class="c1">// uni := ut.New(zhT, zhT) 也是可以的
+</span><span class="c1"></span>	<span class="nx">uni</span> <span class="o">:=</span> <span class="nx">ut</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">enT</span><span class="p">,</span> <span class="nx">zhT</span><span class="p">,</span> <span class="nx">enT</span><span class="p">)</span>
+
+	<span class="c1">// locale 通常取决于 http 请求头的 &#39;Accept-Language&#39;
+</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">ok</span> <span class="kt">bool</span>
+	<span class="c1">// 也可以使用 uni.FindTranslator(...) 传入多个locale进行查找
+</span><span class="c1"></span>	<span class="nx">trans</span><span class="p">,</span> <span class="nx">ok</span> <span class="p">=</span> <span class="nx">uni</span><span class="p">.</span><span class="nf">GetTranslator</span><span class="p">(</span><span class="nx">locale</span><span class="p">)</span>
+	<span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;uni.GetTranslator(%s) failed&#34;</span><span class="p">,</span> <span class="nx">locale</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="c1">// 注册翻译器
+</span><span class="c1"></span>	<span class="k">switch</span> <span class="nx">locale</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="s">&#34;en&#34;</span><span class="p">:</span>
+		<span class="nx">err</span> <span class="p">=</span> <span class="nx">en</span><span class="p">.</span><span class="nf">RegisterDefaultTranslations</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="nx">trans</span><span class="p">)</span>
+	<span class="k">case</span> <span class="s">&#34;zh&#34;</span><span class="p">:</span>
+		<span class="nx">err</span> <span class="p">=</span> <span class="nx">zh</span><span class="p">.</span><span class="nf">RegisterDefaultTranslations</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="nx">trans</span><span class="p">)</span>
+	<span class="k">default</span><span class="p">:</span>
+		<span class="nx">err</span> <span class="p">=</span> <span class="nx">en</span><span class="p">.</span><span class="nf">RegisterDefaultTranslations</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="nx">trans</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">return</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">fmtValidateErr</span><span class="p">(</span><span class="nx">fields</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">res</span> <span class="kt">string</span>
+	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span><span class="nx">err</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">fields</span> <span class="p">{</span>
+		<span class="nx">res</span> <span class="o">+=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s\n&#34;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">res</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">v</span> <span class="o">:=</span> <span class="nx">validator</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nf">InitTrans</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span><span class="s">&#34;zh&#34;</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;init trans failed, err:%v\n&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">u</span> <span class="o">:=</span> <span class="nx">User</span><span class="p">{</span>
+		<span class="nx">UserName</span><span class="p">:</span> <span class="s">&#34;test0000000000000000000001&#34;</span><span class="p">,</span>
+		<span class="nx">ID</span><span class="p">:</span>       <span class="mi">0</span><span class="p">,</span>
+	<span class="p">}</span>
+
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Struct</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">u</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">errs</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">err</span><span class="p">.(</span><span class="nx">validator</span><span class="p">.</span><span class="nx">ValidationErrors</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nx">ok</span> <span class="p">{</span>
+			<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nf">fmtValidateErr</span><span class="p">(</span><span class="nx">errs</span><span class="p">.</span><span class="nf">Translate</span><span class="p">(</span><span class="nx">trans</span><span class="p">)))</span>
+		<span class="p">}</span>
+
+	<span class="p">}</span>
+
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>out</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用户ID为必填字段
+用户名长度不能超过16个字符
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="一些使用中的问题">一些使用中的问题</h1>
+<p>oneof 要包含空</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">validate:&#34;oneof=&#39;&#39; &#39;Redis&#39; &#39;Pika&#39;&#34;
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="参考连接">参考连接</h1>
+<p>源码 github.com/go-playground/validator/v10</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">白水飘萍</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-10-09
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AE%80%E5%8D%95%E7%9A%84%E4%BD%BF%E7%94%A8/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Gin的学习笔记1-简单的使用</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/leetcode/114%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/">
+            <span class="next-text nav-default">114二叉树展开为链表</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/bspp1314" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/3841870377" class="iconfont icon-weibo" title="weibo"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">白水飘萍</span>
+  </span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

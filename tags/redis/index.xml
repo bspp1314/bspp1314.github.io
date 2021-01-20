@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>redis on 白水飘萍</title>
+    <link>http://localhost:1313/tags/redis/</link>
+    <description>Recent content in redis on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 29 Nov 2020 13:38:40 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis数据类型之bitmap</title>
+      <link>http://localhost:1313/post/redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8Bbitmap/</link>
+      <pubDate>Sun, 29 Nov 2020 13:38:40 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8Bbitmap/</guid>
+      <description>简介 bitmap就是通过最小的单位bit来进行0或者1的设置，表示某个元素对应的值或者状态。一个bit的值，或者是0，或者是1；也就是说一个</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Gin的学习笔记1-简单的使用 - 白水飘萍</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="白水飘萍" /><meta name="description" content="gin 是什么 Gin is a web framework written in Go (Golang). It features a martini-like API with much better performance, up to 40 times faster thanks to httprouter 简单的使用 1 2 3 4 5 6 7 8 9 10 11 12 13 14 func main() { r := gin.Default() r.GET(&amp;#34;/hello&amp;#34;, HelloAction) r.Run() // listen and serve on 0.0.0.0:8080} } func HelloAction(c *gin.Context) { name" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AE%80%E5%8D%95%E7%9A%84%E4%BD%BF%E7%94%A8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.651e6917abb0239242daa570c2bec9867267bbcd83646da5a850afe573347b44.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Gin的学习笔记1-简单的使用" />
+<meta property="og:description" content="gin 是什么 Gin is a web framework written in Go (Golang). It features a martini-like API with much better performance, up to 40 times faster thanks to httprouter 简单的使用 1 2 3 4 5 6 7 8 9 10 11 12 13 14 func main() { r := gin.Default() r.GET(&#34;/hello&#34;, HelloAction) r.Run() // listen and serve on 0.0.0.0:8080} } func HelloAction(c *gin.Context) { name" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AE%80%E5%8D%95%E7%9A%84%E4%BD%BF%E7%94%A8/" />
+<meta property="article:published_time" content="2020-10-09T18:49:19+08:00" />
+<meta property="article:modified_time" content="2020-10-09T18:49:19+08:00" />
+<meta itemprop="name" content="Gin的学习笔记1-简单的使用">
+<meta itemprop="description" content="gin 是什么 Gin is a web framework written in Go (Golang). It features a martini-like API with much better performance, up to 40 times faster thanks to httprouter 简单的使用 1 2 3 4 5 6 7 8 9 10 11 12 13 14 func main() { r := gin.Default() r.GET(&#34;/hello&#34;, HelloAction) r.Run() // listen and serve on 0.0.0.0:8080} } func HelloAction(c *gin.Context) { name">
+<meta itemprop="datePublished" content="2020-10-09T18:49:19+08:00" />
+<meta itemprop="dateModified" content="2020-10-09T18:49:19+08:00" />
+<meta itemprop="wordCount" content="2555">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gin的学习笔记1-简单的使用"/>
+<meta name="twitter:description" content="gin 是什么 Gin is a web framework written in Go (Golang). It features a martini-like API with much better performance, up to 40 times faster thanks to httprouter 简单的使用 1 2 3 4 5 6 7 8 9 10 11 12 13 14 func main() { r := gin.Default() r.GET(&#34;/hello&#34;, HelloAction) r.Run() // listen and serve on 0.0.0.0:8080} } func HelloAction(c *gin.Context) { name"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">白水飘萍</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">白水飘萍</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Gin的学习笔记1-简单的使用</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-10-09 </span>
+        <div class="post-category">
+            <a href="/categories/golang/"> golang </a>
+            <a href="/categories/gin/"> gin </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#gin-是什么">gin 是什么</a></li>
+    <li><a href="#简单的使用">简单的使用</a></li>
+    <li><a href="#http-method">HTTP Method</a>
+      <ul>
+        <li><a href="#gin-restful-api-实现">Gin RESTful API 实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#url-参数">Url 参数</a></li>
+    <li><a href="#gin报文体body参数">Gin报文体body参数</a>
+      <ul>
+        <li><a href="#gin-文件上传">Gin 文件上传</a></li>
+        <li><a href="#gin-处理json">Gin 处理Json</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="gin-是什么">gin 是什么</h1>
+<blockquote>
+<p>Gin is a web framework written in Go (Golang). It features a martini-like API with much better performance, up to 40 times faster thanks to httprouter</p>
+</blockquote>
+<h1 id="简单的使用">简单的使用</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/hello&#34;</span><span class="p">,</span> <span class="nx">HelloAction</span><span class="p">)</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Run</span><span class="p">()</span> <span class="c1">// listen and serve on 0.0.0.0:8080}
+</span><span class="c1"></span><span class="p">}</span>
+
+
+<span class="kd">func</span> <span class="nf">HelloAction</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span>  <span class="p">{</span>
+	<span class="nx">name</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Query</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">)</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+		<span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;hello %s &#34;</span><span class="p">,</span><span class="nx">name</span><span class="p">),</span>
+	<span class="p">})</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后我们运行它,用curl 命名访问该服务器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">curl -X GET <span class="s1">&#39;http://0.0.0.0:8080/hello?name=bspp&#39;</span>
+<span class="o">{</span><span class="s2">&#34;message&#34;</span>:<span class="s2">&#34;hello bspp &#34;</span><span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="http-method">HTTP Method</h1>
+<p>最开始的HTTP 0.9版本只有一个<code>GET</code>方法，也就是我们在浏览器中直接输入网址回车请求的方法，这是一个幂等方法，用于获取服务器上的资源。</p>
+<p>在HTTP 1.0的时候又增加了<code>HEAD</code>和<code>POST</code>方法，其中常用的就是<code>POST</code>方法，一般用于我们给服务端提交一个资源，导致服务器的资源发生变化。</p>
+<p>在HTTP1.1版本，也就是HTTP 1系列的最后一个版本中，也是我们当下比较常用的HTTP版本，增加了更多的HTTP 方法。比如<code>OPTIONS</code>, <code>PUT</code>, <code>DELETE</code>, <code>TRACE</code>和<code>CONNECT</code>，这样在HTTP 1.1 版本中，HTTP的方法达到了8个。</p>
+<p>具体每个方法用处可以参考 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods</a></p>
+<h2 id="gin-restful-api-实现">Gin RESTful API 实现</h2>
+<p><a href="http://en.wikipedia.org/wiki/Representational_state_transfer">RESTful API</a>是目前比较成熟的一套互联网应用程序的API设计理论。如果想了解更多关于RESTfule API，可以参考 <a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">http://www.ruanyifeng.com/blog/2014/05/restful_api.html</a>，这里就不多说了。我们直接看一个例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/users&#34;</span><span class="p">,)</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/user/:id&#34;</span><span class="p">,</span> <span class="nx">UserInfo</span><span class="p">)</span>
+
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Run</span><span class="p">()</span>
+
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">ID</span>       <span class="kt">string</span>
+	<span class="nx">UserName</span> <span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">UsersMap</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">User</span><span class="p">{</span>
+	<span class="s">&#34;1&#34;</span><span class="p">:</span><span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="s">&#34;user1&#34;</span><span class="p">},</span>
+	<span class="s">&#34;2&#34;</span><span class="p">:</span><span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span><span class="s">&#34;2&#34;</span><span class="p">,</span><span class="s">&#34;user2&#34;</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">Users</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span>   <span class="p">{</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="o">&amp;</span><span class="nx">UsersMap</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">UserInfo</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">ID</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">)</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">UsersMap</span><span class="p">[</span><span class="nx">ID</span><span class="p">])</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>请求全部的users</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"> curl -X GET <span class="s1">&#39;http://0.0.0.0:8080/users&#39;</span>         
+<span class="o">{</span><span class="s2">&#34;1&#34;</span>:<span class="o">{</span><span class="s2">&#34;ID&#34;</span>:<span class="s2">&#34;1&#34;</span>,<span class="s2">&#34;UserName&#34;</span>:<span class="s2">&#34;user1&#34;</span><span class="o">}</span>,<span class="s2">&#34;2&#34;</span>:<span class="o">{</span><span class="s2">&#34;ID&#34;</span>:<span class="s2">&#34;2&#34;</span>,<span class="s2">&#34;UserName&#34;</span>:<span class="s2">&#34;user2&#34;</span><span class="o">}}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>请假 user 1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">curl</span> <span class="o">-</span><span class="nx">X</span> <span class="nx">GET</span> <span class="err">&#39;</span><span class="nx">http</span><span class="p">:</span><span class="c1">//0.0.0.0:8080/users/1&#39;
+</span><span class="c1"></span><span class="p">{</span><span class="s">&#34;ID&#34;</span><span class="p">:</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="s">&#34;UserName&#34;</span><span class="p">:</span><span class="s">&#34;user1&#34;</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="url-参数">Url 参数</h1>
+<p>web提供的服务通常是client和server的交互。其中客户端向服务器发送请求，除了路由参数，其他的参数无非两种，URL 参数和报文体body参数。</p>
+<p>URL 参数通过 DefaultQuery 或 Query 方法获取。</p>
+<p>对于参数的处理，经常会出现参数不存在的情况，对于是否提供默认值，gin也考虑了，并且给出了一个优雅的方案，使用c.DefaultQuery方法读取参数，其中当参数不存在的时候，提供一个默认值。使用Query方法读取正常参数，当参数不存在的时候，返回空字串。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/users/info&#34;</span><span class="p">,</span> <span class="nx">UserInfoAction</span><span class="p">)</span>
+
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Run</span><span class="p">()</span>
+
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">ID</span>       <span class="kt">string</span>
+	<span class="nx">UserName</span> <span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">UsersMap</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">User</span><span class="p">{</span>
+	<span class="s">&#34;1&#34;</span><span class="p">:</span><span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="s">&#34;user1&#34;</span><span class="p">},</span>
+	<span class="s">&#34;2&#34;</span><span class="p">:</span><span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span><span class="s">&#34;2&#34;</span><span class="p">,</span><span class="s">&#34;user2&#34;</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">UsersAction</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span>   <span class="p">{</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="o">&amp;</span><span class="nx">UsersMap</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">UserInfoAction</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">userId</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Query</span><span class="p">(</span><span class="s">&#34;user_id&#34;</span><span class="p">)</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">UsersMap</span><span class="p">[</span><span class="nx">userId</span><span class="p">])</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl -X GET &#39;http://0.0.0.0:8080/users/info?user_id=1&#39;
+{&#34;ID&#34;:&#34;1&#34;,&#34;UserName&#34;:&#34;user1&#34;}
+
+</code></pre></td></tr></table>
+</div>
+</div><p>以上两个获取查询参数值实际调用的都是<code>GetQuery</code>，这也是<code>gin.Context</code>的一个方法，它和<code>Query</code>唯一不同的是，它返回两个值，可以告诉我们要获取的<code>key</code>是否存在。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">//gin 框架里的源码
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Context</span><span class="p">)</span> <span class="nf">GetQuery</span><span class="p">(</span><span class="nx">key</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">values</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">GetQueryArray</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">ok</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="kc">false</span>
+<span class="p">}</span>
+
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Context</span><span class="p">)</span> <span class="nf">GetQueryArray</span><span class="p">(</span><span class="nx">key</span> <span class="kt">string</span><span class="p">)</span> <span class="p">([]</span><span class="kt">string</span><span class="p">,</span> <span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nf">getQueryCache</span><span class="p">()</span> <span class="c1">//缓存所有的键值对
+</span><span class="c1"></span>    <span class="k">if</span> <span class="nx">values</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">queryCache</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span> <span class="nx">ok</span> <span class="o">&amp;&amp;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">values</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">values</span><span class="p">,</span> <span class="kc">true</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{},</span> <span class="kc">false</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Context</span><span class="p">)</span> <span class="nf">getQueryCache</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">c</span><span class="p">.</span><span class="nx">queryCache</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">c</span><span class="p">.</span><span class="nx">queryCache</span> <span class="p">=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nf">Query</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// go源码里的代码 net/http.go 
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">URL</span><span class="p">)</span> <span class="nf">Query</span><span class="p">()</span> <span class="nx">Values</span> <span class="p">{</span>
+	<span class="nx">v</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nf">ParseQuery</span><span class="p">(</span><span class="nx">u</span><span class="p">.</span><span class="nx">RawQuery</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">v</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到实际上最终在都会去调用分解Url参数的函数ParseQuery 来获取参数。当然gin里面还有其他的读取参数函数，比如QueryArray和QueryMap等，不过这些在个人的开发过程中不常用，所有这里就不写出来了，有兴趣的可以去看源码。</p>
+<h1 id="gin报文体body参数">Gin报文体body参数</h1>
+<p>HTTP 协议是以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规范。规范把 HTTP 请求分为三个部分：请求行、请求头、消息主体。类似于下面这样：’</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">method</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">request-URL</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">version</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">headers</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">entity-body</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>协议规定 POST 提交的数据必须放在消息主体（entity-body）中，但协议并没有规定数据必须使用什么编码方式。实际上，开发者完全可以自己决定消息主体的格式，只要最后发送的 HTTP 请求满足上面的格式就可以。一般服务端语言以及它们的 framework，都内置了自动解析常见数据格式的功能。服务端通常是根据请求头（headers）中的 Content-Type 字段来获知请求中的消息主体是用何种方式编码，再对主体进行解析。所以说到 POST 提交数据方案，包含了 Content-Type 和消息主体编码方式两部分。常见的Content-Type 有以下4 中</p>
+<table>
+<thead>
+<tr>
+<th>Content-Type</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>application/x-www-form-urlencoded</td>
+<td>和Url参数的模式一样。如果不设置 <code>enctype</code> 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据</td>
+</tr>
+<tr>
+<td>multipart/form-data</td>
+<td>用于上传文件时使用</td>
+</tr>
+<tr>
+<td>application/json</td>
+<td>Json</td>
+</tr>
+<tr>
+<td>text/xml</td>
+<td>xml</td>
+</tr>
+</tbody>
+</table>
+<p>##Gin 表单处理</p>
+<p>我们直接来看一个小例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/user/info&#34;</span><span class="p">,</span> <span class="nx">UserInfoAction</span><span class="p">)</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Run</span><span class="p">()</span>
+
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">UserInfoAction</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">userId</span>  <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">PostForm</span><span class="p">(</span><span class="s">&#34;user_id&#34;</span><span class="p">)</span>
+	<span class="nx">userName</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">PostForm</span><span class="p">(</span><span class="s">&#34;user_name&#34;</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">userId</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">userName</span><span class="p">)</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="s">&#34;OK&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">curl -d <span class="s2">&#34;user_id=1&amp;user_name=user1&#34;</span> <span class="s1">&#39;http://0.0.0.0:8080/user/info&#39;</span>
+OK                                                                         
+</code></pre></td></tr></table>
+</div>
+</div><p>和查询参数方法一样，对于表单的参数接收，<code>Gin</code>也提供了一系列的方法，他们的用法和查询参数的一样。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">查询参数</th>
+<th style="text-align:left">Form表单</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Query</td>
+<td style="text-align:left">PostForm</td>
+<td style="text-align:left">获取key对应的值，不存在为空字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">GetQuery</td>
+<td style="text-align:left">GetPostForm</td>
+<td style="text-align:left">多返回一个key是否存在的结果</td>
+</tr>
+<tr>
+<td style="text-align:left">QueryArray</td>
+<td style="text-align:left">PostFormArray</td>
+<td style="text-align:left">获取key对应的数组，不存在返回一个空数组</td>
+</tr>
+<tr>
+<td style="text-align:left">GetQueryArray</td>
+<td style="text-align:left">GetPostFormArray</td>
+<td style="text-align:left">多返回一个key是否存在的结果</td>
+</tr>
+<tr>
+<td style="text-align:left">QueryMap</td>
+<td style="text-align:left">PostFormMap</td>
+<td style="text-align:left">获取key对应的map，不存在返回空map</td>
+</tr>
+<tr>
+<td style="text-align:left">GetQueryMap</td>
+<td style="text-align:left">GetPostFormMap</td>
+<td style="text-align:left">多返回一个key是否存在的结果</td>
+</tr>
+<tr>
+<td style="text-align:left">DefaultQuery</td>
+<td style="text-align:left">DefaultPostForm</td>
+<td style="text-align:left">key不存在的话，可以指定返回的默认值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gin-文件上传">Gin 文件上传</h2>
+<p><code>multipart/form-data</code>用于文件上传。gin文件上传也很方便，和原生的net/http方法类似，不同在于gin把原生的request封装到c.Request中了。我们可以看一下以下的代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+	<span class="c1">// Set a lower memory limit for multipart forms (default is 32 MiB)
+</span><span class="c1"></span>	<span class="c1">// router.MaxMultipartMemory = 8 &lt;&lt; 20  // 8 MiB
+</span><span class="c1"></span>	<span class="nx">router</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/upload&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// single file
+</span><span class="c1"></span>		<span class="nx">file</span><span class="p">,</span> <span class="nx">err</span><span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">FormFile</span><span class="p">(</span><span class="s">&#34;file&#34;</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Get file failed %v \n&#34;</span><span class="p">,</span><span class="nx">err</span><span class="p">))</span>
+		<span class="p">}</span>
+
+		<span class="c1">// Upload the file to specific dst.
+</span><span class="c1"></span>		<span class="nx">fileName</span> <span class="o">:=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s%d&#34;</span><span class="p">,</span><span class="nx">file</span><span class="p">.</span><span class="nx">Filename</span><span class="p">,</span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">())</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">SaveUploadedFile</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">)</span>
+
+		<span class="cm">/*
+</span><span class="cm">		   也可以直接使用io操作，拷贝文件数据。
+</span><span class="cm">		   out, err := os.Create(fileName)
+</span><span class="cm">		   defer out.Close()
+</span><span class="cm">		   _, err = io.Copy(out, file)
+</span><span class="cm">		*/</span>
+
+		<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;&#39;%s&#39; uploaded!&#34;</span><span class="p">,</span> <span class="nx">file</span><span class="p">.</span><span class="nx">Filename</span><span class="p">))</span>
+	<span class="p">})</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="err">$</span> <span class="nx">curl</span> <span class="o">-</span><span class="nx">X</span> <span class="nx">POST</span> <span class="nx">http</span><span class="p">:</span><span class="c1">//0.0.0.0:8080/upload -F &#34;file=@/Users/linyuanpeng/workplace/go/src/github.com/bspp1314/go-common-lib/gin-lib/ex5/main.go&#34; -H &#34;Content-Type: multipart/form-data&#34;
+</span><span class="c1"></span><span class="err">&#39;</span><span class="nx">main</span><span class="p">.</span><span class="k">go</span><span class="err">&#39;</span> <span class="nx">uploaded</span><span class="p">!</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="gin-处理json">Gin 处理Json</h2>
+<p>application/json 这个 Content-Type 几乎是最常用到的一种格式。实际上，现在越来越多的人把它作为请求头，用来告诉服务端消息主体是序列化后的 JSON 字符串。gin中当然也支持这种格式的解析了。我们直接来看代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/user/create&#34;</span><span class="p">,</span> <span class="nx">UserCreateAction</span><span class="p">)</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Run</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">UserCreateReq</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">UserName</span>  <span class="kt">string</span> <span class="s">`json:&#34;user_name&#34;`</span>
+	<span class="nx">UserEmail</span> <span class="kt">string</span> <span class="s">`json:&#34;user_email&#34;`</span>
+<span class="p">}</span>
+<span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">ID</span>        <span class="kt">int64</span>  <span class="s">`json:&#34;id&#34;`</span>
+	<span class="nx">UserName</span>  <span class="kt">string</span> <span class="s">`json:&#34;user_name&#34;`</span>
+	<span class="nx">UserEmail</span> <span class="kt">string</span> <span class="s">`json:&#34;user_email&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">RespData</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">ErrorNo</span>  <span class="kt">int64</span>  <span class="s">`json:&#34;err_no&#34;`</span>
+	<span class="nx">ErrorMsg</span> <span class="kt">string</span> <span class="s">`json:&#34;err_msg&#34;`</span>
+	<span class="nx">Data</span>     <span class="kd">interface</span><span class="p">{}</span> <span class="s">`json:&#34;data&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">SetData</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="nx">data</span> <span class="kd">interface</span><span class="p">{})</span>  <span class="p">{</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="o">&amp;</span><span class="nx">RespData</span><span class="p">{</span>
+		<span class="nx">ErrorNo</span><span class="p">:</span>  <span class="mi">0</span><span class="p">,</span>
+		<span class="nx">ErrorMsg</span><span class="p">:</span> <span class="s">&#34;&#34;</span><span class="p">,</span>
+		<span class="nx">Data</span><span class="p">:</span>     <span class="nx">data</span><span class="p">,</span>
+	<span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">SetError</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="nx">err</span> <span class="kt">error</span><span class="p">,</span> <span class="nx">errNo</span> <span class="kt">int64</span><span class="p">)</span>  <span class="p">{</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="o">&amp;</span><span class="nx">RespData</span><span class="p">{</span>
+		<span class="nx">ErrorNo</span><span class="p">:</span>  <span class="nx">errNo</span><span class="p">,</span>
+		<span class="nx">ErrorMsg</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">(),</span>
+		<span class="nx">Data</span><span class="p">:</span>     <span class="kc">nil</span><span class="p">,</span>
+	<span class="p">})</span>
+<span class="p">}</span>
+
+
+<span class="kd">func</span> <span class="nf">UserCreateAction</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">req</span> <span class="nx">UserCreateReq</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">ShouldBind</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nf">SetError</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span><span class="nx">err</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span>
+		<span class="nx">ID</span><span class="p">:</span>        <span class="mi">1</span><span class="p">,</span>
+		<span class="nx">UserName</span><span class="p">:</span>  <span class="nx">req</span><span class="p">.</span><span class="nx">UserName</span><span class="p">,</span>
+		<span class="nx">UserEmail</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">UserEmail</span><span class="p">,</span>
+	<span class="p">})</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">curl -X POST http://0.0.0.0:8080/user/create -d <span class="s1">&#39;{&#34;user_name&#34;: &#34;张三&#34;, &#34;user_email&#34;: &#34;zhangsan@163.com&#34;}&#39;</span> -H <span class="s2">&#34;Content-Type: applicatiojson&#34;</span>
+<span class="o">{</span><span class="s2">&#34;id&#34;</span>:1,<span class="s2">&#34;user_name&#34;</span>:<span class="s2">&#34;张三&#34;</span>,<span class="s2">&#34;user_email&#34;</span>:<span class="s2">&#34;zhangsan@163.com&#34;</span><span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>参考连接</p>
+<p>Gin 源码以及官方文档  <a href="https://github.com/gin-gonic/gin">https://github.com/gin-gonic/gin</a></p>
+<p>Golang Gin 实战（一）| 快速安装入门  <a href="https://www.flysnow.org/2019/12/10/golang-gin-quick-start.html#%E5%85%A5%E9%97%A8%E8%A6%81%E6%B1%82">https://www.flysnow.org/2019/12/10/golang-gin-quick-start.html#%E5%85%A5%E9%97%A8%E8%A6%81%E6%B1%82</a></p>
+<p>RESTful API 设计指南  <a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">http://www.ruanyifeng.com/blog/2014/05/restful_api.html</a></p>
+<p>四种常见的 POST 提交数据方式  <a href="https://imququ.com/post/four-ways-to-post-data-in-http.html">https://imququ.com/post/four-ways-to-post-data-in-http.html</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">白水飘萍</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-10-09
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/redis/mac%E5%AE%89%E8%A3%85redis/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Mac安装redis</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bvalidator/">
+            <span class="next-text nav-default">Go常见库之validator</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/bspp1314" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/3841870377" class="iconfont icon-weibo" title="weibo"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">白水飘萍</span>
+  </span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

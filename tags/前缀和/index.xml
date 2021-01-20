@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>前缀和 on 白水飘萍</title>
+    <link>http://localhost:1313/tags/%E5%89%8D%E7%BC%80%E5%92%8C/</link>
+    <description>Recent content in 前缀和 on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 24 Dec 2020 11:59:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%89%8D%E7%BC%80%E5%92%8C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>238除自身以外数组的乘积</title>
+      <link>http://localhost:1313/post/leetcode/238%E9%99%A4%E8%87%AA%E8%BA%AB%E4%BB%A5%E5%A4%96%E6%95%B0%E7%BB%84%E7%9A%84%E4%B9%98%E7%A7%AF/</link>
+      <pubDate>Thu, 24 Dec 2020 11:59:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/238%E9%99%A4%E8%87%AA%E8%BA%AB%E4%BB%A5%E5%A4%96%E6%95%B0%E7%BB%84%E7%9A%84%E4%B9%98%E7%A7%AF/</guid>
+      <description>题目 给你一个长度为 n 的整数数组 nums，其中 n &amp;gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。 示例: 1 2 输入: [1,2,3,4] 输出: [24,12,8,6] **提</description>
+    </item>
+    
+    <item>
+      <title>437路径总和III</title>
+      <link>http://localhost:1313/post/leetcode/437%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8Ciii/</link>
+      <pubDate>Tue, 08 Dec 2020 21:39:45 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/437%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8Ciii/</guid>
+      <description>题目 给定一个二叉树，它的每个结点都存放着一个整数值。 找出路径和等于给定数值的路径总数。 路径不需要从根节点开始，也不需要在叶子节点结束，但是路</description>
+    </item>
+    
+    <item>
+      <title>303区域和检索 数组不可变</title>
+      <link>http://localhost:1313/post/leetcode/303%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/</link>
+      <pubDate>Mon, 23 Nov 2020 21:28:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/303%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/</guid>
+      <description># 题目 难度简单210收藏分享切换为英文接收动态反馈 给定一个整数数组 nums，求出数组从索引 i 到 j（i ≤ j）范围内元素的总和，包含 i、j 两点。</description>
+    </item>
+    
+  </channel>
+</rss>

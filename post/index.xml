@@ -1,0 +1,1204 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on 白水飘萍</title>
+    <link>http://localhost:1313/post/</link>
+    <description>Recent content in Posts on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 03 Jan 2021 23:44:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>220存在重复元素III</title>
+      <link>http://localhost:1313/post/leetcode/220%E5%AD%98%E5%9C%A8%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0iii/</link>
+      <pubDate>Sun, 03 Jan 2021 23:44:14 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/220%E5%AD%98%E5%9C%A8%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0iii/</guid>
+      <description>题目 在整数数组 nums 中，是否存在两个下标 i 和 j，使得 nums [i] 和 nums [j] 的差的绝对值小于等于 t ，且满足i 和 j 的差的绝对值也小于等于 ķ 。 如果存在则返回 tru</description>
+    </item>
+    
+    <item>
+      <title>240搜索二维矩阵II</title>
+      <link>http://localhost:1313/post/leetcode/240%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5ii/</link>
+      <pubDate>Sun, 03 Jan 2021 23:34:05 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/240%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5ii/</guid>
+      <description>题目 编写一个高效的算法来搜索 *m* x *n* 矩阵 matrix 中的一个目标值 target 。该矩阵具有以下特性： 每行的元素从左到右升序排列。 每列的元素从上到下升序排列。 示例 1</description>
+    </item>
+    
+    <item>
+      <title>74搜索二维矩阵</title>
+      <link>http://localhost:1313/post/leetcode/74%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5/</link>
+      <pubDate>Sun, 03 Jan 2021 23:29:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/74%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5/</guid>
+      <description>题目 编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。该矩阵具有如下特性： 每行中的整数从左到右按升序排列。 每行的第一个整数大于前一行</description>
+    </item>
+    
+    <item>
+      <title>50Pow</title>
+      <link>http://localhost:1313/post/leetcode/50pow/</link>
+      <pubDate>Tue, 29 Dec 2020 12:06:08 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/50pow/</guid>
+      <description>题目 实现 pow(x, n) ，即计算 x 的 n 次幂函数。 示例 1: 1 2 输入: 2.00000, 10 输出: 1024.00000 示例 2: 1 2 输入: 2.10000, 3 输出: 9.26100 示例 3: 1 2 3 输入: 2.00000, -2 输出: 0.25000 解释: 2-2 = 1/22 = 1/4 =</description>
+    </item>
+    
+    <item>
+      <title>29两数相除</title>
+      <link>http://localhost:1313/post/leetcode/29%E4%B8%A4%E6%95%B0%E7%9B%B8%E9%99%A4/</link>
+      <pubDate>Tue, 29 Dec 2020 11:22:23 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/29%E4%B8%A4%E6%95%B0%E7%9B%B8%E9%99%A4/</guid>
+      <description>题目 给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。 返回被除数 dividend 除以除数 divisor 得到的商。 整数除法的结果应</description>
+    </item>
+    
+    <item>
+      <title>golang pprof</title>
+      <link>http://localhost:1313/post/golang/golang-pprof/</link>
+      <pubDate>Mon, 28 Dec 2020 10:31:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/golang-pprof/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>42接雨水</title>
+      <link>http://localhost:1313/post/leetcode/42%E6%8E%A5%E9%9B%A8%E6%B0%B4/</link>
+      <pubDate>Fri, 25 Dec 2020 10:26:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/42%E6%8E%A5%E9%9B%A8%E6%B0%B4/</guid>
+      <description># 题目 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。 示例 1： 1 2 3 输入：height = [0,1,0,2,1,0,1,3,2,1,2,1] 输出：6</description>
+    </item>
+    
+    <item>
+      <title>238除自身以外数组的乘积</title>
+      <link>http://localhost:1313/post/leetcode/238%E9%99%A4%E8%87%AA%E8%BA%AB%E4%BB%A5%E5%A4%96%E6%95%B0%E7%BB%84%E7%9A%84%E4%B9%98%E7%A7%AF/</link>
+      <pubDate>Thu, 24 Dec 2020 11:59:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/238%E9%99%A4%E8%87%AA%E8%BA%AB%E4%BB%A5%E5%A4%96%E6%95%B0%E7%BB%84%E7%9A%84%E4%B9%98%E7%A7%AF/</guid>
+      <description>题目 给你一个长度为 n 的整数数组 nums，其中 n &amp;gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。 示例: 1 2 输入: [1,2,3,4] 输出: [24,12,8,6] **提</description>
+    </item>
+    
+    <item>
+      <title>697数组中的度</title>
+      <link>http://localhost:1313/post/leetcode/697%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%BA%A6/</link>
+      <pubDate>Thu, 24 Dec 2020 10:01:40 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/697%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%BA%A6/</guid>
+      <description>题目 给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。 你的任务是找到与 nums 拥有相同大小的度的最短连续子数</description>
+    </item>
+    
+    <item>
+      <title>673最长递增子序列的个数</title>
+      <link>http://localhost:1313/post/leetcode/673%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0/</link>
+      <pubDate>Mon, 21 Dec 2020 10:19:44 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/673%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0/</guid>
+      <description>题目 给定一个未排序的整数数组，找到最长递增子序列的个数。 示例 1: 1 2 3 输入: [1,3,5,4,7] 输出: 2 解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7</description>
+    </item>
+    
+    <item>
+      <title>354俄罗斯套娃信封问题</title>
+      <link>http://localhost:1313/post/leetcode/354%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Sun, 20 Dec 2020 17:37:57 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/354%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98/</guid>
+      <description>题目 给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信</description>
+    </item>
+    
+    <item>
+      <title>646最长数对链</title>
+      <link>http://localhost:1313/post/leetcode/646%E6%9C%80%E9%95%BF%E6%95%B0%E5%AF%B9%E9%93%BE/</link>
+      <pubDate>Sun, 20 Dec 2020 17:17:31 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/646%E6%9C%80%E9%95%BF%E6%95%B0%E5%AF%B9%E9%93%BE/</guid>
+      <description>题目 给出 n 个数对。 在每一个数对中，第一个数字总是比第二个数字小。 现在，我们定义一种跟随关系，当且仅当 b &amp;lt; c 时，数对(c, d) 才可以跟在 (a, b) 后面</description>
+    </item>
+    
+    <item>
+      <title>200岛屿数量</title>
+      <link>http://localhost:1313/post/leetcode/200%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/</link>
+      <pubDate>Fri, 18 Dec 2020 10:12:52 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/200%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/</guid>
+      <description>题目 给你一个由 &#39;1&#39;（陆地）和 &#39;0&#39;（水）组成的的二维网格，请你计算网格中岛屿的数量。 岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直</description>
+    </item>
+    
+    <item>
+      <title>334递增的三元子序列</title>
+      <link>http://localhost:1313/post/leetcode/334%E9%80%92%E5%A2%9E%E7%9A%84%E4%B8%89%E5%85%83%E5%AD%90%E5%BA%8F%E5%88%97/</link>
+      <pubDate>Tue, 15 Dec 2020 21:09:16 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/334%E9%80%92%E5%A2%9E%E7%9A%84%E4%B8%89%E5%85%83%E5%AD%90%E5%BA%8F%E5%88%97/</guid>
+      <description>题目 给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。 数学表达式如下: 如果存在这样的 i, j, k, 且满足 0 ≤ i &amp;lt; j &amp;lt; k ≤ n-1， 使得</description>
+    </item>
+    
+    <item>
+      <title>300最长递增子序列</title>
+      <link>http://localhost:1313/post/leetcode/300%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</link>
+      <pubDate>Tue, 15 Dec 2020 13:35:36 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/300%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</guid>
+      <description>题目 给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。 子序列是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。</description>
+    </item>
+    
+    <item>
+      <title>657机器人能否返回原点</title>
+      <link>http://localhost:1313/post/leetcode/657%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%83%BD%E5%90%A6%E8%BF%94%E5%9B%9E%E5%8E%9F%E7%82%B9/</link>
+      <pubDate>Mon, 14 Dec 2020 10:15:14 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/657%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%83%BD%E5%90%A6%E8%BF%94%E5%9B%9E%E5%8E%9F%E7%82%B9/</guid>
+      <description>题目 在二维平面上，有一个机器人从原点 (0, 0) 开始。给出它的移动顺序，判断这个机器人在完成移动后是否在 (0, 0) 处结束。 移动顺序由字符串表示。字符 move[i] 表示</description>
+    </item>
+    
+    <item>
+      <title>130被围绕的区域</title>
+      <link>http://localhost:1313/post/leetcode/130%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/</link>
+      <pubDate>Thu, 10 Dec 2020 10:00:41 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/130%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/</guid>
+      <description>题目 给定一个二维的矩阵，包含 &#39;X&#39; 和 &#39;O&#39;（字母 O）。 找到所有被 &#39;X&#39; 围绕的区域，并将这些区域里所有的 &#39;O&#39; 用 &#39;X&#39; 填充。 示例: 1 2 3 4 X X X X X O O X X X</description>
+    </item>
+    
+    <item>
+      <title>Redis源码阅读之整数集合</title>
+      <link>http://localhost:1313/post/redis/redis%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B9%8Bintset/</link>
+      <pubDate>Wed, 09 Dec 2020 18:25:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/redis/redis%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B9%8Bintset/</guid>
+      <description>Set 集合采用了整数集合和字典两种方式来实现的，当满足如下两个条件的时候，采用整数集合实现；一旦有一个条件不满足时则采用字典来实现。 Set 集合中的所</description>
+    </item>
+    
+    <item>
+      <title>687最长同值路径</title>
+      <link>http://localhost:1313/post/leetcode/687%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84/</link>
+      <pubDate>Wed, 09 Dec 2020 10:27:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/687%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84/</guid>
+      <description>题目 给定一个二叉树，找到最长的路径，这个路径中的每个节点具有相同值。 这条路径可以经过也可以不经过根节点。 注意：两个节点之间的路径长度由它们之</description>
+    </item>
+    
+    <item>
+      <title>437路径总和III</title>
+      <link>http://localhost:1313/post/leetcode/437%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8Ciii/</link>
+      <pubDate>Tue, 08 Dec 2020 21:39:45 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/437%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8Ciii/</guid>
+      <description>题目 给定一个二叉树，它的每个结点都存放着一个整数值。 找出路径和等于给定数值的路径总数。 路径不需要从根节点开始，也不需要在叶子节点结束，但是路</description>
+    </item>
+    
+    <item>
+      <title>124二叉树的最大路径和III</title>
+      <link>http://localhost:1313/post/leetcode/124%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8Ciii/</link>
+      <pubDate>Tue, 08 Dec 2020 21:15:49 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/124%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8Ciii/</guid>
+      <description>题目 给定一个非空二叉树，返回其最大路径和。 本题中，路径被定义为一条从树中任意节点出发，沿父节点-子节点连接，达到任意节点的序列。该路径至少包</description>
+    </item>
+    
+    <item>
+      <title>547朋友圈</title>
+      <link>http://localhost:1313/post/leetcode/547%E6%9C%8B%E5%8F%8B%E5%9C%88/</link>
+      <pubDate>Sun, 06 Dec 2020 21:21:09 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/547%E6%9C%8B%E5%8F%8B%E5%9C%88/</guid>
+      <description>题目 班上有 N 名学生。其中有些人是朋友，有些则不是。他们的友谊具有是传递性。如果已知 A 是 B 的朋友，B 是 C 的朋友，那么我们可以认为 A 也是 C 的朋友</description>
+    </item>
+    
+    <item>
+      <title>338比特位计数</title>
+      <link>http://localhost:1313/post/leetcode/338%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/</link>
+      <pubDate>Sun, 06 Dec 2020 18:56:19 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/338%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/</guid>
+      <description># 题目 给定一个非负整数 num。对于 0 ≤ i ≤ num 范围中的每个数字 i ，计算其二进制数中的 1 的数目并将它们作为数组返回。 示例 1: 1 2 输入: 2 输出: [0,1,1] 示</description>
+    </item>
+    
+    <item>
+      <title>Redis数据类型之bitmap</title>
+      <link>http://localhost:1313/post/redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8Bbitmap/</link>
+      <pubDate>Sun, 29 Nov 2020 13:38:40 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8Bbitmap/</guid>
+      <description>简介 bitmap就是通过最小的单位bit来进行0或者1的设置，表示某个元素对应的值或者状态。一个bit的值，或者是0，或者是1；也就是说一个</description>
+    </item>
+    
+    <item>
+      <title>Redis源码阅读之skiplist</title>
+      <link>http://localhost:1313/post/redis/redis%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B9%8Bskiplist/</link>
+      <pubDate>Fri, 27 Nov 2020 21:11:55 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/redis/redis%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B9%8Bskiplist/</guid>
+      <description>Redis里面使用skiplist是为了实现sorted set这种对外的数据结构。 我们知道在一般的有序链表中，我们需要查找数据的时间复杂度为</description>
+    </item>
+    
+    <item>
+      <title>307区域和检索 数组可修改</title>
+      <link>http://localhost:1313/post/leetcode/307%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E5%8F%AF%E4%BF%AE%E6%94%B9/</link>
+      <pubDate>Mon, 23 Nov 2020 21:35:12 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/307%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E5%8F%AF%E4%BF%AE%E6%94%B9/</guid>
+      <description>题目 给定一个整数数组 nums，求出数组从索引 i 到 j (i ≤ j) 范围内元素的总和，包含 i, j 两点。 update(i, val) 函数可以通过将下标为 i 的数值更新为 val，从而对</description>
+    </item>
+    
+    <item>
+      <title>303区域和检索 数组不可变</title>
+      <link>http://localhost:1313/post/leetcode/303%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/</link>
+      <pubDate>Mon, 23 Nov 2020 21:28:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/303%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/</guid>
+      <description># 题目 难度简单210收藏分享切换为英文接收动态反馈 给定一个整数数组 nums，求出数组从索引 i 到 j（i ≤ j）范围内元素的总和，包含 i、j 两点。</description>
+    </item>
+    
+    <item>
+      <title>139单词拆分</title>
+      <link>http://localhost:1313/post/leetcode/139%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/</link>
+      <pubDate>Thu, 12 Nov 2020 21:38:23 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/139%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/</guid>
+      <description>题目 给定一个非空字符串 s 和一个包含非空单词的列表 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。 说明： 拆分时可以重</description>
+    </item>
+    
+    <item>
+      <title>337打家劫舍III</title>
+      <link>http://localhost:1313/post/leetcode/337%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Diii/</link>
+      <pubDate>Wed, 11 Nov 2020 21:50:18 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/337%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Diii/</guid>
+      <description>题目 在上次打劫完一条街道之后和一圈房屋后，小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为“根”。 除了“根”之外，每栋房子</description>
+    </item>
+    
+    <item>
+      <title>213打家劫舍II</title>
+      <link>http://localhost:1313/post/leetcode/213%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Dii/</link>
+      <pubDate>Wed, 11 Nov 2020 21:43:04 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/213%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Dii/</guid>
+      <description>题目 你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都 围成一圈 ，这意味着第一个房屋和最后一个房屋是紧挨着</description>
+    </item>
+    
+    <item>
+      <title>198打家劫舍</title>
+      <link>http://localhost:1313/post/leetcode/198%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</link>
+      <pubDate>Wed, 11 Nov 2020 21:34:45 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/198%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</guid>
+      <description>题目 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间</description>
+    </item>
+    
+    <item>
+      <title>91解码方法</title>
+      <link>http://localhost:1313/post/leetcode/91%E8%A7%A3%E7%A0%81%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Mon, 09 Nov 2020 17:05:35 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/91%E8%A7%A3%E7%A0%81%E6%96%B9%E6%B3%95/</guid>
+      <description>题目 一条包含字母 A-Z 的消息通过以下方式进行了编码： 1 2 3 4 &amp;#39;A&amp;#39; -&amp;gt; 1 &amp;#39;B&amp;#39; -&amp;gt; 2 ... &amp;#39;Z&amp;#39; -&amp;gt; 26 给定一个只包含数字的非空字符串，请计算解码方法的总数。 题目数据保</description>
+    </item>
+    
+    <item>
+      <title>309最佳买卖股票时期含冷冻期</title>
+      <link>http://localhost:1313/post/leetcode/309%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%9F%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F/</link>
+      <pubDate>Mon, 09 Nov 2020 11:38:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/309%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%9F%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F/</guid>
+      <description>题目 给定一个整数数组，其中第 i 个元素代表了第 i 天的股票价格 。 设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（</description>
+    </item>
+    
+    <item>
+      <title>714买卖股票的最佳时机含手续费</title>
+      <link>http://localhost:1313/post/leetcode/714%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9/</link>
+      <pubDate>Sun, 08 Nov 2020 21:24:40 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/714%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9/</guid>
+      <description>题目 给定一个整数数组 prices，其中第 i 个元素代表了第 i 天的股票价格 ；非负整数 fee 代表了交易股票的手续费用。 你可以无限次地完成交易，但是你每</description>
+    </item>
+    
+    <item>
+      <title>188买卖股票的最佳时机IV</title>
+      <link>http://localhost:1313/post/leetcode/188%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAiv/</link>
+      <pubDate>Sun, 08 Nov 2020 20:28:23 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/188%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAiv/</guid>
+      <description>题目 给定一个整数数组 prices ，它的第 i 个元素 prices[i] 是一支给定的股票在第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你最多可以完成 k 笔交易。 注意</description>
+    </item>
+    
+    <item>
+      <title>123买卖股票的最佳时机III</title>
+      <link>http://localhost:1313/post/leetcode/123%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAiii/</link>
+      <pubDate>Sun, 08 Nov 2020 19:49:40 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/123%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAiii/</guid>
+      <description>题目 给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你最多可以完成 两笔 交易。 注意: 你不能</description>
+    </item>
+    
+    <item>
+      <title>121买卖股票的最佳时机</title>
+      <link>http://localhost:1313/post/leetcode/121%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</link>
+      <pubDate>Sun, 08 Nov 2020 18:51:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/121%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</guid>
+      <description>题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所</description>
+    </item>
+    
+    <item>
+      <title>121买卖股票的最佳时机</title>
+      <link>http://localhost:1313/post/leetcode/122%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</link>
+      <pubDate>Sun, 08 Nov 2020 18:51:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/122%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</guid>
+      <description>题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一</description>
+    </item>
+    
+    <item>
+      <title>120三角形最小路径和</title>
+      <link>http://localhost:1313/post/leetcode/120%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</link>
+      <pubDate>Sun, 08 Nov 2020 17:55:08 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/120%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</guid>
+      <description>给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。 相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层</description>
+    </item>
+    
+    <item>
+      <title>70爬楼梯</title>
+      <link>http://localhost:1313/post/leetcode/70%E7%88%AC%E6%A5%BC%E6%A2%AF/</link>
+      <pubDate>Sun, 08 Nov 2020 17:41:52 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/70%E7%88%AC%E6%A5%BC%E6%A2%AF/</guid>
+      <description>题目 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ **注意：**给定 n 是一个正整数</description>
+    </item>
+    
+    <item>
+      <title>64最小路径和</title>
+      <link>http://localhost:1313/post/leetcode/64%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</link>
+      <pubDate>Sun, 08 Nov 2020 17:25:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/64%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</guid>
+      <description>题目 给定一个包含非负整数的 m x n 网格，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。 **说明：**每次只能向下或者向右移动一</description>
+    </item>
+    
+    <item>
+      <title>63不同路径II</title>
+      <link>http://localhost:1313/post/leetcode/63%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84ii/</link>
+      <pubDate>Sun, 08 Nov 2020 17:08:21 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/63%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84ii/</guid>
+      <description>题目 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下</description>
+    </item>
+    
+    <item>
+      <title>WaitGroup的使用和源码</title>
+      <link>http://localhost:1313/post/golang/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/waitgroup%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E6%BA%90%E7%A0%81/</link>
+      <pubDate>Sun, 08 Nov 2020 16:25:32 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/waitgroup%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E6%BA%90%E7%A0%81/</guid>
+      <description>WaitGroup 用途 sync.WaitGroup 它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成 A WaitGroup waits for a collection of goroutines to finish.The main goroutine calls</description>
+    </item>
+    
+    <item>
+      <title>62不同路径</title>
+      <link>http://localhost:1313/post/leetcode/62%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/</link>
+      <pubDate>Wed, 04 Nov 2020 17:57:13 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/62%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/</guid>
+      <description>题目 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下</description>
+    </item>
+    
+    <item>
+      <title>Go-Redis数据类型使用</title>
+      <link>http://localhost:1313/post/redis/redis%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Wed, 04 Nov 2020 16:54:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/redis/redis%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+      <description>​ | String 常见操作 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 //set(key, value)：给数据库中名称为key的string赋予值value //get(key)：返回</description>
+    </item>
+    
+    <item>
+      <title>53最大子序和</title>
+      <link>http://localhost:1313/post/leetcode/53%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/</link>
+      <pubDate>Fri, 30 Oct 2020 13:50:34 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/53%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/</guid>
+      <description>题目 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 1 2 3 输入: [-2,1,-3,4,-1,2,1,-5,4] 输出: 6 解释: 连续子数组</description>
+    </item>
+    
+    <item>
+      <title>516最长回文子序列</title>
+      <link>http://localhost:1313/post/leetcode/516%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97/</link>
+      <pubDate>Tue, 27 Oct 2020 00:32:50 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/516%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97/</guid>
+      <description>题目 给定一个字符串 s ，找到其中最长的回文子序列，并返回该序列的长度。可以假设 s 的最大长度为 1000 。 示例 1: 输入: 1 &amp;#34;bbbab&amp;#34; 输出: 1 4 一个可能的最长回文子</description>
+    </item>
+    
+    <item>
+      <title>Gin的学习笔记3 Context分析</title>
+      <link>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03-context%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 26 Oct 2020 16:50:45 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03-context%E5%88%86%E6%9E%90/</guid>
+      <description>Context是框架中非常重要的一点，它允许我们在中间件间共享变量，管理整个流程，验证请求的json以及提供一个json的响应体. 通常情况下</description>
+    </item>
+    
+    <item>
+      <title>二叉树的遍历</title>
+      <link>http://localhost:1313/post/datastruct/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Sun, 25 Oct 2020 16:49:44 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/datastruct/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/</guid>
+      <description>概述 一般意义上来说，二叉树由很多个树节点构成的，非线性的数据结构。每个节点都拥有两个“子节点”，这个节点也被称之为子节点的“父节点”。通常地</description>
+    </item>
+    
+    <item>
+      <title>226翻转二叉树</title>
+      <link>http://localhost:1313/post/leetcode/226%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Sun, 25 Oct 2020 15:58:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/226%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;翻转一棵二叉树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Context的使用和源码</title>
+      <link>http://localhost:1313/post/golang/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/context%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E6%BA%90%E7%A0%81/</link>
+      <pubDate>Tue, 20 Oct 2020 10:57:12 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/context%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E6%BA%90%E7%A0%81/</guid>
+      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
+&lt;p&gt;看了很多了关于Context的介绍，感觉还是官方的博客最准确。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Gin的学习笔记2 中间件的使用</title>
+      <link>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 19 Oct 2020 10:41:16 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>&lt;h1 id=&#34;gin中间件的作用&#34;&gt;Gin中间件的作用&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Web请求到到达我们定义的HTTP请求处理方法之前，拦截请求并进行相应处理(比如：权限验证，数据过滤等)，这个可以类比为&lt;code&gt;前置拦截器&lt;/code&gt;或&lt;code&gt;前置过滤器&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Http源码学习1</title>
+      <link>http://localhost:1313/post/golang/http%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A01/</link>
+      <pubDate>Wed, 14 Oct 2020 11:14:24 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/http%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A01/</guid>
+      <description>&lt;h1 id=&#34;简单的使用&#34;&gt;简单的使用&lt;/h1&gt;
+&lt;p&gt;对于Golang来说，实现一个简单的&lt;code&gt;http server&lt;/code&gt;非常容易，只需要短短几行代码。我们直接来看一个简单的例子。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac安装redis</title>
+      <link>http://localhost:1313/post/redis/mac%E5%AE%89%E8%A3%85redis/</link>
+      <pubDate>Sat, 10 Oct 2020 17:06:12 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/redis/mac%E5%AE%89%E8%A3%85redis/</guid>
+      <description>下载Redis 1 2 brew update brew install redis 启动Redis 1 brew services start redis 停止Redis 1 brew services stop redis 配置Redis 1 redis-server /usr/local/etc/redis.conf 测试Redis是否同 1 redis-cli ping If it replies “PONG”</description>
+    </item>
+    
+    <item>
+      <title>Gin的学习笔记1-简单的使用</title>
+      <link>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AE%80%E5%8D%95%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 09 Oct 2020 18:49:19 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AE%80%E5%8D%95%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>gin 是什么 Gin is a web framework written in Go (Golang). It features a martini-like API with much better performance, up to 40 times faster thanks to httprouter 简单的使用 1 2 3 4 5 6 7 8 9 10 11 12 13 14 func main() { r := gin.Default() r.GET(&amp;#34;/hello&amp;#34;, HelloAction) r.Run() // listen and serve on 0.0.0.0:8080} } func HelloAction(c *gin.Context) { name</description>
+    </item>
+    
+    <item>
+      <title>Go常见库之validator</title>
+      <link>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bvalidator/</link>
+      <pubDate>Fri, 09 Oct 2020 13:58:10 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bvalidator/</guid>
+      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;Validator&lt;/code&gt;是一个基于结构体tag用于对数据进行校验库，在 Web 开发中，对用户传过来的数据我们都需要进行严格校验，防止用户的恶意请求。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>114二叉树展开为链表</title>
+      <link>http://localhost:1313/post/leetcode/114%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Wed, 07 Oct 2020 13:05:21 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/114%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，&lt;a href=&#34;https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/8010757&#34;&gt;原地&lt;/a&gt;将它展开为一个单链表。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>反射</title>
+      <link>http://localhost:1313/post/golang/%E5%8F%8D%E5%B0%84/</link>
+      <pubDate>Wed, 30 Sep 2020 10:43:49 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/%E5%8F%8D%E5%B0%84/</guid>
+      <description>&lt;h1 id=&#34;反射的概念&#34;&gt;反射的概念&lt;/h1&gt;
+&lt;p&gt;在计算机科学领域，反射是指一类应用，它们能够自描述和自控制。也就是说，这类应用通过采用某种机制来实现对自己行为的描述（self-representation）和监测（examination），并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Golang反射的常见操作</title>
+      <link>http://localhost:1313/post/golang/golang%E5%8F%8D%E5%B0%84%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Tue, 29 Sep 2020 18:13:22 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/golang%E5%8F%8D%E5%B0%84%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dockerfile的命令</title>
+      <link>http://localhost:1313/post/docker/dockerfile%E7%9A%84%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Mon, 28 Sep 2020 16:42:24 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/docker/dockerfile%E7%9A%84%E5%91%BD%E4%BB%A4/</guid>
+      <description>COPY 格式 1 2 COPY [--chown=&amp;lt;user&amp;gt;:&amp;lt;group&amp;gt;] &amp;lt;源路径&amp;gt;... &amp;lt;目标路径&amp;gt; COPY [--chown=&amp;lt;user&amp;gt;:&amp;lt;group&amp;gt;] [&amp;#34;&amp;lt;源路径1&amp;gt;&amp;#34;,... &amp;#34;&amp;lt</description>
+    </item>
+    
+    <item>
+      <title>647回文子串</title>
+      <link>http://localhost:1313/post/leetcode/647%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</link>
+      <pubDate>Sat, 26 Sep 2020 19:32:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/647%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个字符串，你的任务是计算这个字符串中有多少个回文子串。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>5最长回文串</title>
+      <link>http://localhost:1313/post/leetcode/5%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E4%B8%B2/</link>
+      <pubDate>Sat, 26 Sep 2020 18:07:04 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/5%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E4%B8%B2/</guid>
+      <description>&lt;h2 id=&#34;题目&#34;&gt;题目&lt;/h2&gt;
+&lt;p&gt;给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>501二叉搜索树中的众数</title>
+      <link>http://localhost:1313/post/leetcode/501%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E4%BC%97%E6%95%B0/</link>
+      <pubDate>Sat, 26 Sep 2020 16:56:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/501%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E4%BC%97%E6%95%B0/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个有相同值的二叉搜索树（BST），找出 BST 中的所有众数（出现频率最高的元素）。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>1382将二叉搜索树变平衡</title>
+      <link>http://localhost:1313/post/leetcode/1382%E5%B0%86%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%8F%98%E5%B9%B3%E8%A1%A1/</link>
+      <pubDate>Sat, 26 Sep 2020 16:27:08 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/1382%E5%B0%86%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%8F%98%E5%B9%B3%E8%A1%A1/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给你一棵二叉搜索树，请你返回一棵 &lt;strong&gt;平衡后&lt;/strong&gt; 的二叉搜索树，新生成的树应该与原来的树有着相同的节点值。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>617合并二叉树</title>
+      <link>http://localhost:1313/post/leetcode/617%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Sat, 26 Sep 2020 16:16:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/617%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定两个二叉树，想象当你将它们中的一个覆盖到另一个上时，两个二叉树的一些节点便会重叠。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>79单词搜索</title>
+      <link>http://localhost:1313/post/leetcode/79%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/</link>
+      <pubDate>Sat, 26 Sep 2020 15:37:26 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/79%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二维网格和一个单词，找出该单词是否存在于网格中。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>39组合总和</title>
+      <link>http://localhost:1313/post/leetcode/39%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/</link>
+      <pubDate>Tue, 22 Sep 2020 23:43:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/39%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个&lt;strong&gt;无重复元素&lt;/strong&gt;的数组 &lt;code&gt;candidates&lt;/code&gt; 和一个目标数 &lt;code&gt;target&lt;/code&gt; ，找出 &lt;code&gt;candidates&lt;/code&gt; 中所有可以使数字和为 &lt;code&gt;target&lt;/code&gt; 的组合。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>40组合总和II</title>
+      <link>http://localhost:1313/post/leetcode/40%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Cii/</link>
+      <pubDate>Tue, 22 Sep 2020 23:41:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/40%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Cii/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个数组 &lt;code&gt;candidates&lt;/code&gt; 和一个目标数 &lt;code&gt;target&lt;/code&gt; ，找出 &lt;code&gt;candidates&lt;/code&gt; 中所有可以使数字和为 &lt;code&gt;target&lt;/code&gt; 的组合。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>216组合总和III</title>
+      <link>http://localhost:1313/post/leetcode/216%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Ciii/</link>
+      <pubDate>Tue, 22 Sep 2020 22:56:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/216%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Ciii/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>77组合</title>
+      <link>http://localhost:1313/post/leetcode/77%E7%BB%84%E5%90%88/</link>
+      <pubDate>Sun, 20 Sep 2020 15:32:45 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/77%E7%BB%84%E5%90%88/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定两个整数 n 和 k，返回 1 &amp;hellip; n 中所有可能的 k 个数的组合。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>46全排列</title>
+      <link>http://localhost:1313/post/leetcode/46%E5%85%A8%E6%8E%92%E5%88%97/</link>
+      <pubDate>Sat, 19 Sep 2020 22:24:23 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/46%E5%85%A8%E6%8E%92%E5%88%97/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个 没有重复 数字的序列，返回其所有可能的全排列。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>47全排列II</title>
+      <link>http://localhost:1313/post/leetcode/47%E5%85%A8%E6%8E%92%E5%88%97ii/</link>
+      <pubDate>Sat, 19 Sep 2020 22:24:23 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/47%E5%85%A8%E6%8E%92%E5%88%97ii/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个可包含重复数字的序列，返回所有不重复的全排列。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>199二叉树的右视图</title>
+      <link>http://localhost:1313/post/leetcode/199%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8F%B3%E8%A7%86%E5%9B%BE/</link>
+      <pubDate>Thu, 17 Sep 2020 11:14:46 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/199%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8F%B3%E8%A7%86%E5%9B%BE/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>173二叉搜索树迭代器</title>
+      <link>http://localhost:1313/post/leetcode/173%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BF%AD%E4%BB%A3%E5%99%A8/</link>
+      <pubDate>Thu, 17 Sep 2020 10:23:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/173%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BF%AD%E4%BB%A3%E5%99%A8/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;实现一个二叉搜索树迭代器。你将使用二叉搜索树的根节点初始化迭代器。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>129求根到叶子节点数字之和</title>
+      <link>http://localhost:1313/post/leetcode/129%E6%B1%82%E6%A0%B9%E5%88%B0%E5%8F%B6%E5%AD%90%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/</link>
+      <pubDate>Wed, 16 Sep 2020 23:47:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/129%E6%B1%82%E6%A0%B9%E5%88%B0%E5%8F%B6%E5%AD%90%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，它的每个结点都存放一个 0-9 的数字，每条从根到叶子节点的路径都代表一个数字。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go常见库之logrus</title>
+      <link>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Blogrus/</link>
+      <pubDate>Tue, 15 Sep 2020 17:39:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Blogrus/</guid>
+      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
+&lt;p&gt;logrus 其是一个 golang 结构化后的日志包，API完全兼容标准包logger。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go常见库之cron</title>
+      <link>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bcron/</link>
+      <pubDate>Mon, 14 Sep 2020 10:37:34 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bcron/</guid>
+      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/robfig/cron&#34;&gt;&lt;code&gt;cron&lt;/code&gt;&lt;/a&gt;一个用于管理定时任务的库，用 Go 实现 Linux 中crontab这个命令的效果。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>112路径总和</title>
+      <link>http://localhost:1313/post/leetcode/112%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/</link>
+      <pubDate>Sun, 13 Sep 2020 19:54:03 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/112%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>111二叉树的最小深度</title>
+      <link>http://localhost:1313/post/leetcode/111%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6/</link>
+      <pubDate>Sun, 13 Sep 2020 19:40:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/111%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，找出其最小深度。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>110平衡二叉树</title>
+      <link>http://localhost:1313/post/leetcode/110%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Sun, 13 Sep 2020 19:26:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/110%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，判断它是否是高度平衡的二叉树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>109将有序链表转换为二叉搜索树</title>
+      <link>http://localhost:1313/post/leetcode/109%E5%B0%86%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link>
+      <pubDate>Sun, 13 Sep 2020 18:56:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/109%E5%B0%86%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>108将有序数组转换为二叉搜索树</title>
+      <link>http://localhost:1313/post/leetcode/108%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link>
+      <pubDate>Sun, 13 Sep 2020 18:32:44 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/108%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>姐姐，今夜我在德令哈</title>
+      <link>http://localhost:1313/post/idea/%E5%A7%90%E5%A7%90%E4%BB%8A%E5%A4%9C%E6%88%91%E5%9C%A8%E5%BE%B7%E4%BB%A4%E5%93%88/</link>
+      <pubDate>Sun, 13 Sep 2020 17:50:56 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/idea/%E5%A7%90%E5%A7%90%E4%BB%8A%E5%A4%9C%E6%88%91%E5%9C%A8%E5%BE%B7%E4%BB%A4%E5%93%88/</guid>
+      <description>&lt;h1&gt; 姐姐，今夜我在德令哈　&lt;/h1&gt;</description>
+    </item>
+    
+    <item>
+      <title>106从前序与中序遍历序列构造二叉树</title>
+      <link>http://localhost:1313/post/leetcode/106%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Sun, 13 Sep 2020 17:19:19 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/106%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;根据一棵树的中序遍历与后序遍历构造二叉树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>105从前序与中序遍历序列构造二叉树</title>
+      <link>http://localhost:1313/post/leetcode/105%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Sun, 13 Sep 2020 16:49:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/105%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;根据一棵树的前序遍历与中序遍历构造二叉树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>104二叉树的最大深度</title>
+      <link>http://localhost:1313/post/leetcode/104%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/</link>
+      <pubDate>Sun, 13 Sep 2020 00:16:12 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/104%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，找出其最大深度。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>103二叉树的锯齿形层次遍历</title>
+      <link>http://localhost:1313/post/leetcode/103%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Sat, 12 Sep 2020 23:57:42 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/103%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，返回其节点值的锯齿形层次遍历。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>101对称二叉树</title>
+      <link>http://localhost:1313/post/leetcode/101%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Thu, 10 Sep 2020 13:57:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/101%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，检查它是否是镜像对称的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>100相同的树</title>
+      <link>http://localhost:1313/post/leetcode/100%E7%9B%B8%E5%90%8C%E7%9A%84%E6%A0%91/</link>
+      <pubDate>Thu, 10 Sep 2020 12:58:43 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/100%E7%9B%B8%E5%90%8C%E7%9A%84%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定两个二叉树，编写一个函数来检验它们是否相同。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>102二叉树的层序遍历</title>
+      <link>http://localhost:1313/post/leetcode/102%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Tue, 08 Sep 2020 23:26:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/102%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给你一个二叉树，请你返回其按 层序遍历 得到的节点值。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>96不同的二叉搜索树</title>
+      <link>http://localhost:1313/post/leetcode/96%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link>
+      <pubDate>Mon, 07 Sep 2020 23:46:54 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/96%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个整数 n，求以 1 &amp;hellip; n 为节点组成的二叉搜索树有多少种？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>98验证二叉搜索树</title>
+      <link>http://localhost:1313/post/leetcode/98%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link>
+      <pubDate>Mon, 07 Sep 2020 18:08:53 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/98%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，判断其是否是一个有效的二叉搜索树。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>94二叉树的中序遍历</title>
+      <link>http://localhost:1313/post/leetcode/94%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Mon, 07 Sep 2020 09:58:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/94%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二叉树，返回它的中序 遍历。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mysql中的控制流函数</title>
+      <link>http://localhost:1313/post/mysql/mysql%E4%B8%AD%E7%9A%84%E6%8E%A7%E5%88%B6%E6%B5%81%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Thu, 03 Sep 2020 10:47:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/mysql/mysql%E4%B8%AD%E7%9A%84%E6%8E%A7%E5%88%B6%E6%B5%81%E5%87%BD%E6%95%B0/</guid>
+      <description>&lt;p&gt;MySQL 中的控制流函数主要有一下四种&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>33搜索旋转排序数组</title>
+      <link>http://localhost:1313/post/leetcode/33%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Thu, 03 Sep 2020 00:01:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/33%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;假设按照升序排序的数组在预先未知的某个点上进行了旋转。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>209长度最小的子数组</title>
+      <link>http://localhost:1313/post/leetcode/209%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Wed, 02 Sep 2020 17:50:32 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/209%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个含有 n 个正整数的数组和一个正整数 s ，&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>567字符串的排列</title>
+      <link>http://localhost:1313/post/leetcode/567%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97/</link>
+      <pubDate>Wed, 02 Sep 2020 17:24:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/567%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定两个字符串 s1 和 s2，写一个函数来判断 s2 是否包含 s1 的排列。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>误解</title>
+      <link>http://localhost:1313/post/idea/%E8%AF%AF%E8%A7%A3/</link>
+      <pubDate>Wed, 02 Sep 2020 12:05:59 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/idea/%E8%AF%AF%E8%A7%A3/</guid>
+      <description>&lt;p&gt;一切都只是误解&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>滑动窗口算法思想</title>
+      <link>http://localhost:1313/post/arithmetic/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/</link>
+      <pubDate>Tue, 01 Sep 2020 17:55:27 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/arithmetic/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/</guid>
+      <description>&lt;h1 id=&#34;什么是滑动窗口&#34;&gt;什么是滑动窗口&lt;/h1&gt;
+&lt;p&gt;滑动窗口算法是非常重要的一种算法思想，一般是用来解决数组，字符串的子元素问题。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>424替换后的最长重复字符</title>
+      <link>http://localhost:1313/post/leetcode/424%E6%9B%BF%E6%8D%A2%E5%90%8E%E7%9A%84%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6/</link>
+      <pubDate>Tue, 01 Sep 2020 16:55:44 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/424%E6%9B%BF%E6%8D%A2%E5%90%8E%E7%9A%84%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给你一个仅由大写英文字母组成的字符串，你可以将任意位置上的字符替换成另外的字符，&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>345反转字符串中的元音字母</title>
+      <link>http://localhost:1313/post/leetcode/345%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%85%83%E9%9F%B3%E5%AD%97%E6%AF%8D/</link>
+      <pubDate>Mon, 31 Aug 2020 16:03:32 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/345%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%85%83%E9%9F%B3%E5%AD%97%E6%AF%8D/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;编写一个函数，以字符串作为输入，反转该字符串中的元音字母。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>142环形链表</title>
+      <link>http://localhost:1313/post/leetcode/142%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Mon, 31 Aug 2020 14:48:43 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/142%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Floyd判圈算法</title>
+      <link>http://localhost:1313/post/arithmetic/floyd%E5%88%A4%E5%9C%88%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Mon, 31 Aug 2020 14:25:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/arithmetic/floyd%E5%88%A4%E5%9C%88%E7%AE%97%E6%B3%95/</guid>
+      <description>&lt;p&gt;Floyd判圈算法(Floyd Cycle Detection Algorithm)，又称龟兔赛跑算法(Tortoise and Hare Algorithm)，是一个可以在有限状态机、迭代函数或者链表上判断是否存在环，求出该环的起点与长度的算法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>167两数之和</title>
+      <link>http://localhost:1313/post/leetcode/167%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</link>
+      <pubDate>Mon, 31 Aug 2020 13:03:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/167%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>86分隔链表</title>
+      <link>http://localhost:1313/post/leetcode/86%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sun, 30 Aug 2020 22:24:49 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/86%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个链表和一个特定值 x，对链表进行分隔，使得所有小于 x 的节点都在大于或等于 x 的节点之前。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>19删除链表的倒数第N个节点</title>
+      <link>http://localhost:1313/post/leetcode/19%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/</link>
+      <pubDate>Sun, 30 Aug 2020 21:00:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/19%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>80删除排序数组中的重复项II</title>
+      <link>http://localhost:1313/post/leetcode/80%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9ii/</link>
+      <pubDate>Fri, 28 Aug 2020 19:12:42 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/80%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9ii/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素最多出现两次，返回移除后数组的新长度。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>27移除元素</title>
+      <link>http://localhost:1313/post/leetcode/27%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Fri, 28 Aug 2020 17:06:04 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/27%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>26删除排序数组中的重复项</title>
+      <link>http://localhost:1313/post/leetcode/26%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/</link>
+      <pubDate>Fri, 28 Aug 2020 16:32:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/26%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>16最接近的三数之和</title>
+      <link>http://localhost:1313/post/leetcode/16%E6%9C%80%E6%8E%A5%E8%BF%91%E7%9A%84%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</link>
+      <pubDate>Thu, 27 Aug 2020 22:51:10 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/16%E6%9C%80%E6%8E%A5%E8%BF%91%E7%9A%84%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个包括 &lt;em&gt;n&lt;/em&gt; 个整数的数组 &lt;code&gt;nums&lt;/code&gt; 和 一个目标值 &lt;code&gt;target&lt;/code&gt;。找出 &lt;code&gt;nums&lt;/code&gt; 中的三个整数，使得它们的和与 &lt;code&gt;target&lt;/code&gt; 最接近。返回这三个数的和。假定每组输入只存在唯一答案。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>一路向北</title>
+      <link>http://localhost:1313/post/idea/%E4%B8%80%E8%B7%AF%E5%90%91%E5%8C%97/</link>
+      <pubDate>Thu, 27 Aug 2020 21:46:58 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/idea/%E4%B8%80%E8%B7%AF%E5%90%91%E5%8C%97/</guid>
+      <description>&lt;p&gt;从黑夜到黎明&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>18四数之和</title>
+      <link>http://localhost:1313/post/leetcode/18%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/</link>
+      <pubDate>Thu, 27 Aug 2020 17:58:24 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/18%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>15三数之和</title>
+      <link>http://localhost:1313/post/leetcode/15%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</link>
+      <pubDate>Wed, 26 Aug 2020 20:34:16 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/15%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>75颜色分类</title>
+      <link>http://localhost:1313/post/leetcode/75%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB/</link>
+      <pubDate>Sun, 23 Aug 2020 23:19:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/75%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Centos安装Vim8</title>
+      <link>http://localhost:1313/post/vim/centos%E5%AE%89%E8%A3%85vim8/</link>
+      <pubDate>Thu, 20 Aug 2020 12:47:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/vim/centos%E5%AE%89%E8%A3%85vim8/</guid>
+      <description>&lt;h1 id=&#34;说明&#34;&gt;说明&lt;/h1&gt;
+&lt;p&gt;vim 8.0正式发布到现在已经很久了，很多新的vim插件对7.x版本的支持已经不是很好了，比如vim-go插件，而centos默认的又是vim7.x。这就导致在使用插件的使用出现一些冲突，所以需要将vim7.x 升级到vim8.0&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>3无重复字符的最长子串</title>
+      <link>http://localhost:1313/post/leetcode/3%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</link>
+      <pubDate>Wed, 19 Aug 2020 23:44:30 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/3%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在Xorm中使用Join和Extends标记</title>
+      <link>http://localhost:1313/post/golang/%E5%9C%A8xorm%E4%B8%AD%E4%BD%BF%E7%94%A8join%E5%92%8Cextends%E6%A0%87%E8%AE%B0/</link>
+      <pubDate>Wed, 19 Aug 2020 15:03:01 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/%E5%9C%A8xorm%E4%B8%AD%E4%BD%BF%E7%94%A8join%E5%92%8Cextends%E6%A0%87%E8%AE%B0/</guid>
+      <description>&lt;p&gt;Xorm的基本操作都是比较简单的，可能大家也都比较熟悉了。这个文章主要讲解extends标记和join的使用。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>141环形链表</title>
+      <link>http://localhost:1313/post/leetcode/141%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Wed, 19 Aug 2020 00:25:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/141%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个链表，判断链表中是否有环。&lt;/p&gt;
+&lt;p&gt;为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>189旋转数组</title>
+      <link>http://localhost:1313/post/leetcode/189%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Tue, 18 Aug 2020 22:38:22 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/189%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>golang切片的原理和应用</title>
+      <link>http://localhost:1313/post/golang/golang%E5%88%87%E7%89%87%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/</link>
+      <pubDate>Tue, 18 Aug 2020 22:16:30 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/golang%E5%88%87%E7%89%87%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/</guid>
+      <description>&lt;p&gt;本文为转载&lt;/p&gt;
+&lt;h1 id=&#34;概述&#34;&gt;概述&lt;/h1&gt;
+&lt;p&gt;切片是 Go 中的一种基本的数据结构。切片的设计想法是由动态数组概念而来，为了开发者可以更加方便的使一个数据结构可以自动增加和减少。但是切片本身并不是动态数据或者数组指针。切片常见的操作有 reslice、append、copy。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Git Config 的配置说明</title>
+      <link>http://localhost:1313/post/git/git_config/</link>
+      <pubDate>Mon, 17 Aug 2020 00:10:51 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/git/git_config/</guid>
+      <description>config 的配置指令 1 git config git的配置一共有三个级别： system级别:整个系统的配置。 global级别：该用户下的配置。 local级别:当前仓库下</description>
+    </item>
+    
+    <item>
+      <title>61旋转链表</title>
+      <link>http://localhost:1313/post/leetcode/61%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Fri, 14 Aug 2020 17:47:49 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/61%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>计算机程序构造和解释阅读笔记1</title>
+      <link>http://localhost:1313/post/scip/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E6%9E%84%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8A%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B01/</link>
+      <pubDate>Fri, 14 Aug 2020 17:47:49 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/scip/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E6%9E%84%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8A%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B01/</guid>
+      <description>&lt;h1 id=&#34;应用序和正则序&#34;&gt;应用序和正则序&lt;/h1&gt;
+&lt;h2 id=&#34;正则序&#34;&gt;正则序&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;首先不计算运算对象的值，首先展开原有的式子，直到实际需要的时候再计算&lt;/strong&gt;。缺陷是可能有重复计算。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/elk/elk%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/elk/elk%E9%83%A8%E7%BD%B2/</guid>
+      <description>Docker 部署 ElasticSearch 拉取镜像 1 docker pull docker.elastic.co/elasticsearch/elasticsearch:7.9.0 运行镜像 ElasticSearch的默认端口是9200，我们把宿主环境9200端口映射到Docker容器中的9200</description>
+    </item>
+    
+    <item>
+      <title>计算机程序构造和解释阅读笔记2_构造数据抽象</title>
+      <link>http://localhost:1313/post/scip/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E6%9E%84%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8A%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B02/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/scip/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E6%9E%84%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8A%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B02/</guid>
+      <description>概述 为什么需要复合数据 Why do we want compound data in a programming language? For the same reasons that we want compound procedures: to elevate the conceptual level at which we can design our programs, to increase the modularity of our designs, and to enhance the expressive power of our language. Just as the ability to define procedures enables us to deal with</description>
+    </item>
+    
+  </channel>
+</rss>

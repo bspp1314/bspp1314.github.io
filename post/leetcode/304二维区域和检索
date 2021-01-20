@@ -1,0 +1,172 @@
+---
+title: "304二维区域和检索"
+date: 2020-12-22T10:16:28+08:00
+draft: false
+tags: ["动态规划","前缀和","leetcode-easy"]   #[]前面要有空格
+categories: ["leetcode"]
+---
+
+# 题目
+
+给定一个二维矩阵，计算其子矩形范围内元素的总和，该子矩阵的左上角为 (*row*1, *col*1) ，右下角为 (*row*2, *col*2)。
+
+![Range Sum Query 2D](https://assets.leetcode-cn.com/aliyun-lc-upload/images/304.png)
+上图子矩阵左上角 (row1, col1) = **(2, 1)** ，右下角(row2, col2) = **(4, 3)，**该子矩形内元素的总和为 8。
+
+**示例:**
+
+```
+给定 matrix = [
+  [3, 0, 1, 4, 2],
+  [5, 6, 3, 2, 1],
+  [1, 2, 0, 1, 5],
+  [4, 1, 0, 1, 7],
+  [1, 0, 3, 0, 5]
+]
+
+sumRegion(2, 1, 4, 3) -> 8
+sumRegion(1, 1, 2, 2) -> 11
+sumRegion(1, 2, 2, 4) -> 12
+```
+
+**说明:**
+
+1. 你可以假设矩阵不可变。
+2. 会多次调用 *sumRegion* 方法*。*
+3. 你可以假设 *row*1 ≤ *row*2 且 *col*1 ≤ *col*2。
+
+
+
+
+
+# 解答
+
+[维基百科](https://en.wikipedia.org/wiki/Prefix_sum) 关于前缀和的表述如下：
+
+```
+In computer science, the prefix sum, cumulative sum, inclusive scan, or simply scan of a sequence of numbers x0, x1, x2, ... is a second sequence of numbers y0, y1, y2, ..., the sums of prefixes (running totals) of the input sequence:
+
+y0 = x0
+y1 = x0 + x1
+y2 = x0 + x1+ x2
+```
+
+那么我们就 可以用一下公式求解 $ x_i $ 到 $ x_j $ 之和了
+
+
+$$
+\sum_{k=i}^{j}y_k 
+\begin{cases}
+  y_j, & i = 0 \\
+  y_j - y_{i-1} , & i > 0 
+\end{cases}
+$$
+
+
+
+了解了前缀和，我们就可以解答这个题目了，我们简单的保存每一行的前缀和，就可以在$ O(n) $的时间复杂度下进行查询
+
+```go
+type NumMatrix struct {
+	Rows [][]int  //每一行的前缀和
+}
+
+func Sum(sum []int,begin,end int) int   {
+	if begin == 0 {
+		return sum[end]
+	}
+
+	return sum[end] - sum[begin-1]
+}
+
+func Constructor(matrix [][]int) NumMatrix {
+	s := NumMatrix{Rows: nil}
+	if len(matrix) == 0 || len(matrix[0]) == 0 {
+		return s 
+	}
+
+	s.Rows = make([][]int,len(matrix))
+	for i := 0; i < len(matrix); i++ {
+		s.Rows[i] = make([]int,len(matrix[i]))
+		s.Rows[i][0] = matrix[i][0]
+
+
+		for j := 1; j < len(matrix[i]); j++ {
+			s.Rows[i][j]= s.Rows[i][j-1] + matrix[i][j]
+		}
+	}
+	
+	return s 
+}
+
+
+func (this *NumMatrix) SumRegion(row1 int, col1 int, row2 int, col2 int) int {
+	if this.Rows == nil {
+		return 0
+	}
+	sum := 0
+
+	for i := row1; i <= row2; i++ {
+		sum += Sum(this.Rows[i],col1,col2)
+	}
+
+	return sum
+}
+
+
+/**
+ * Your NumMatrix object will be instantiated and called as such:
+ * obj := Constructor(matrix);
+ * param_1 := obj.SumRegion(row1,col1,row2,col2);
+ */
+```
+
+查询时间复杂度 $ O(n) $
+
+
+
+
+
+前缀和二维改进版本
+
+```go
+type NumMatrix struct {
+	Dp [][]int //每一行的前缀和
+}
+
+
+func Constructor(matrix [][]int) NumMatrix {
+	s := NumMatrix{Dp: nil}
+	if len(matrix) == 0 || len(matrix[0]) == 0 {
+		return s 
+	}
+
+	row := len(matrix)
+	col := len(matrix[0])
+	s.Dp = make([][]int,row+1)
+
+	for i := 0; i < len(s.Dp); i++ {
+			s.Dp[i] = make([]int,col+1)
+	}
+	for i := 0; i < len(matrix); i++ {
+		for j := 0; j < len(matrix[i]); j++ {
+			s.Dp[i + 1][j + 1] = s.Dp[i + 1][j] + s.Dp[i][j + 1] + matrix[i][j] - s.Dp[i][j]
+		}
+	}
+	
+	return s 
+}
+
+
+func (this *NumMatrix) SumRegion(row1 int, col1 int, row2 int, col2 int) int {
+	if this.Dp == nil {
+		return 0
+	}
+
+	return this.Dp[row2 + 1][col2 + 1] - this.Dp[row1][col2 + 1] - this.Dp[row2 + 1][col1] + this.Dp[row1][col1]
+
+}
+```
+
+查询时间复杂度 $ O(1) $
+

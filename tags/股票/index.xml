@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>股票 on 白水飘萍</title>
+    <link>http://localhost:1313/tags/%E8%82%A1%E7%A5%A8/</link>
+    <description>Recent content in 股票 on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 09 Nov 2020 11:38:47 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%82%A1%E7%A5%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>309最佳买卖股票时期含冷冻期</title>
+      <link>http://localhost:1313/post/leetcode/309%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%9F%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F/</link>
+      <pubDate>Mon, 09 Nov 2020 11:38:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/309%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%9F%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F/</guid>
+      <description>题目 给定一个整数数组，其中第 i 个元素代表了第 i 天的股票价格 。 设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（</description>
+    </item>
+    
+    <item>
+      <title>714买卖股票的最佳时机含手续费</title>
+      <link>http://localhost:1313/post/leetcode/714%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9/</link>
+      <pubDate>Sun, 08 Nov 2020 21:24:40 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/714%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9/</guid>
+      <description>题目 给定一个整数数组 prices，其中第 i 个元素代表了第 i 天的股票价格 ；非负整数 fee 代表了交易股票的手续费用。 你可以无限次地完成交易，但是你每</description>
+    </item>
+    
+    <item>
+      <title>188买卖股票的最佳时机IV</title>
+      <link>http://localhost:1313/post/leetcode/188%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAiv/</link>
+      <pubDate>Sun, 08 Nov 2020 20:28:23 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/188%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAiv/</guid>
+      <description>题目 给定一个整数数组 prices ，它的第 i 个元素 prices[i] 是一支给定的股票在第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你最多可以完成 k 笔交易。 注意</description>
+    </item>
+    
+    <item>
+      <title>123买卖股票的最佳时机III</title>
+      <link>http://localhost:1313/post/leetcode/123%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAiii/</link>
+      <pubDate>Sun, 08 Nov 2020 19:49:40 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/123%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAiii/</guid>
+      <description>题目 给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你最多可以完成 两笔 交易。 注意: 你不能</description>
+    </item>
+    
+    <item>
+      <title>121买卖股票的最佳时机</title>
+      <link>http://localhost:1313/post/leetcode/121%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</link>
+      <pubDate>Sun, 08 Nov 2020 18:51:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/121%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</guid>
+      <description>题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所</description>
+    </item>
+    
+    <item>
+      <title>121买卖股票的最佳时机</title>
+      <link>http://localhost:1313/post/leetcode/122%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</link>
+      <pubDate>Sun, 08 Nov 2020 18:51:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/122%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</guid>
+      <description>题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一</description>
+    </item>
+    
+  </channel>
+</rss>

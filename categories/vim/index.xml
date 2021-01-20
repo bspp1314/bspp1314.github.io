@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vim on 白水飘萍</title>
+    <link>http://localhost:1313/categories/vim/</link>
+    <description>Recent content in vim on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 20 Aug 2020 12:47:39 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/vim/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Centos安装Vim8</title>
+      <link>http://localhost:1313/post/vim/centos%E5%AE%89%E8%A3%85vim8/</link>
+      <pubDate>Thu, 20 Aug 2020 12:47:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/vim/centos%E5%AE%89%E8%A3%85vim8/</guid>
+      <description>&lt;h1 id=&#34;说明&#34;&gt;说明&lt;/h1&gt;
+&lt;p&gt;vim 8.0正式发布到现在已经很久了，很多新的vim插件对7.x版本的支持已经不是很好了，比如vim-go插件，而centos默认的又是vim7.x。这就导致在使用插件的使用出现一些冲突，所以需要将vim7.x 升级到vim8.0&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>并查集 on 白水飘萍</title>
+    <link>http://localhost:1313/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/</link>
+    <description>Recent content in 并查集 on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 18 Dec 2020 10:12:52 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>200岛屿数量</title>
+      <link>http://localhost:1313/post/leetcode/200%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/</link>
+      <pubDate>Fri, 18 Dec 2020 10:12:52 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/200%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/</guid>
+      <description>题目 给你一个由 &#39;1&#39;（陆地）和 &#39;0&#39;（水）组成的的二维网格，请你计算网格中岛屿的数量。 岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直</description>
+    </item>
+    
+    <item>
+      <title>130被围绕的区域</title>
+      <link>http://localhost:1313/post/leetcode/130%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/</link>
+      <pubDate>Thu, 10 Dec 2020 10:00:41 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/130%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/</guid>
+      <description>题目 给定一个二维的矩阵，包含 &#39;X&#39; 和 &#39;O&#39;（字母 O）。 找到所有被 &#39;X&#39; 围绕的区域，并将这些区域里所有的 &#39;O&#39; 用 &#39;X&#39; 填充。 示例: 1 2 3 4 X X X X X O O X X X</description>
+    </item>
+    
+    <item>
+      <title>547朋友圈</title>
+      <link>http://localhost:1313/post/leetcode/547%E6%9C%8B%E5%8F%8B%E5%9C%88/</link>
+      <pubDate>Sun, 06 Dec 2020 21:21:09 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/547%E6%9C%8B%E5%8F%8B%E5%9C%88/</guid>
+      <description>题目 班上有 N 名学生。其中有些人是朋友，有些则不是。他们的友谊具有是传递性。如果已知 A 是 B 的朋友，B 是 C 的朋友，那么我们可以认为 A 也是 C 的朋友</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title> - 白水飘萍</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="白水飘萍" /><meta name="description" content="Docker 部署 ElasticSearch 拉取镜像 1 docker pull docker.elastic.co/elasticsearch/elasticsearch:7.9.0 运行镜像 ElasticSearch的默认端口是9200，我们把宿主环境9200端口映射到Docker容器中的9200" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/elk/elk%E9%83%A8%E7%BD%B2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.651e6917abb0239242daa570c2bec9867267bbcd83646da5a850afe573347b44.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="" />
+<meta property="og:description" content="Docker 部署 ElasticSearch 拉取镜像 1 docker pull docker.elastic.co/elasticsearch/elasticsearch:7.9.0 运行镜像 ElasticSearch的默认端口是9200，我们把宿主环境9200端口映射到Docker容器中的9200" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/elk/elk%E9%83%A8%E7%BD%B2/" />
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="Docker 部署 ElasticSearch 拉取镜像 1 docker pull docker.elastic.co/elasticsearch/elasticsearch:7.9.0 运行镜像 ElasticSearch的默认端口是9200，我们把宿主环境9200端口映射到Docker容器中的9200">
+
+<meta itemprop="wordCount" content="1346">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Docker 部署 ElasticSearch 拉取镜像 1 docker pull docker.elastic.co/elasticsearch/elasticsearch:7.9.0 运行镜像 ElasticSearch的默认端口是9200，我们把宿主环境9200端口映射到Docker容器中的9200"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">白水飘萍</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">白水飘萍</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title"></h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 0001-01-01 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#docker-部署-elasticsearch">Docker 部署 ElasticSearch</a>
+      <ul>
+        <li><a href="#拉取镜像">拉取镜像</a></li>
+      </ul>
+    </li>
+    <li><a href="#运行镜像">运行镜像</a>
+      <ul>
+        <li><a href="#配置跨域">配置跨域</a>
+          <ul>
+            <li><a href="#进入容器">进入容器</a></li>
+            <li><a href="#进行配置">进行配置</a></li>
+            <li><a href="#重启容器">重启容器</a></li>
+            <li><a href="#curl-验证">curl 验证</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#docker-部署-kibana">docker 部署 kibana</a></li>
+    <li><a href="#拉取镜像-1">拉取镜像</a></li>
+    <li><a href="#启动-kibana">启动 kibana</a></li>
+    <li><a href="#登录验证">登录验证</a></li>
+    <li><a href="#基本的概念">基本的概念</a>
+      <ul>
+        <li><a href="#node-和-cluster">Node 和 Cluster</a></li>
+        <li><a href="#index">Index</a></li>
+      </ul>
+    </li>
+    <li><a href="#type">Type</a>
+      <ul>
+        <li><a href="#document">Document</a></li>
+      </ul>
+    </li>
+    <li><a href="#新建和删除index">新建和删除index</a></li>
+    <li><a href="#索引文档">索引文档</a>
+      <ul>
+        <li><a href="#使用自定义的-id">使用自定义的 ID</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="docker-部署-elasticsearch">Docker 部署 ElasticSearch</h1>
+<h2 id="拉取镜像">拉取镜像</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker pull docker.elastic.co/elasticsearch/elasticsearch:7.9.0
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="运行镜像">运行镜像</h1>
+<p><code>ElasticSearch</code>的默认端口是9200，我们把宿主环境9200端口映射到<code>Docker</code>容器中的9200端口，就可以访问到<code>Docker</code>容器中的<code>ElasticSearch</code>服务了，同时我们把这个容器命名为<code>es</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">d</span> <span class="o">--</span><span class="nx">name</span> <span class="nx">elasticsearch</span> <span class="o">-</span><span class="nx">p</span> <span class="mi">9200</span><span class="p">:</span><span class="mi">9200</span> <span class="o">-</span><span class="nx">p</span> <span class="mi">9300</span><span class="p">:</span><span class="mi">9300</span> <span class="o">-</span><span class="nx">e</span> <span class="s">&#34;discovery.type=single-node&#34;</span> <span class="nx">docker</span><span class="p">.</span><span class="nx">elastic</span><span class="p">.</span><span class="nx">co</span><span class="o">/</span><span class="nx">elasticsearch</span><span class="o">/</span><span class="nx">elasticsearch</span><span class="p">:</span><span class="mf">7.9.0</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="配置跨域">配置跨域</h2>
+<h3 id="进入容器">进入容器</h3>
+<p>由于要进行配置，因此需要进入容器当中修改相应的配置信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker <span class="nb">exec</span> -it es /bin/bash
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="进行配置">进行配置</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 显示文件
+ls
+结果如下：
+LICENSE.txt  README.textile  config  lib   modules
+NOTICE.txt   bin             data    logs  plugins
+
+# 进入配置文件夹
+cd config
+
+# 显示文件
+ls
+结果如下：
+elasticsearch.keystore  ingest-geoip  log4j2.properties  roles.yml  users_roles
+elasticsearch.yml       jvm.options   role_mapping.yml   users
+
+# 修改配置文件
+vi elasticsearch.yml
+
+# 加入跨域配置
+http.cors.enabled: true
+http.cors.allow-origin: &#34;*&#34;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="重启容器">重启容器</h3>
+<p>由于修改了配置，因此需要重启<code>ElasticSearch</code>容器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker restart es
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="curl-验证">curl 验证</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-http" data-lang="http"><span class="err">curl http://0.0.0.0:9200/
+</span><span class="err">{
+</span><span class="err">  &#34;name&#34; : &#34;8827c8cce977&#34;,
+</span><span class="err">  &#34;cluster_name&#34; : &#34;docker-cluster&#34;,
+</span><span class="err">  &#34;cluster_uuid&#34; : &#34;1Ps0Ig4ZQ8Oy6fcBjhJE2Q&#34;,
+</span><span class="err">  &#34;version&#34; : {
+</span><span class="err">    &#34;number&#34; : &#34;7.9.0&#34;,
+</span><span class="err">    &#34;build_flavor&#34; : &#34;default&#34;,
+</span><span class="err">    &#34;build_type&#34; : &#34;docker&#34;,
+</span><span class="err">    &#34;build_hash&#34; : &#34;a479a2a7fce0389512d6a9361301708b92dff667&#34;,
+</span><span class="err">    &#34;build_date&#34; : &#34;2020-08-11T21:36:48.204330Z&#34;,
+</span><span class="err">    &#34;build_snapshot&#34; : false,
+</span><span class="err">    &#34;lucene_version&#34; : &#34;8.6.0&#34;,
+</span><span class="err">    &#34;minimum_wire_compatibility_version&#34; : &#34;6.8.0&#34;,
+</span><span class="err">    &#34;minimum_index_compatibility_version&#34; : &#34;6.0.0-beta1&#34;
+</span><span class="err">  },
+</span><span class="err">  &#34;tagline&#34; : &#34;You Know, for Search&#34;
+</span><span class="err">}
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="docker-部署-kibana">docker 部署 kibana</h1>
+<h1 id="拉取镜像-1">拉取镜像</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker pull docker.elastic.co/elasticsearch/kibana:7.9.0
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="启动-kibana">启动 kibana</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker run -d --name kibana --link<span class="o">=</span>elasticsearch:9200 -p 5601:5601 kibana:7.9.0
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="登录验证">登录验证</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">http://0.0.0.0:5601/app/home#/tutorial_directory/sampleData
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="基本的概念">基本的概念</h1>
+<h2 id="node-和-cluster">Node 和 Cluster</h2>
+<p>Elastic 本质上是一个分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个 Elastic 实例。</p>
+<p>单个 Elastic 实例称为一个节点（node）。一组节点构成一个集群（cluster）。</p>
+<h2 id="index">Index</h2>
+<p>Elastic 会索引所有字段，经过处理后写入一个反向索引（Inverted Index）。查找数据的时候，直接查找该索引。</p>
+<p>所以，Elastic 数据管理的顶层单位就叫做 Index（索引）。它是单个数据库的同义词。每个 Index （即数据库）的名字必须是小写。</p>
+<p>下面的命令可以查看当前节点的所有 Index。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">curl -X GET <span class="s1">&#39;http://0.0.0.0:9200/_cat/indices&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">health status index                          uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   .apm-custom-link               _JSZVgluSoKExTqiXqOa6A   <span class="m">1</span>   <span class="m">0</span>          <span class="m">0</span>            <span class="m">0</span>       208b           208b
+green  open   .kibana-event-log-7.9.0-000001 NNESBxxSSeWYpbZakEHguQ   <span class="m">1</span>   <span class="m">0</span>          <span class="m">1</span>            <span class="m">0</span>      5.4kb          5.4kb
+green  open   .kibana_task_manager_1         9u_L9mTyQs6_B3VWJKsoAw   <span class="m">1</span>   <span class="m">0</span>          <span class="m">6</span>           <span class="m">27</span>     83.8kb         83.8kb
+green  open   .apm-agent-configuration       i0VArRhbTHSnsNeAotmLeQ   <span class="m">1</span>   <span class="m">0</span>          <span class="m">0</span>            <span class="m">0</span>       208b           208b
+green  open   .kibana_1                      cqlsCD8TRku7-B-eTKTH5w   <span class="m">1</span>   <span class="m">0</span>         <span class="m">13</span>            <span class="m">0</span>     10.4mb         10.4mb
+
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="type">Type</h1>
+<p>在一个索引中，你可以定义一种或多种类型。一个类型是你的索引的一个逻辑上的分类/分区，其语义完全由你来定。通常，会为具有一组共同字段的文档定义一个类型。比如说，我们假设你运营一个博客平台并且将你所有的数据存储到一个索引中。在这个索引中，你可以为用户数据定义一个类型，为博客数据定义另一个类型，当然，也可以为评论数据定义另一个类型。类型类似于关系型数据库中Table的概念。不过目前7.x版本只允许一个index里面有一个Type</p>
+<h2 id="document">Document</h2>
+<p>Index 里面单条的记录称为 Document（文档）。许多条 Document 构成了一个 Index。</p>
+<p>Document 使用 JSON 格式表示，下面是一个例子。</p>
+<blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
+  <span class="s2">&#34;user&#34;</span><span class="o">:</span> <span class="s2">&#34;张三&#34;</span><span class="p">,</span>
+  <span class="s2">&#34;title&#34;</span><span class="o">:</span> <span class="s2">&#34;工程师&#34;</span><span class="p">,</span>
+  <span class="s2">&#34;desc&#34;</span><span class="o">:</span> <span class="s2">&#34;数据库管理&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<p>同一个 Index 里面的 Document，不要求有相同的结构（scheme），但是最好保持相同，这样有利于提高搜索效率。</p>
+<h1 id="新建和删除index">新建和删除index</h1>
+<p>新建Index,可以直接向 Elastic 服务器发出 PUT 请求。下面的例子是新建一个名叫user的 Index。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ curl -X PUT <span class="s1">&#39;0.0.0.0:9200/user&#39;</span>
+
+<span class="o">{</span><span class="s2">&#34;acknowledged&#34;</span>:true,<span class="s2">&#34;shards_acknowledged&#34;</span>:true,<span class="s2">&#34;index&#34;</span>:<span class="s2">&#34;user&#34;</span><span class="o">}</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>删除index</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$  curl -X DELETE &#39;0.0.0.0:9200/user&#39;
+{&#34;acknowledged&#34;:true}#
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="索引文档">索引文档</h1>
+<p>一个文档的 <code>_index</code> 、 <code>_type</code> 和 <code>_id</code> 唯一标识一个文档。 我们可以提供自定义的 <code>_id</code> 值，或者让 <code>index</code> API 自动生成。</p>
+<h2 id="使用自定义的-id">使用自定义的 ID</h2>
+<p>如果你的文档有一个自然的标识符 （例如，一个 <code>user_account</code> 字段或其他标识文档的值），你应该使用如下方式的 <code>index</code> API 并提供你自己 <code>_id</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"> curl -H <span class="s1">&#39;Content-Type: application/json&#39;</span> -X PUT <span class="s1">&#39;0.0.0.0:9200/polaris-center/user/1&#39;</span> -d <span class="s1">&#39;{&#34;username&#34;:&#34;linyuanpeng&#34;,&#34;email&#34;:&#34;linyuanpeng@163.com&#34;}&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Elasticsearch 响应体如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+<span class="nt">&#34;_index&#34;</span><span class="p">:</span> <span class="s2">&#34;polaris-center&#34;</span><span class="p">,</span>
+<span class="nt">&#34;_type&#34;</span><span class="p">:</span> <span class="s2">&#34;user&#34;</span><span class="p">,</span>
+<span class="nt">&#34;_id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+<span class="nt">&#34;_version&#34;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+<span class="nt">&#34;result&#34;</span><span class="p">:</span> <span class="s2">&#34;created&#34;</span><span class="p">,</span>
+<span class="nt">&#34;_shards&#34;</span><span class="p">:</span> <span class="p">{</span>
+<span class="nt">&#34;total&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="nt">&#34;successful&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="nt">&#34;failed&#34;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">},</span>
+<span class="nt">&#34;_seq_no&#34;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+<span class="nt">&#34;_primary_term&#34;</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="参考">参考</h1>
+<p>全文搜索引擎 Elasticsearch 入门教程 <a href="https://www.ruanyifeng.com/blog/2017/08/elasticsearch.html">https://www.ruanyifeng.com/blog/2017/08/elasticsearch.html</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">白水飘萍</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        0001-01-01
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/scip/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E6%9E%84%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8A%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B01/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">计算机程序构造和解释阅读笔记1</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/scip/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E6%9E%84%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8A%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B02/">
+            <span class="next-text nav-default">计算机程序构造和解释阅读笔记2_构造数据抽象</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/bspp1314" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/3841870377" class="iconfont icon-weibo" title="weibo"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">白水飘萍</span>
+  </span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Redis数据类型之bitmap - 白水飘萍</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="白水飘萍" /><meta name="description" content="简介 bitmap就是通过最小的单位bit来进行0或者1的设置，表示某个元素对应的值或者状态。一个bit的值，或者是0，或者是1；也就是说一个" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8Bbitmap/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.651e6917abb0239242daa570c2bec9867267bbcd83646da5a850afe573347b44.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Redis数据类型之bitmap" />
+<meta property="og:description" content="简介 bitmap就是通过最小的单位bit来进行0或者1的设置，表示某个元素对应的值或者状态。一个bit的值，或者是0，或者是1；也就是说一个" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8Bbitmap/" />
+<meta property="article:published_time" content="2020-11-29T13:38:40+08:00" />
+<meta property="article:modified_time" content="2020-11-29T13:38:40+08:00" />
+<meta itemprop="name" content="Redis数据类型之bitmap">
+<meta itemprop="description" content="简介 bitmap就是通过最小的单位bit来进行0或者1的设置，表示某个元素对应的值或者状态。一个bit的值，或者是0，或者是1；也就是说一个">
+<meta itemprop="datePublished" content="2020-11-29T13:38:40+08:00" />
+<meta itemprop="dateModified" content="2020-11-29T13:38:40+08:00" />
+<meta itemprop="wordCount" content="1183">
+
+
+
+<meta itemprop="keywords" content="redis," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Redis数据类型之bitmap"/>
+<meta name="twitter:description" content="简介 bitmap就是通过最小的单位bit来进行0或者1的设置，表示某个元素对应的值或者状态。一个bit的值，或者是0，或者是1；也就是说一个"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">白水飘萍</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">白水飘萍</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Redis数据类型之bitmap</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-29 </span>
+        <div class="post-category">
+            <a href="/categories/redis/"> redis </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#常用接口">常用接口</a></li>
+    <li><a href="#bitmap的优势限制">bitmap的优势、限制</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#优势">优势</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#golang-中的简单使用">Golang 中的简单使用</a></li>
+    <li><a href="#场景">场景</a>
+      <ul>
+        <li><a href="#用户在线状态">用户在线状态</a></li>
+      </ul>
+    </li>
+    <li><a href="#统计活跃用户">统计活跃用户</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="简介">简介</h1>
+<p>bitmap就是通过最小的单位bit来进行0或者1的设置，表示某个元素对应的值或者状态。一个bit的值，或者是0，或者是1；也就是说一个bit能存储的最多信息是2。redis中bit映射被限制在512MB之内，所以最大是2^32位。建议每个key的位数都控制下，因为读取时候时间复杂度O(n)，越大的串读的时间花销越多。</p>
+<h1 id="常用接口">常用接口</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">setbit key offset value: bool or int (1 or 0) 给一个指定key的值得第offset位 赋值为value。
+getbit key offset
+bitbount key  返回一个指定key中位的值为1的个数(是以byte为单位不是bit)
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="bitmap的优势限制">bitmap的优势、限制</h1>
+<h3 id="优势">优势</h3>
+<p>1.基于最小的单位bit进行存储，所以非常省空间。
+2.二进制数据的存储，进行相关计算的时候非常快。</p>
+<h1 id="golang-中的简单使用">Golang 中的简单使用</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">rdb</span> <span class="o">:=</span> <span class="nx">redis</span><span class="p">.</span><span class="nf">NewClien</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Options</span><span class="p">{</span>
+		<span class="nx">Addr</span><span class="p">:</span>     <span class="s">&#34;localhost:6379&#34;</span><span class="p">,</span>
+		<span class="nx">Password</span><span class="p">:</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="c1">// no password set
+</span><span class="c1"></span>		<span class="nx">DB</span><span class="p">:</span>       <span class="mi">0</span><span class="p">,</span>  <span class="c1">// use default DB
+</span><span class="c1"></span>	<span class="p">})</span>
+	
+	<span class="nx">_</span><span class="p">,</span><span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SetBit</span><span class="p">(</span><span class="s">&#34;login_status&#34;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	
+	<span class="k">defer</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Del</span><span class="p">(</span><span class="s">&#34;login_status&#34;</span><span class="p">)</span>
+	<span class="nx">v</span><span class="p">,</span><span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">GetBit</span><span class="p">(</span><span class="s">&#34;login_status&#34;</span><span class="p">,</span><span class="mi">1</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;value is &#34;</span><span class="p">,</span><span class="nx">v</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="场景">场景</h1>
+<h2 id="用户在线状态">用户在线状态</h2>
+<blockquote>
+<p>需求分析：</p>
+</blockquote>
+<p>需要对子项目提供一个接口，来提供某用户是否在线？</p>
+<blockquote>
+<p>设计方案：</p>
+</blockquote>
+<p>使用bitmap是一个节约空间效率又高的一种方法，只需要一个key，然后用户id为偏移量offset，如果在线就设置为1，不在线就设置为一个亿用户只需要10M左右的空间。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 不分片 
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetUserLoginStatus</span><span class="p">(</span><span class="nx">rdb</span> <span class="o">*</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Client</span><span class="p">,</span> <span class="nx">offset</span> <span class="kt">int64</span><span class="p">)</span> <span class="p">(</span><span class="kt">int64</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">GetBit</span><span class="p">(</span><span class="s">&#34;user_login_status&#34;</span><span class="p">,</span> <span class="nx">offset</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">GetUserLoginStatusShard</span><span class="p">(</span><span class="nx">rdb</span> <span class="o">*</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Client</span><span class="p">,</span> <span class="nx">offset</span> <span class="kt">int64</span><span class="p">)</span> <span class="p">(</span><span class="kt">int64</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">GetBit</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;user_login_status_%d&#34;</span><span class="p">,</span><span class="nx">offset</span> <span class="o">/</span> <span class="mi">100000</span> <span class="p">),</span> <span class="nx">offset</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+<span class="p">}</span>
+
+
+<span class="c1">// 分片
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">SetUserLoginStatus</span><span class="p">(</span><span class="nx">rdb</span> <span class="o">*</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Client</span><span class="p">,</span> <span class="nx">offset</span> <span class="kt">int64</span><span class="p">,</span><span class="nx">online</span> <span class="kt">bool</span><span class="p">)</span> <span class="p">(</span><span class="kt">int64</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">online</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SetBit</span><span class="p">(</span><span class="s">&#34;user_login_status&#34;</span><span class="p">,</span> <span class="nx">offset</span><span class="p">,</span><span class="mi">1</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+		<span class="k">return</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SetBit</span><span class="p">(</span><span class="s">&#34;user_login_status&#34;</span><span class="p">,</span> <span class="nx">offset</span><span class="p">,</span><span class="mi">0</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">SetUserLoginStatusShard</span><span class="p">(</span><span class="nx">rdb</span> <span class="o">*</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Client</span><span class="p">,</span> <span class="nx">offset</span> <span class="kt">int64</span><span class="p">,</span><span class="nx">online</span> <span class="kt">bool</span><span class="p">)</span> <span class="p">(</span><span class="kt">int64</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">online</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SetBit</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;user_login_status_%d&#34;</span><span class="p">,</span><span class="nx">offset</span> <span class="o">/</span> <span class="mi">100000</span><span class="p">),</span> <span class="nx">offset</span><span class="p">,</span><span class="mi">1</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+		<span class="k">return</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SetBit</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;user_login_status_%d&#34;</span><span class="p">,</span><span class="nx">offset</span> <span class="o">/</span> <span class="mi">100000</span><span class="p">),</span> <span class="nx">offset</span><span class="p">,</span><span class="mi">0</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如上所示上面有两种的实现方式，一种是对数据进行分片一种是不对数据进行分片。对于过亿的数据，就可以进行分片了</p>
+<p>如果你的数据量在一千万左右，实际上可以不需要分片，对上两种的实现进行千万级的测试，发现其性能相差不到 10%。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"> <span class="k">go</span> <span class="nx">test</span> <span class="o">-</span><span class="nx">bench</span><span class="p">=.</span>
+<span class="nx">goos</span><span class="p">:</span> <span class="nx">darwin</span>
+<span class="nx">goarch</span><span class="p">:</span> <span class="nx">amd64</span>
+<span class="nx">pkg</span><span class="p">:</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">bspp1314</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="nx">common</span><span class="o">-</span><span class="nx">lib</span><span class="o">/</span><span class="nx">redis</span><span class="o">-</span><span class="nx">lib</span><span class="o">/</span><span class="nx">bitmap</span>
+<span class="nx">BenchmarkUserLoginStatus</span><span class="o">-</span><span class="mi">4</span>                 <span class="mi">12968</span>             <span class="mi">89549</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>   <span class="c1">//千万数据量的非分片实现
+</span><span class="c1"></span><span class="nx">BenchmarkUserLoginStatusShard</span><span class="o">-</span><span class="mi">4</span>            <span class="mi">12194</span>             <span class="mi">94778</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>  <span class="c1">//千万数据量的分片实现
+</span><span class="c1"></span><span class="nx">PASS</span>
+<span class="nx">ok</span>      <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">bspp1314</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="nx">common</span><span class="o">-</span><span class="nx">lib</span><span class="o">/</span><span class="nx">redis</span><span class="o">-</span><span class="nx">lib</span><span class="o">/</span><span class="nx">bitmap</span>      <span class="mf">4.031</span><span class="nx">s</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="统计活跃用户">统计活跃用户</h1>
+<p>如果要统计某一天的所有的活跃用户数，使用<code>bitcount</code>命令，bitcount可以统计1的个数，也就是活跃用户数：</p>
+<blockquote>
+<p>bitcount 2020-01-01 [时间复杂度为O(N)]</p>
+</blockquote>
+<p>如果要统计某一段时间内的活跃用户数，需要用到bitop命令。这个命令提供四种位运算，<code>AND(与)</code>，<code>(OR)或</code>，<code>XOR(亦或)</code>，<code>NOT(非)</code>。我们可以对某一段时间内的所有key进行<code>OR(或)</code>操作，或操作出来的位图是0的就代表这段时间内一次都没有登陆的用户。那只要我们求出1的个数就可以了。</p>
+<p>备注 总活跃度值得是交集</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">r</span> <span class="o">:=</span> <span class="nx">rand</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">rand</span><span class="p">.</span><span class="nf">NewSource</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">UnixNano</span><span class="p">()))</span>
+	<span class="nx">activeReal</span> <span class="o">:=</span> <span class="mi">0</span>
+	<span class="nx">notActiveReal</span> <span class="o">:=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="nx">j</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="p">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span> <span class="p">{</span>
+			<span class="nx">date</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Unix</span><span class="p">(</span><span class="nb">int64</span><span class="p">(</span><span class="mi">1577808000</span><span class="o">+</span><span class="mi">86400</span><span class="o">*</span><span class="nx">j</span><span class="p">),</span> <span class="mi">0</span><span class="p">).</span><span class="nf">Format</span><span class="p">(</span><span class="s">&#34;2006-01-02&#34;</span><span class="p">)</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nf">Intn</span><span class="p">(</span><span class="mi">10000000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+				<span class="nf">SetUserActive</span><span class="p">(</span><span class="nx">rdb</span><span class="p">,</span> <span class="nb">int64</span><span class="p">(</span><span class="nx">i</span><span class="p">),</span> <span class="nx">date</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+				<span class="nx">activeReal</span><span class="o">++</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="nf">SetUserActive</span><span class="p">(</span><span class="nx">rdb</span><span class="p">,</span> <span class="nb">int64</span><span class="p">(</span><span class="nx">i</span><span class="p">),</span> <span class="nx">date</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
+				<span class="nx">notActiveReal</span><span class="o">++</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;activeReal&#34;</span><span class="p">,</span><span class="nx">activeReal</span><span class="p">)</span>
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;notActiveReal&#34;</span><span class="p">,</span><span class="nx">notActiveReal</span><span class="p">)</span>
+
+
+	<span class="kd">var</span> <span class="nx">keys</span> <span class="p">[]</span><span class="kt">string</span>
+	<span class="k">for</span> <span class="nx">j</span><span class="o">:=</span><span class="mi">0</span><span class="p">;</span><span class="nx">j</span> <span class="p">&lt;</span> <span class="mi">2</span><span class="p">;</span><span class="nx">j</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">key</span>  <span class="o">:=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;active_%s&#34;</span><span class="p">,</span><span class="nx">time</span><span class="p">.</span><span class="nf">Unix</span><span class="p">(</span><span class="nb">int64</span><span class="p">(</span><span class="mi">1577808000</span> <span class="o">+</span><span class="mi">86400</span> <span class="o">*</span> <span class="nx">j</span><span class="p">),</span><span class="mi">0</span><span class="p">).</span><span class="nf">Format</span><span class="p">(</span><span class="s">&#34;2006-01-02&#34;</span><span class="p">))</span>
+		<span class="nx">keys</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">keys</span><span class="p">,</span><span class="nx">key</span><span class="p">)</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">rdb</span><span class="p">.</span><span class="nf">BitCount</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">BitCount</span><span class="p">{</span>
+			<span class="nx">Start</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+			<span class="nx">End</span><span class="p">:</span>  <span class="mi">365000</span><span class="p">,</span>
+		<span class="p">}).</span><span class="nf">Result</span><span class="p">())</span>
+
+	<span class="p">}</span>
+	<span class="nx">_</span><span class="p">,</span><span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">BitOpOr</span><span class="p">(</span><span class="s">&#34;active_2020&#34;</span><span class="p">,</span><span class="nx">keys</span><span class="o">...</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="c1">//
+</span><span class="c1"></span>	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">rdb</span><span class="p">.</span><span class="nf">BitCount</span><span class="p">(</span><span class="s">&#34;active_2020&#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">BitCount</span><span class="p">{</span>
+		<span class="nx">Start</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+		<span class="nx">End</span><span class="p">:</span>  <span class="mi">10000</span><span class="p">,</span>
+	<span class="p">}).</span><span class="nf">Result</span><span class="p">())</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="参考">参考</h1>
+<p>一看就懂系列之 详解redis的bitmap在亿级项目中的 <a href="https://blog.csdn.net/u011957758/article/details/74783347">https://blog.csdn.net/u011957758/article/details/74783347</a></p>
+<p>Redis如何存储和计算一亿用户的活跃度 <a href="https://www.cnblogs.com/bryan31/p/13331213.html">https://www.cnblogs.com/bryan31/p/13331213.html</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">白水飘萍</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-29
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/redis/">redis</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/leetcode/338%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">338比特位计数</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/redis/redis%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B9%8Bskiplist/">
+            <span class="next-text nav-default">Redis源码阅读之skiplist</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/bspp1314" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/3841870377" class="iconfont icon-weibo" title="weibo"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">白水飘萍</span>
+  </span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

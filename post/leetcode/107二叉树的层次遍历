@@ -1,0 +1,94 @@
+---
+title: "107二叉树的层次遍历"
+date: 2020-09-13T18:28:33+08:00
+draft: false
+tags: ["树","队列","广度优先搜索","leetcode-easy"]   #[]前面要有空格
+categories: ["leetcode"]
+---
+
+# 题目
+
+给定一个二叉树，返回其节点值自底向上的层次遍历。 <!--more-->（即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
+
+例如：
+给定二叉树 [3,9,20,null,null,15,7],
+
+```
+    3
+   / \
+  9  20
+    /  \
+   15   7
+```
+
+返回其自底向上的层次遍历为：
+
+```
+[
+  [15,7],
+  [9,20],
+  [3]
+]
+```
+
+
+
+# 解答
+
+一个简单的二叉树遍历问题，直接上代码如下：
+
+```go
+func levelOrder(root *TreeNode) [][]int {
+	var res [][]int
+	if root == nil {
+		return res
+	}
+	currentLevel := []*TreeNode{root}
+	level := 0
+	for {
+		res = append(res,[]int{})
+		var nextLevel []*TreeNode
+		for i:=0;i<len(currentLevel);i++ {
+			node := currentLevel[i]
+			res[level] = append(res[level],node.Val)
+			
+			if node.Left != nil {
+				nextLevel = append(nextLevel,node.Left)
+			}
+
+			if node.Right != nil {
+				nextLevel = append(nextLevel,node.Right)
+			}
+		}
+
+		level++
+		currentLevel = nextLevel
+		if len(currentLevel) == 0 {
+			break
+		}
+	}
+
+	return res
+ }
+
+func levelOrderBottom(root *TreeNode) [][]int {
+	res :=  levelOrder(root)
+    left := 0 
+    right := len(res) -1 
+
+    for left < right {
+        res[left],res[right] = res[right],res[left]
+        left++
+        right--
+    }
+
+    return res 
+}
+```
+
+
+
+时间复杂度 $ O(n) $
+
+空间复杂度 $ O(n) $
+

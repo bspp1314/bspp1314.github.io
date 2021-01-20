@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on 白水飘萍</title>
+    <link>http://localhost:1313/categories/git/</link>
+    <description>Recent content in Git on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 17 Aug 2020 00:10:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git Config 的配置说明</title>
+      <link>http://localhost:1313/post/git/git_config/</link>
+      <pubDate>Mon, 17 Aug 2020 00:10:51 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/git/git_config/</guid>
+      <description>config 的配置指令 1 git config git的配置一共有三个级别： system级别:整个系统的配置。 global级别：该用户下的配置。 local级别:当前仓库下</description>
+    </item>
+    
+  </channel>
+</rss>

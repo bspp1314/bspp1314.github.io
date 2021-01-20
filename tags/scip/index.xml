@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SCIP on 白水飘萍</title>
+    <link>http://localhost:1313/tags/scip/</link>
+    <description>Recent content in SCIP on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 14 Aug 2020 17:47:49 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/scip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>计算机程序构造和解释阅读笔记1</title>
+      <link>http://localhost:1313/post/scip/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E6%9E%84%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8A%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B01/</link>
+      <pubDate>Fri, 14 Aug 2020 17:47:49 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/scip/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E6%9E%84%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8A%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B01/</guid>
+      <description>&lt;h1 id=&#34;应用序和正则序&#34;&gt;应用序和正则序&lt;/h1&gt;
+&lt;h2 id=&#34;正则序&#34;&gt;正则序&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;首先不计算运算对象的值，首先展开原有的式子，直到实际需要的时候再计算&lt;/strong&gt;。缺陷是可能有重复计算。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>计算机程序构造和解释阅读笔记2_构造数据抽象</title>
+      <link>http://localhost:1313/post/scip/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E6%9E%84%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8A%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B02/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/scip/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E6%9E%84%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8A%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B02/</guid>
+      <description>概述 为什么需要复合数据 Why do we want compound data in a programming language? For the same reasons that we want compound procedures: to elevate the conceptual level at which we can design our programs, to increase the modularity of our designs, and to enhance the expressive power of our language. Just as the ability to define procedures enables us to deal with</description>
+    </item>
+    
+  </channel>
+</rss>

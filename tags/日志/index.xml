@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>日志 on 白水飘萍</title>
+    <link>http://localhost:1313/tags/%E6%97%A5%E5%BF%97/</link>
+    <description>Recent content in 日志 on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 15 Sep 2020 17:39:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%97%A5%E5%BF%97/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go常见库之logrus</title>
+      <link>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Blogrus/</link>
+      <pubDate>Tue, 15 Sep 2020 17:39:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Blogrus/</guid>
+      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
+&lt;p&gt;logrus 其是一个 golang 结构化后的日志包，API完全兼容标准包logger。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

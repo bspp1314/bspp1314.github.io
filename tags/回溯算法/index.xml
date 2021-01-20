@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>回溯算法 on 白水飘萍</title>
+    <link>http://localhost:1313/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 回溯算法 on 白水飘萍</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 26 Sep 2020 15:37:26 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>79单词搜索</title>
+      <link>http://localhost:1313/post/leetcode/79%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/</link>
+      <pubDate>Sat, 26 Sep 2020 15:37:26 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/79%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个二维网格和一个单词，找出该单词是否存在于网格中。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>39组合总和</title>
+      <link>http://localhost:1313/post/leetcode/39%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/</link>
+      <pubDate>Tue, 22 Sep 2020 23:43:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/39%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个&lt;strong&gt;无重复元素&lt;/strong&gt;的数组 &lt;code&gt;candidates&lt;/code&gt; 和一个目标数 &lt;code&gt;target&lt;/code&gt; ，找出 &lt;code&gt;candidates&lt;/code&gt; 中所有可以使数字和为 &lt;code&gt;target&lt;/code&gt; 的组合。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>40组合总和II</title>
+      <link>http://localhost:1313/post/leetcode/40%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Cii/</link>
+      <pubDate>Tue, 22 Sep 2020 23:41:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/40%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Cii/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个数组 &lt;code&gt;candidates&lt;/code&gt; 和一个目标数 &lt;code&gt;target&lt;/code&gt; ，找出 &lt;code&gt;candidates&lt;/code&gt; 中所有可以使数字和为 &lt;code&gt;target&lt;/code&gt; 的组合。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>216组合总和III</title>
+      <link>http://localhost:1313/post/leetcode/216%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Ciii/</link>
+      <pubDate>Tue, 22 Sep 2020 22:56:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/216%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Ciii/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>77组合</title>
+      <link>http://localhost:1313/post/leetcode/77%E7%BB%84%E5%90%88/</link>
+      <pubDate>Sun, 20 Sep 2020 15:32:45 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/77%E7%BB%84%E5%90%88/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定两个整数 n 和 k，返回 1 &amp;hellip; n 中所有可能的 k 个数的组合。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>46全排列</title>
+      <link>http://localhost:1313/post/leetcode/46%E5%85%A8%E6%8E%92%E5%88%97/</link>
+      <pubDate>Sat, 19 Sep 2020 22:24:23 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/46%E5%85%A8%E6%8E%92%E5%88%97/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个 没有重复 数字的序列，返回其所有可能的全排列。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>47全排列II</title>
+      <link>http://localhost:1313/post/leetcode/47%E5%85%A8%E6%8E%92%E5%88%97ii/</link>
+      <pubDate>Sat, 19 Sep 2020 22:24:23 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/47%E5%85%A8%E6%8E%92%E5%88%97ii/</guid>
+      <description>&lt;h1 id=&#34;题目&#34;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个可包含重复数字的序列，返回所有不重复的全排列。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
