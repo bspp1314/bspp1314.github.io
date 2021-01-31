@@ -1,0 +1,393 @@
+---
+title: "Golang调度5-main groutine的执行"
+date: 2021-01-27T10:42:44+08:00
+draft: true
+---
+
+上面分析到，通过调度器main groutine 首次被调度到将执行runtime.main
+
+我们继续来分析runtime.main 
+
+
+
+```go
+// The main goroutine.
+func main() {
+	g := getg()
+
+	// Racectx of m0->g0 is used only as the parent of the main goroutine.
+	// It must not be used for anything else.
+	g.m.g0.racectx = 0
+
+	// Max stack size is 1 GB on 64-bit, 250 MB on 32-bit.
+	// Using decimal instead of binary GB and MB because
+	// they look nicer in the stack overflow failure message.
+	if sys.PtrSize == 8 {//64位系统上每个groutine的栈最大可达到1G
+		maxstacksize = 1000000000
+	} else {
+		maxstacksize = 250000000
+	}
+
+	// Allow newproc to start new Ms.
+	mainStarted = true
+
+   //现在执行的是main goroutine，所以使用的是main goroutine的栈，需要切换到g0栈去执行newm()
+	if GOARCH != "wasm" { // no threads on wasm yet, so no sysmon
+		systemstack(func() {
+     //创建监控线程，该线程独立于调度器，不需要跟p关联即可运行
+			newm(sysmon, nil, -1)
+		})
+	}
+
+	// Lock the main goroutine onto this, the main OS thread,
+	// during initialization. Most programs won't care, but a few
+	// do require certain calls to be made by the main thread.
+	// Those can arrange for main.main to run in the main thread
+	// by calling runtime.LockOSThread during initialization
+	// to preserve the lock.
+	lockOSThread()
+
+	if g.m != &m0 {
+		throw("runtime.main not on m0")
+	}
+	
+  //调用runtime包的初始化函数
+	doInit(&runtime_inittask) // must be before defer
+  .....
+	//  //开启垃圾回收器
+	gcenable()
+	...
+   ///main 包的初始化函数
+	doInit(&main_inittask)
+
+	close(main_init_done)
+
+	needUnlock = false
+	unlockOSThread()
+
+	//调用main.main函数
+	fn := main_main // make an indirect call, as the linker doesn't know the address of the main package when laying down the runtime
+	fn()
+	......
+  //进入系统调用，退出进程，可以看出main goroutine并未返回，而是直接进入系统调用退出进程了
+	exit(0)
+  //保护性代码，如果exit意外返回，下面的代码也会让该进程crash死掉
+	for {
+		var x *int32
+		*x = 0
+	}
+}
+```
+
+runtime.main 的主要功能有
+
+- 启动一个sysmon系统监控线程，该线程负责整个程序的gc、抢占调度以及netpoll等功能的监控，在抢占调度一章我们再继续分析sysmon是如何协助完成goroutine的抢占调度的；
+- runtime包的初始化
+- 执行main包以及main包import的所有包的初始化
+- 执行main.main函数
+- 从main.main函数返回后调用exit系统调用退出进程；
+
+main groutine执行完就直接调用exit(0) 退出了整个进程了，它并没有返回到调用它的函数。然而我们又设置了 goroutine 退出时应该跳到 `runtime.goexit` 函数吗？回顾下我们是怎么到runtime.main 函数的
+
+```go
+// 把 sched.pc 值放入 BX 寄存器
+MOVQ    gobuf_pc(BX),BX
+// JMP 把 BX 寄存器的包含的地址值放入 CPU 的 IP 寄存器，于是，CPU 跳转到该地址继续执行指令
+JMP    BX
+```
+
+直接使用了一个跳转，并没有使用 `CALL` 指令，而 runtime.main 函数中确实也没有 `RET` 返回的指令。所以，main goroutine 执行完后，直接调用 exit(0) 退出整个进程。那么之前设置的设置了 goroutine 退出时应该跳到 `runtime.goexit` 函数还有用吗？这是针对非 main goroutine 起作用。我们可以用dlv来验证一下我们的代码：
+
+```go
+func g2(n int, ch chan int) {
+	ch <- n * n
+}
+
+func main() {
+	ch := make(chan int)
+
+	go g2(100, ch)
+
+	fmt.Println(<-ch)
+}
+```
+
+
+
+
+
+```go
+dlv debug main.go
+Type 'help' for list of commands.
+(dlv) break main.g2
+Breakpoint 1 set at 0x10d0faf for main.g2() ./main.go:5
+(dlv) c
+> main.g2() ./main.go:5 (hits goroutine(18):1 total:1) (PC: 0x10d0faf)
+     1: package main
+     2: 
+     3: import "fmt"
+     4: 
+=>   5: func g2(n int, ch chan int) {
+     6:         ch <- n * n
+     7: }
+     8: 
+     9: func main() {
+    10:         ch := make(chan int)
+(dlv) bt
+0  0x00000000010d0faf in main.g2
+   at ./main.go:5
+1  0x000000000106d021 in runtime.goexit
+   at /usr/local/go/src/runtime/asm_amd64.s:1374
+(dlv) disassemble
+TEXT main.g2(SB) /Users/linyuanpeng/workplace/go/src/github.com/bspp1314/go-common-lib/sched-lib/ex2/main.go
+        main.go:5               0x10d0fa0       65488b0c2530000000      mov rcx, qword ptr gs:[0x30]
+        main.go:5               0x10d0fa9       483b6110                cmp rsp, qword ptr [rcx+0x10]
+        main.go:5               0x10d0fad       7643                    jbe 0x10d0ff2
+=>      main.go:5               0x10d0faf*      4883ec20                sub rsp, 0x20
+        main.go:5               0x10d0fb3       48896c2418              mov qword ptr [rsp+0x18], rbp
+        main.go:5               0x10d0fb8       488d6c2418              lea rbp, ptr [rsp+0x18]
+        main.go:6               0x10d0fbd       488b442428              mov rax, qword ptr [rsp+0x28]
+        main.go:6               0x10d0fc2       488b4c2428              mov rcx, qword ptr [rsp+0x28]
+        main.go:6               0x10d0fc7       480fafc8                imul rcx, rax
+        main.go:6               0x10d0fcb       48894c2410              mov qword ptr [rsp+0x10], rcx
+        main.go:6               0x10d0fd0       488b442430              mov rax, qword ptr [rsp+0x30]
+        main.go:6               0x10d0fd5       48890424                mov qword ptr [rsp], rax
+        main.go:6               0x10d0fd9       488d442410              lea rax, ptr [rsp+0x10]
+        main.go:6               0x10d0fde       4889442408              mov qword ptr [rsp+0x8], rax
+        main.go:6               0x10d0fe3       e8583ff3ff              call $runtime.chansend1
+        main.go:7               0x10d0fe8       488b6c2418              mov rbp, qword ptr [rsp+0x18]
+        main.go:7               0x10d0fed       4883c420                add rsp, 0x20
+        main.go:7               0x10d0ff1       c3                      ret
+        main.go:5               0x10d0ff2       e889a5f9ff              call $runtime.morestack_noctxt
+        <autogenerated>:1       0x10d0ff7       eba7                    jmp $main.g2
+(dlv) break *0x10d0ff1
+Breakpoint 2 set at 0x10d0ff1 for main.g2() ./main.go:7
+(dlv) c
+> main.g2() ./main.go:7 (hits goroutine(18):1 total:1) (PC: 0x10d0ff1)
+     2: 
+     3: import "fmt"
+     4: 
+     5: func g2(n int, ch chan int) {
+     6:         ch <- n * n
+=>   7: }
+     8: 
+     9: func main() {
+    10:         ch := make(chan int)
+    11: 
+    12:         go g2(100, ch)
+(dlv) si
+> runtime.goexit() /usr/local/go/src/runtime/asm_amd64.s:1375 (PC: 0x106d021)
+Warning: debugging optimized function
+  1370: 
+  1371: // The top-most function running on a goroutine
+  1372: // returns to goexit+PCQuantum.
+  1373: TEXT runtime·goexit(SB),NOSPLIT,$0-0
+  1374:         BYTE    $0x90   // NOP
+=>1375:         CALL    runtime·goexit1(SB)     // does not return
+  1376:         // traceback from goexit1 must hit code range of goexit
+  1377:         BYTE    $0x90   // NOP
+  1378: 
+  1379: // This is called from .init_array and follows the platform, not Go, ABI.
+  1380: TEXT runtime·addmoduledata(SB),NOSPLIT,$0-0
+(dlv) 
+```
+
+
+
+我们先通过在main.g2处打断点，然后通过bt查看其调用栈，可以看到其确实是被 runtime.goexit调用。然后在g2的return地址打断点，通过si执行下一步，发现g2退出后，确实执行了 runtime.goexit1。
+
+
+
+接下来我们来看runtime.goexist1代码
+
+```go
+// Finishes execution of the current goroutine.
+func goexit1() {
+	.....
+	mcall(goexit0)
+}
+
+/ func mcall(fn func(*g))
+// Switch to m->g0's stack, call fn(g).
+// Fn must never return. It should gogo(&g->sched)
+// to keep running g.
+TEXT runtime·mcall(SB), NOSPLIT, $0-8
+	MOVQ	fn+0(FP), DI
+
+	get_tls(CX)
+	MOVQ	g(CX), AX	// save state in g->sched
+	MOVQ	0(SP), BX	// caller's PC
+	MOVQ	BX, (g_sched+gobuf_pc)(AX)
+	LEAQ	fn+0(FP), BX	// caller's SP
+	MOVQ	BX, (g_sched+gobuf_sp)(AX)
+	MOVQ	AX, (g_sched+gobuf_g)(AX)
+	MOVQ	BP, (g_sched+gobuf_bp)(AX)
+
+	// switch to m->g0 & its stack, call fn
+	MOVQ	g(CX), BX
+	MOVQ	g_m(BX), BX
+	MOVQ	m_g0(BX), SI
+	CMPQ	SI, AX	// if g == m->g0 call badmcall
+	JNE	3(PC)
+	MOVQ	$runtime·badmcall(SB), AX
+	JMP	AX
+	MOVQ	SI, g(CX)	// g = m->g0
+	MOVQ	(g_sched+gobuf_sp)(SI), SP	// sp = m->g0->sched.sp
+	PUSHQ	AX
+	MOVQ	DI, DX
+	MOVQ	0(DI), DI
+	CALL	DI
+	POPQ	AX
+	MOVQ	$runtime·badmcall2(SB), AX
+	JMP	AX
+	RET
+
+```
+
+goexit1函数通过调用mcall从当前运行的g2 goroutine切换到g0，然后在g0栈上调用和执行goexit0这个函数。
+
+```go
+/ func mcall(fn func(*g))
+// Switch to m->g0's stack, call fn(g).
+// Fn must never return. It should gogo(&g->sched)
+// to keep running g.
+TEXT runtime·mcall(SB), NOSPLIT, $0-8
+  // 取出参数的值放入DI寄存器，它是funcval对象的指针，此场景中fn.fn是goexit0的地址
+	MOVQ	fn+0(FP), DI   
+
+	get_tls(CX)   // get tls 
+	MOVQ	g(CX), AX	// save state in g->sched  # AX = g，本场景g 是 g2
+  // 保存g2的调度信息，因为我们要从当前正在运行的g2切换到g0
+	MOVQ	0(SP), BX	// caller's PC   // BX = SP 
+	MOVQ	BX, (g_sched+gobuf_pc)(AX) // g2.sched.pc = PC 
+	LEAQ	fn+0(FP), BX	// caller's SP // BX = SP 
+	MOVQ	BX, (g_sched+gobuf_sp)(AX) // g2.sched.sp = SP 
+	MOVQ	AX, (g_sched+gobuf_g)(AX)  // g2.sched.g = g2 
+	MOVQ	BP, (g_sched+gobuf_bp)(AX) // g2.sched.bp = BP 
+
+	// switch to m->g0 & its stack, call fn
+	MOVQ	g(CX), BX     // BX = g2 
+	MOVQ	g_m(BX), BX   // BX = g2.m 
+	MOVQ	m_g0(BX), SI  // SI = g2.m.g0 
+  
+  // 此刻，SI = g0， AX = g，所以这里在判断g 是否是 g0，如果g == g0则一定是哪里代码写错了
+	CMPQ	SI, AX	// if g == m->g0 call badmcall
+	JNE	3(PC)
+	MOVQ	$runtime·badmcall(SB), AX
+	JMP	AX
+
+	//把g0的地址设置到线程本地存储之中 
+	MOVQ	SI, g(CX)	// g = m->g0
+	// sp = g0.sched.sp 
+	MOVQ	(g_sched+gobuf_sp)(SI), SP	// sp = m->g0->sched.sp
+	// fn的参数g入栈
+  PUSHQ	AX
+	// DI是结构体funcval实例对象的指针，它的第一个成员才是goexit0的地址
+	MOVQ	DI, DX
+  //读取第一个成员到DI寄存器
+	MOVQ	0(DI), DI
+  //调用goexit0(g)
+	CALL	DI
+	//
+	POPQ	AX
+	MOVQ	$runtime·badmcall2(SB), AX
+	JMP	AX
+	RET
+
+```
+
+mcall的参数是一个函数，在Go语言的实现中，函数变量并不是一个直接指向函数代码的指针，而是一个指向funcval结构体对象的指针，funcval结构体对象的第一个成员fn才是真正指向函数代码的指针。
+
+```go
+type funcval struct {
+    fn uintptr
+    // variable-size, fn-specific data here
+}
+```
+
+mcall函数主要有两个功能：
+
+1. 首先从当前运行的g(我们这个场景是g2)切换到g0，这一步包括保存当前g的调度信息，把g0设置到tls中，修改CPU的rsp寄存器使其指向g0的栈；
+2. 以当前运行的g(我们这个场景是g2)为参数调用fn函数(此处为goexit0)。
+
+接下来我们来继续看goexit1 
+
+```go
+// goexit continuation on g0.
+func goexit0(gp *g) {
+  // get g0
+	_g_ := getg()
+
+  // 设置 gp 的状态为 _Gdead
+	casgstatus(gp, _Grunning, _Gdead)
+	if isSystemGoroutine(gp, false) {
+		atomic.Xadd(&sched.ngsys, -1)
+	}
+  
+   //清空g保存的一些信息
+	gp.m = nil
+	locked := gp.lockedm != 0
+	gp.lockedm = 0
+	_g_.m.lockedg = 0
+	gp.preemptStop = false
+	gp.paniconfault = false
+	gp._defer = nil // should be true already but just in case.
+	gp._panic = nil // non-nil for Goexit during panic. points at stack-allocated data.
+	gp.writebuf = nil
+	gp.waitreason = 0
+	gp.param = nil
+	gp.labels = nil
+	gp.timer = nil
+
+	if gcBlackenEnabled != 0 && gp.gcAssistBytes > 0 {
+		// Flush assist credit to the global pool. This gives
+		// better information to pacing if the application is
+		// rapidly creating an exiting goroutines.
+		scanCredit := int64(gcController.assistWorkPerByte * float64(gp.gcAssistBytes))
+		atomic.Xaddint64(&gcController.bgScanCredit, scanCredit)
+		gp.gcAssistBytes = 0
+	}
+
+  //g->m = nil, m->currg = nil 解绑g和m之关系
+	dropg()
+
+	if GOARCH == "wasm" { // no threads yet on wasm
+		gfput(_g_.m.p.ptr(), gp)
+		schedule() // never returns
+	}
+
+	if _g_.m.lockedInt != 0 {
+		print("invalid m->lockedInt = ", _g_.m.lockedInt, "\n")
+		throw("internal lockOSThread error")
+	}
+	gfput(_g_.m.p.ptr(), gp)//g放入p的freeg队列，方便下次重用，免得再去申请内存，提高效率
+	if locked {
+		// The goroutine may have locked this thread because
+		// it put it in an unusual kernel state. Kill it
+		// rather than returning it to the thread pool.
+
+		// Return to mstart, which will release the P and exit
+		// the thread.
+		if GOOS != "plan9" { // See golang.org/issue/22227.
+			gogo(&_g_.m.g0.sched)
+		} else {
+			// Clear lockedExt on plan9 since we may end up re-using
+			// this thread.
+			_g_.m.lockedExt = 0
+		}
+	}
+  //进入调度
+	schedule()
+}
+
+```
+
+ 
+
+上述过程分析了main groutine 的退出了普通的groutine的过程。main goroutine 退出后直接调用 exit(0) 使得整个进程退出，而普通 goroutine 退出后，则进行了一系列的调用，最终又切到 g0 栈，执行 schedule 函数。
+
+
+
+普通 goroutine（gp）就是在 schedule 函数中被选中，然后才有机会执行。而现在，gp 执行完之后，再次进入 schedule 函数，形成一个循环。
+
+![go_schedule3](../go_schedule3.png)
