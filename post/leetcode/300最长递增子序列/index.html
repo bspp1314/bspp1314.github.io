@@ -49,7 +49,7 @@
 <meta itemprop="description" content="题目 给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。 子序列是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。">
 <meta itemprop="datePublished" content="2020-12-15T13:35:36+08:00" />
 <meta itemprop="dateModified" content="2020-12-15T13:35:36+08:00" />
-<meta itemprop="wordCount" content="960">
+<meta itemprop="wordCount" content="962">
 
 
 
@@ -240,10 +240,12 @@ $$</p>
 </span><span class="lnt">30
 </span><span class="lnt">31
 </span><span class="lnt">32
+</span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">lengthOfLIS</span><span class="p">(</span><span class="nx">nums</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
+  <span class="c1">//dp[i] = max(dp[j] + 1) 
+</span><span class="c1"></span>	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
 		<span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span>
 	<span class="p">}</span>
 
@@ -284,8 +286,12 @@ $$</p>
 <p><strong>维护一个数组tail,用tail[i]表示长度为i的最长上升子序列的末尾元素的最小值，用index录目前最长上升子序列的长度</strong>（这句话是这个思路的核心）</p>
 <p>对原序列进行遍历，将每位元素二分插入 tail 中。</p>
 <ul>
-<li>如果 tail[len(tail)-1] &lt; nums[i],那么将nums[i] 插入tail的最后</li>
-<li>否则，替换tail[i] 比它大的最小值，由于tail是有序</li>
+<li>
+<p>如果 tail[len(tail)-1] &lt; nums[i],那么将nums[i] 插入tail的最后</p>
+</li>
+<li>
+<p>否则，tail中第一个大于等于nums[i]的数。</p>
+</li>
 </ul>
 <p>来看一个小例子</p>
 <div class="highlight"><div class="chroma">
@@ -309,7 +315,7 @@ $$</p>
 [0]
 // 4 &gt; 0,add in tail 
 [0 4]
-// 8 &gt; 0,add in tail 
+// 8 &gt; 4,add in tail 
 [0 4 8]
 // 2 &lt; 8,mingreaterOrEqualValueNums[i] is 4 
 [0 2 8]

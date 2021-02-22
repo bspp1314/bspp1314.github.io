@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://localhost:1313/" />
-<meta property="og:updated_time" content="2021-01-03T23:44:14+08:00" />
+<meta property="og:updated_time" content="2021-02-19T13:41:18+08:00" />
 <meta itemprop="name" content="白水飘萍">
 <meta itemprop="description" content="Hugo theme even example site.">
 <meta name="twitter:card" content="summary"/>
@@ -118,6 +118,49 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/redis/mac%E5%AE%89%E8%A3%85redis/">Mac安装redis</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-10-10 </span>
+      <div class="post-category">
+          <a href="/categories/redis/"> redis </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      下载Redis 1 2 brew update brew install redis 启动Redis 1 brew services start redis 停止Redis 1 brew services stop redis 配置Redis 1 redis-server /usr/local/etc/redis.conf 测试Redis是否同 1 redis-cli ping If it replies “PONG”
+    </div>
+    <div class="read-more">
+      <a href="/post/redis/mac%E5%AE%89%E8%A3%85redis/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AE%80%E5%8D%95%E7%9A%84%E4%BD%BF%E7%94%A8/">Gin的学习笔记1-简单的使用</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-10-09 </span>
+      <div class="post-category">
+          <a href="/categories/golang/"> golang </a>
+          <a href="/categories/gin/"> gin </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      gin 是什么 Gin is a web framework written in Go (Golang). It features a martini-like API with much better performance, up to 40 times faster thanks to httprouter 简单的使用 1 2 3 4 5 6 7 8 9 10 11 12 13 14 func main() { r := gin.Default() r.GET(&#34;/hello&#34;, HelloAction) r.Run() // listen and serve on 0.0.0.0:8080} } func HelloAction(c *gin.Context) { name
+    </div>
+    <div class="read-more">
+      <a href="/post/golang/gin/gin%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AE%80%E5%8D%95%E7%9A%84%E4%BD%BF%E7%94%A8/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/golang/common-lib/go%E5%B8%B8%E8%A7%81%E5%BA%93%E4%B9%8Bvalidator/">Go常见库之validator</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-10-09 </span>
@@ -179,46 +222,6 @@
     </div>
     <div class="read-more">
       <a href="/post/golang/%E5%8F%8D%E5%B0%84/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/golang%E5%8F%8D%E5%B0%84%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C/">Golang反射的常见操作</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-09-29 </span>
-      <div class="post-category">
-          <a href="/categories/golang/"> golang </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      
-    </div>
-    <div class="read-more">
-      <a href="/post/golang/golang%E5%8F%8D%E5%B0%84%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/docker/dockerfile%E7%9A%84%E5%91%BD%E4%BB%A4/">Dockerfile的命令</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-09-28 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      COPY 格式 1 2 COPY [--chown=&lt;user&gt;:&lt;group&gt;] &lt;源路径&gt;... &lt;目标路径&gt; COPY [--chown=&lt;user&gt;:&lt;group&gt;] [&#34;&lt;源路径1&gt;&#34;,... &#34;&lt
-    </div>
-    <div class="read-more">
-      <a href="/post/docker/dockerfile%E7%9A%84%E5%91%BD%E4%BB%A4/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
