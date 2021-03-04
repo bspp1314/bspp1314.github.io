@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 白水飘萍</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 19 Feb 2021 13:41:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Mar 2021 14:48:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>递归替换特地文件中的字符串</title>
+      <link>http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/%E9%80%92%E5%BD%92%E6%9B%BF%E6%8D%A2%E7%89%B9%E5%9C%B0%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <pubDate>Thu, 04 Mar 2021 14:48:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/%E9%80%92%E5%BD%92%E6%9B%BF%E6%8D%A2%E7%89%B9%E5%9C%B0%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 function read_dir() { for file in `ls $1` do if [ -d $1&amp;#34;/&amp;#34;$file ] #注意此处之间一定要加上空格，否则会报错 then read_dir $1&amp;#34;/&amp;#34;$file else file=$1&amp;#34;/&amp;#34;$file if [[ $file =~ \.go$ ]];then echo $file sed -i &amp;#34;&amp;#34;</description>
+    </item>
+    
     <item>
       <title>57插入区间</title>
       <link>http://localhost:1313/post/leetcode/57%E6%8F%92%E5%85%A5%E5%8C%BA%E9%97%B4/</link>
