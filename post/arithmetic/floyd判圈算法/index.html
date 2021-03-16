@@ -50,7 +50,7 @@
 <meta itemprop="description" content="Floyd判圈算法(Floyd Cycle Detection Algorithm)，又称龟兔赛跑算法(Tortoise and Hare Algorithm)，是一个可以在有限状态机、迭代函数或者链表上判断是否存在环，求出该环的起点与长度的算法。">
 <meta itemprop="datePublished" content="2020-08-31T14:25:00+08:00" />
 <meta itemprop="dateModified" content="2020-08-31T14:25:00+08:00" />
-<meta itemprop="wordCount" content="864">
+<meta itemprop="wordCount" content="867">
 
 
 
@@ -157,7 +157,7 @@
 为了求出环C的起点，只要令h仍均位于节点M，而令t返回起点节点S，此时h与t之间距为环C长度的整数倍。随后，同时让t和h往前推进，且保持二者的速度相同：t每前进1步，h前进1步。持续该过程直至t与h再一次相遇，设此次相遇时位于同一节点P，则节点P即为从节点S出发所到达的环C的第一个节点，即环C的一个起点。</p>
 <p><strong>对于环路起点算法的解释：</strong></p>
 <p><img src="./885804-20170813223929242-1014504085.png" alt="img"></p>
-<p>假设出发起点到环起点的距离为m，已经确定有环，环的周长为n，（第一次）相遇点距离环的起点的距离是k。那么当两者相遇时，慢指针（t）移动的总距离$ i = m + a * n + k $ ,快指针（h）的移动距离为$ 2i $，$ 2i = m + b * n + k $。其中，a和b分别为t和h在第一次相遇时转过的圈数。让两者相减（快减慢），那么有$ i = (b - a) * n $ 。即i是圈长度的倍数。那么显然 $ m + k = n $ ,将一个指针移到出发起点S，另一个指针仍呆在相遇节点M处两者同时移动,当两个指针相遇时候，即可环的起点。</p>
+<p>假设出发起点到环起点的距离为m，已经确定有环，环的周长为n，（第一次）相遇点距离环的起点的距离是k。那么当两者相遇时，慢指针（t）移动的总距离$ i = m + a * n + k $ ,快指针（h）的移动距离为$ 2i $，$ 2i = m + b * n + k $。其中，a和b分别为t和h在第一次相遇时转过的圈数。让两者相减（快减慢），那么有$ i = (b - a) * n $ 。即i是圈长度的倍数。那么显然 $ m + k  $ 为 n 的倍数 ,将一个指针移到出发起点S，另一个指针仍呆在相遇节点M处两者同时移动,当两个指针相遇时候，即可环的起点。</p>
 <p><a href="/post/leetcode/141%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/">leetcode 案例 141</a></p>
 <p><a href="/post/leetcode/142%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/">leetcode 案例 142</a></p>
     </div>
