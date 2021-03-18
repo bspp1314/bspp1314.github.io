@@ -9,10 +9,10 @@
     <lastBuildDate>Thu, 04 Mar 2021 14:48:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>递归替换特地文件中的字符串</title>
-      <link>http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/%E9%80%92%E5%BD%92%E6%9B%BF%E6%8D%A2%E7%89%B9%E5%9C%B0%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <link>http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/%E9%80%92%E5%BD%92%E6%9B%BF%E6%8D%A2%E7%89%B9%E5%9C%B0%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2-/</link>
       <pubDate>Thu, 04 Mar 2021 14:48:25 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/%E9%80%92%E5%BD%92%E6%9B%BF%E6%8D%A2%E7%89%B9%E5%9C%B0%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <guid>http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/%E9%80%92%E5%BD%92%E6%9B%BF%E6%8D%A2%E7%89%B9%E5%9C%B0%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2-/</guid>
       <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 function read_dir() { for file in `ls $1` do if [ -d $1&amp;#34;/&amp;#34;$file ] #注意此处之间一定要加上空格，否则会报错 then read_dir $1&amp;#34;/&amp;#34;$file else file=$1&amp;#34;/&amp;#34;$file if [[ $file =~ \.go$ ]];then echo $file sed -i &amp;#34;&amp;#34;</description>
     </item>
     
@@ -185,15 +185,6 @@
       
       <guid>http://localhost:1313/post/leetcode/130%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/</guid>
       <description>题目 给定一个二维的矩阵，包含 &#39;X&#39; 和 &#39;O&#39;（字母 O）。 找到所有被 &#39;X&#39; 围绕的区域，并将这些区域里所有的 &#39;O&#39; 用 &#39;X&#39; 填充。 示例: 1 2 3 4 X X X X X O O X X X</description>
-    </item>
-    
-    <item>
-      <title>Redis源码阅读之整数集合</title>
-      <link>http://localhost:1313/post/redis/redis%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B9%8Bintset/</link>
-      <pubDate>Wed, 09 Dec 2020 18:25:20 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/redis/redis%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B9%8Bintset/</guid>
-      <description>Set 集合采用了整数集合和字典两种方式来实现的，当满足如下两个条件的时候，采用整数集合实现；一旦有一个条件不满足时则采用字典来实现。 Set 集合中的所</description>
     </item>
     
     <item>
@@ -431,12 +422,21 @@
     </item>
     
     <item>
-      <title>Go-Redis数据类型使用</title>
+      <title>Redis数据类型使用</title>
       <link>http://localhost:1313/post/redis/redis%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Wed, 04 Nov 2020 16:54:38 +0800</pubDate>
       
       <guid>http://localhost:1313/post/redis/redis%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
-      <description>​ | String 常见操作 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 //set(key, value)：给数据库中名称为key的string赋予值value //get(key)：返回</description>
+      <description>​ Redis目前支持5种数据类型，分别是： String（字符串） List（列表） Hash（字典） Set（集合） Sorted Set（有序集合） redisObject redi</description>
+    </item>
+    
+    <item>
+      <title>Redis数据类型使用</title>
+      <link>http://localhost:1313/post/redis/redis%E7%9F%A5%E8%AF%86%E7%82%B9/</link>
+      <pubDate>Wed, 04 Nov 2020 16:54:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/redis/redis%E7%9F%A5%E8%AF%86%E7%82%B9/</guid>
+      <description>Redis 知识点 Redis 数据类 String - row （sds） - embstr (sds) - int List - ziplist - linkedList Hash - ziplist - hashtable Set - hashtable - inset Sorted Set - skiplist - ziplist Redis 的持久化化方式 RDB AOF 负载均衡 一致性hash 普通hash 为</description>
     </item>
     
     <item>
@@ -1224,6 +1224,15 @@
       
       <guid>http://localhost:1313/post/leetcode/167%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</guid>
       <description>题目 给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。 函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 inde</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/os/io/io%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/os/io/io%E6%A8%A1%E5%9E%8B/</guid>
+      <description></description>
     </item>
     
     <item>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Go-Redis数据类型使用 - 白水飘萍</title>
+  <title>Redis数据类型使用 - 白水飘萍</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="白水飘萍" /><meta name="description" content="​ | String 常见操作 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 //set(key, value)：给数据库中名称为key的string赋予值value //get(key)：返回" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="白水飘萍" /><meta name="description" content="​ Redis目前支持5种数据类型，分别是： String（字符串） List（列表） Hash（字典） Set（集合） Sorted Set（有序集合） redisObject redi" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -39,24 +39,24 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Go-Redis数据类型使用" />
-<meta property="og:description" content="​ | String 常见操作 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 //set(key, value)：给数据库中名称为key的string赋予值value //get(key)：返回" />
+<meta property="og:title" content="Redis数据类型使用" />
+<meta property="og:description" content="​ Redis目前支持5种数据类型，分别是： String（字符串） List（列表） Hash（字典） Set（集合） Sorted Set（有序集合） redisObject redi" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/redis/redis%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" />
 <meta property="article:published_time" content="2020-11-04T16:54:38+08:00" />
 <meta property="article:modified_time" content="2020-11-04T16:54:38+08:00" />
-<meta itemprop="name" content="Go-Redis数据类型使用">
-<meta itemprop="description" content="​ | String 常见操作 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 //set(key, value)：给数据库中名称为key的string赋予值value //get(key)：返回">
+<meta itemprop="name" content="Redis数据类型使用">
+<meta itemprop="description" content="​ Redis目前支持5种数据类型，分别是： String（字符串） List（列表） Hash（字典） Set（集合） Sorted Set（有序集合） redisObject redi">
 <meta itemprop="datePublished" content="2020-11-04T16:54:38+08:00" />
 <meta itemprop="dateModified" content="2020-11-04T16:54:38+08:00" />
-<meta itemprop="wordCount" content="2285">
+<meta itemprop="wordCount" content="5715">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Go-Redis数据类型使用"/>
-<meta name="twitter:description" content="​ | String 常见操作 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 //set(key, value)：给数据库中名称为key的string赋予值value //get(key)：返回"/>
+<meta name="twitter:title" content="Redis数据类型使用"/>
+<meta name="twitter:description" content="​ Redis目前支持5种数据类型，分别是： String（字符串） List（列表） Hash（字典） Set（集合） Sorted Set（有序集合） redisObject redi"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -124,7 +124,7 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Go-Redis数据类型使用</h1>
+      <h1 class="post-title">Redis数据类型使用</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2020-11-04 </span>
@@ -138,18 +138,385 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#string">String</a></li>
-    <li><a href="#list">List</a></li>
-    <li><a href="#hash">Hash</a></li>
-    <li><a href="#set">Set</a></li>
+    <li><a href="#redisobject">redisObject</a></li>
+    <li><a href="#string">String</a>
+      <ul>
+        <li><a href="#构成">构成</a></li>
+        <li><a href="#常见命令">常见命令</a></li>
+        <li><a href="#使用">使用</a></li>
+      </ul>
+    </li>
+    <li><a href="#list">List</a>
+      <ul>
+        <li><a href="#构成-1">构成</a></li>
+        <li><a href="#常见命令-1">常见命令</a></li>
+        <li><a href="#简单使用">简单使用</a></li>
+      </ul>
+    </li>
+    <li><a href="#hash">Hash</a>
+      <ul>
+        <li><a href="#构成-2">构成</a></li>
+        <li><a href="#使用-1">使用</a></li>
+      </ul>
+    </li>
+    <li><a href="#set">Set</a>
+      <ul>
+        <li><a href="#构成-3">构成</a></li>
+        <li><a href="#常见命令-2">常见命令</a></li>
+        <li><a href="#使用-2">使用</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <p>​                    |</p>
-<h1 id="string">String</h1>
-<p>常见操作</p>
+      <p>​      Redis目前支持5种数据类型，分别是：</p>
+<ol>
+<li>String（字符串）</li>
+<li>List（列表）</li>
+<li>Hash（字典）</li>
+<li>Set（集合）</li>
+<li>Sorted Set（有序集合）</li>
+</ol>
+<h1 id="redisobject">redisObject</h1>
+<p> redisObject是redis server存储最原子数据的数据结构，其中的void *ptr会指向真正的存储数据结构，我们set key value中的key和value其实由ptr指向真正保存的位置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="k">struct</span> <span class="nc">redisObject</span> <span class="p">{</span>
+
+    <span class="c1">// 类型
+</span><span class="c1"></span>    <span class="kt">unsigned</span> <span class="nl">type</span><span class="p">:</span><span class="mi">4</span><span class="p">;</span>
+
+    <span class="c1">// 编码
+</span><span class="c1"></span>    <span class="kt">unsigned</span> <span class="nl">encoding</span><span class="p">:</span><span class="mi">4</span><span class="p">;</span>
+
+    <span class="c1">// 对象最后一次被访问的时间
+</span><span class="c1"></span>    <span class="kt">unsigned</span> <span class="nl">lru</span><span class="p">:</span><span class="n">REDIS_LRU_BITS</span><span class="p">;</span> <span class="cm">/* lru time (relative to server.lruclock) */</span>
+
+    <span class="c1">// 引用计数
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">refcount</span><span class="p">;</span>
+
+    <span class="c1">// 指向实际值的指针
+</span><span class="c1"></span>    <span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+
+<span class="p">}</span> <span class="n">robj</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="string">String</h1>
+<h2 id="构成">构成</h2>
+<p> 我们可能以为redis在内部存储string都是用sds的数据结构实现的，其实在整个redis的数据存储过程中为了提高性能，内部做了很多优化。整体选择顺序应该是：</p>
+<ul>
+<li>整数，存储字符串长度小于21且能够转化为整数的字符串。</li>
+<li>EmbeddedString，存储字符串长度小于44的字符串（REDIS_ENCODING_EMBSTR_SIZE_LIMIT）。</li>
+<li>SDS，剩余情况使用sds进行存储。</li>
+</ul>
+<p> <strong>embstr和sds(raw)的区别在于内存的申请和回收</strong></p>
+<ul>
+<li>embstr的创建只需分配一次内存(只分配redisObject)，而raw为两次（一次为sds分配对象，另一次为redisObject分配对象，embstr省去了第一次）。相对地，释放内存的次数也由两次变为一次。</li>
+<li>embstr的redisObject和sds放在一起，更好地利用缓存带来的优势</li>
+<li>缺点：redis并未提供任何修改embstr的方式，即embstr是只读的形式。对embstr的修改实际上是先转换为raw再进行修改。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cm">/* SET key value [NX] [XX] [KEEPTTL] [EX &lt;seconds&gt;] [PX &lt;milliseconds&gt;] */</span>
+<span class="kt">void</span> <span class="nf">setCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+    <span class="n">robj</span> <span class="o">*</span><span class="n">expire</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">UNIT_SECONDS</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">flags</span> <span class="o">=</span> <span class="n">OBJ_SET_NO_FLAGS</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">c</span><span class="o">-&gt;</span><span class="n">argc</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">char</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">;</span>
+        <span class="n">robj</span> <span class="o">*</span><span class="n">next</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">c</span><span class="o">-&gt;</span><span class="n">argc</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">?</span> <span class="nb">NULL</span> <span class="o">:</span> <span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+
+        <span class="k">if</span> <span class="p">((</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;n&#39;</span> <span class="o">||</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;N&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+            <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;x&#39;</span> <span class="o">||</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;X&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;\0&#39;</span> <span class="o">&amp;&amp;</span>
+            <span class="o">!</span><span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">OBJ_SET_XX</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="n">flags</span> <span class="o">|=</span> <span class="n">OBJ_SET_NX</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;x&#39;</span> <span class="o">||</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;X&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+                   <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;x&#39;</span> <span class="o">||</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;X&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;\0&#39;</span> <span class="o">&amp;&amp;</span>
+                   <span class="o">!</span><span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">OBJ_SET_NX</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="n">flags</span> <span class="o">|=</span> <span class="n">OBJ_SET_XX</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strcasecmp</span><span class="p">(</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">,</span><span class="s">&#34;KEEPTTL&#34;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+                   <span class="o">!</span><span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">OBJ_SET_EX</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">OBJ_SET_PX</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="n">flags</span> <span class="o">|=</span> <span class="n">OBJ_SET_KEEPTTL</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;e&#39;</span> <span class="o">||</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;E&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+                   <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;x&#39;</span> <span class="o">||</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;X&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;\0&#39;</span> <span class="o">&amp;&amp;</span>
+                   <span class="o">!</span><span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">OBJ_SET_KEEPTTL</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+                   <span class="o">!</span><span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">OBJ_SET_PX</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">next</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">flags</span> <span class="o">|=</span> <span class="n">OBJ_SET_EX</span><span class="p">;</span>
+            <span class="n">unit</span> <span class="o">=</span> <span class="n">UNIT_SECONDS</span><span class="p">;</span>
+            <span class="n">expire</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+            <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;p&#39;</span> <span class="o">||</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;P&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+                   <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;x&#39;</span> <span class="o">||</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;X&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;\0&#39;</span> <span class="o">&amp;&amp;</span>
+                   <span class="o">!</span><span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">OBJ_SET_KEEPTTL</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+                   <span class="o">!</span><span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">OBJ_SET_EX</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">next</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">flags</span> <span class="o">|=</span> <span class="n">OBJ_SET_PX</span><span class="p">;</span>
+            <span class="n">unit</span> <span class="o">=</span> <span class="n">UNIT_MILLISECONDS</span><span class="p">;</span>
+            <span class="n">expire</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+            <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">addReply</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">shared</span><span class="p">.</span><span class="n">syntaxerr</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+  	<span class="c1">//尝试对obj对象重新编码
+</span><span class="c1"></span>    <span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">tryObjectEncoding</span><span class="p">(</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+    <span class="n">setGenericCommand</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">flags</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">expire</span><span class="p">,</span><span class="n">unit</span><span class="p">,</span><span class="nb">NULL</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="cm">/* Try to encode a string object in order to save space */</span>
+<span class="n">robj</span> <span class="o">*</span><span class="nf">tryObjectEncoding</span><span class="p">(</span><span class="n">robj</span> <span class="o">*</span><span class="n">o</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">long</span> <span class="n">value</span><span class="p">;</span>
+    <span class="n">sds</span> <span class="n">s</span> <span class="o">=</span> <span class="n">o</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="n">size_t</span> <span class="n">len</span><span class="p">;</span>
+
+    <span class="cm">/* Make sure this is a string object, the only type we encode
+</span><span class="cm">     * in this function. Other types use encoded memory efficient
+</span><span class="cm">     * representations but are handled by the commands implementing
+</span><span class="cm">     * the type. */</span>
+    <span class="n">serverAssertWithInfo</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="n">o</span><span class="p">,</span><span class="n">o</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">OBJ_STRING</span><span class="p">);</span>
+
+    <span class="cm">/* We try some specialized encoding only for objects that are
+</span><span class="cm">     * RAW or EMBSTR encoded, in other words objects that are still
+</span><span class="cm">     * in represented by an actually array of chars. */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">sdsEncodedObject</span><span class="p">(</span><span class="n">o</span><span class="p">))</span> <span class="k">return</span> <span class="n">o</span><span class="p">;</span>
+
+    <span class="cm">/* It&#39;s not safe to encode shared objects: shared objects can be shared
+</span><span class="cm">     * everywhere in the &#34;object space&#34; of Redis and may end in places where
+</span><span class="cm">     * they are not handled. We handle them only as values in the keyspace. */</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">o</span><span class="o">-&gt;</span><span class="n">refcount</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">o</span><span class="p">;</span>
+
+    <span class="cm">/* Check if we can represent this string as a long integer.
+</span><span class="cm">     * Note that we are sure that a string larger than 20 chars is not
+</span><span class="cm">     * representable as a 32 nor 64 bit integer. */</span>
+    <span class="n">len</span> <span class="o">=</span> <span class="n">sdslen</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+  <span class="c1">//小于20等于21个字节且其为int 
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">len</span> <span class="o">&lt;=</span> <span class="mi">20</span> <span class="o">&amp;&amp;</span> <span class="n">string2l</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">len</span><span class="p">,</span><span class="o">&amp;</span><span class="n">value</span><span class="p">))</span> <span class="p">{</span>
+        <span class="cm">/* This object is encodable as a long. Try to use a shared object.
+</span><span class="cm">         * Note that we avoid using shared integers when maxmemory is used
+</span><span class="cm">         * because every object needs to have a private LRU field for the LRU
+</span><span class="cm">         * algorithm to work well. */</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">server</span><span class="p">.</span><span class="n">maxmemory</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span>
+            <span class="o">!</span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">maxmemory_policy</span> <span class="o">&amp;</span> <span class="n">MAXMEMORY_FLAG_NO_SHARED_INTEGERS</span><span class="p">))</span> <span class="o">&amp;&amp;</span>
+            <span class="n">value</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>
+            <span class="n">value</span> <span class="o">&lt;</span> <span class="n">OBJ_SHARED_INTEGERS</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">decrRefCount</span><span class="p">(</span><span class="n">o</span><span class="p">);</span>
+            <span class="n">incrRefCount</span><span class="p">(</span><span class="n">shared</span><span class="p">.</span><span class="n">integers</span><span class="p">[</span><span class="n">value</span><span class="p">]);</span>
+            <span class="k">return</span> <span class="n">shared</span><span class="p">.</span><span class="n">integers</span><span class="p">[</span><span class="n">value</span><span class="p">];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">o</span><span class="o">-&gt;</span><span class="n">encoding</span> <span class="o">==</span> <span class="n">OBJ_ENCODING_RAW</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">sdsfree</span><span class="p">(</span><span class="n">o</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">);</span>
+                <span class="n">o</span><span class="o">-&gt;</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">OBJ_ENCODING_INT</span><span class="p">;</span>
+                <span class="n">o</span><span class="o">-&gt;</span><span class="n">ptr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="n">value</span><span class="p">;</span>
+                <span class="k">return</span> <span class="n">o</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">o</span><span class="o">-&gt;</span><span class="n">encoding</span> <span class="o">==</span> <span class="n">OBJ_ENCODING_EMBSTR</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">decrRefCount</span><span class="p">(</span><span class="n">o</span><span class="p">);</span>
+                <span class="k">return</span> <span class="n">createStringObjectFromLongLongForValue</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* If the string is small and is still RAW encoded,
+</span><span class="cm">     * try the EMBSTR encoding which is more efficient.
+</span><span class="cm">     * In this representation the object and the SDS string are allocated
+</span><span class="cm">     * in the same chunk of memory to save space and cache misses. */</span>
+  	<span class="c1">// 小于 44 
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">len</span> <span class="o">&lt;=</span> <span class="n">OBJ_ENCODING_EMBSTR_SIZE_LIMIT</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">robj</span> <span class="o">*</span><span class="n">emb</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">o</span><span class="o">-&gt;</span><span class="n">encoding</span> <span class="o">==</span> <span class="n">OBJ_ENCODING_EMBSTR</span><span class="p">)</span> <span class="k">return</span> <span class="n">o</span><span class="p">;</span>
+        <span class="n">emb</span> <span class="o">=</span> <span class="n">createEmbeddedStringObject</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">sdslen</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+        <span class="n">decrRefCount</span><span class="p">(</span><span class="n">o</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">emb</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* We can&#39;t encode the object...
+</span><span class="cm">     *
+</span><span class="cm">     * Do the last try, and at least optimize the SDS string inside
+</span><span class="cm">     * the string object to require little space, in case there
+</span><span class="cm">     * is more than 10% of free space at the end of the SDS string.
+</span><span class="cm">     *
+</span><span class="cm">     * We do that only for relatively large strings as this branch
+</span><span class="cm">     * is only entered if the length of the string is greater than
+</span><span class="cm">     * OBJ_ENCODING_EMBSTR_SIZE_LIMIT. */</span>
+    <span class="n">trimStringObjectIfNeeded</span><span class="p">(</span><span class="n">o</span><span class="p">);</span>
+
+    <span class="cm">/* Return the original object. */</span>
+    <span class="k">return</span> <span class="n">o</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="常见命令">常见命令</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -188,7 +555,66 @@
 
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><h2 id="使用">使用</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">rdb</span> <span class="o">:=</span> <span class="nx">redis</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Options</span><span class="p">{</span>
+		<span class="nx">Addr</span><span class="p">:</span>     <span class="s">&#34;localhost:6379&#34;</span><span class="p">,</span>
+		<span class="nx">Password</span><span class="p">:</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="c1">// no password set
+</span><span class="c1"></span>		<span class="nx">DB</span><span class="p">:</span>       <span class="mi">0</span><span class="p">,</span>  <span class="c1">// use default DB
+</span><span class="c1"></span>	<span class="p">})</span>
+
+	<span class="nx">rdbCmdStatus</span>  <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;key&#34;</span><span class="p">,</span> <span class="s">&#34;value&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">rdbCmdStatus</span><span class="p">.</span><span class="nf">Err</span><span class="p">()</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Set redis failed %v,cmd is %s  &#34;</span><span class="p">,</span><span class="nx">rdbCmdStatus</span><span class="p">.</span><span class="nf">Err</span><span class="p">(),</span><span class="nx">rdbCmdStatus</span><span class="p">.</span><span class="nf">String</span><span class="p">())</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">rdbCmdStatus</span><span class="p">.</span><span class="nf">String</span><span class="p">())</span>
+
+	<span class="nx">resStatus</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;key&#34;</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">resStatus</span><span class="p">.</span><span class="nf">Err</span><span class="p">()</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Get redis failed %v,cmd is %s  &#34;</span><span class="p">,</span><span class="nx">rdbCmdStatus</span><span class="p">.</span><span class="nf">Err</span><span class="p">(),</span><span class="nx">rdbCmdStatus</span><span class="p">.</span><span class="nf">String</span><span class="p">())</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">resStatus</span><span class="p">.</span><span class="nf">String</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="list">List</h1>
+<h2 id="构成-1">构成</h2>
+<p> redis list数据结构底层采用压缩列表ziplist或linkedlist两种数据结构进行存储，首先以ziplist进行存储，在不满足ziplist的存储要求后转换为linkedlist列表。
+<strong>当列表对象同时满足以下两个条件时，列表对象使用ziplist进行存储，否则用linkedlist存储。</strong></p>
+<ul>
+<li>列表对象保存的所有字符串元素的长度小于64字节</li>
+<li>列表对象保存的元素数量小于512 （可以配置）</li>
+</ul>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -214,35 +640,165 @@
 </span><span class="lnt">22
 </span><span class="lnt">23
 </span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">rdb</span> <span class="o">:=</span> <span class="nx">redis</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Options</span><span class="p">{</span>
-		<span class="nx">Addr</span><span class="p">:</span>     <span class="s">&#34;localhost:6379&#34;</span><span class="p">,</span>
-		<span class="nx">Password</span><span class="p">:</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="c1">// no password set
-</span><span class="c1"></span>		<span class="nx">DB</span><span class="p">:</span>       <span class="mi">0</span><span class="p">,</span>  <span class="c1">// use default DB
-</span><span class="c1"></span>	<span class="p">})</span>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">oid</span> <span class="nf">pushGenericCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="kt">int</span> <span class="n">where</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">j</span><span class="p">,</span> <span class="n">pushed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  	<span class="c1">// 取出对象
+</span><span class="c1"></span>    <span class="n">robj</span> <span class="o">*</span><span class="n">lobj</span> <span class="o">=</span> <span class="n">lookupKeyWrite</span><span class="p">(</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">db</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 
-	<span class="nx">rdbCmdStatus</span>  <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;key&#34;</span><span class="p">,</span> <span class="s">&#34;value&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">rdbCmdStatus</span><span class="p">.</span><span class="nf">Err</span><span class="p">()</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Set redis failed %v,cmd is %s  &#34;</span><span class="p">,</span><span class="nx">rdbCmdStatus</span><span class="p">.</span><span class="nf">Err</span><span class="p">(),</span><span class="nx">rdbCmdStatus</span><span class="p">.</span><span class="nf">String</span><span class="p">())</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
+  	<span class="c1">// 对象类型不是 OBJ_LIST 
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">lobj</span> <span class="o">&amp;&amp;</span> <span class="n">lobj</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">OBJ_LIST</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">addReply</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">shared</span><span class="p">.</span><span class="n">wrongtypeerr</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
 
-	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">rdbCmdStatus</span><span class="p">.</span><span class="nf">String</span><span class="p">())</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">c</span><span class="o">-&gt;</span><span class="n">argc</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      	<span class="c1">// 对象为空，创建一个obj 
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">lobj</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">lobj</span> <span class="o">=</span> <span class="n">createQuicklistObject</span><span class="p">();</span>
+          	<span class="c1">//设置类型
+</span><span class="c1"></span>            <span class="n">quicklistSetOptions</span><span class="p">(</span><span class="n">lobj</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">,</span> <span class="n">server</span><span class="p">.</span><span class="n">list_max_ziplist_size</span><span class="p">,</span>
+                                <span class="n">server</span><span class="p">.</span><span class="n">list_compress_depth</span><span class="p">);</span>
+            <span class="c1">//关联到数据库
+</span><span class="c1"></span>            <span class="n">dbAdd</span><span class="p">(</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">db</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">lobj</span><span class="p">);</span>
+        <span class="p">}</span>
+      	 <span class="c1">// 将值推入到列表
+</span><span class="c1"></span>        <span class="n">listTypePush</span><span class="p">(</span><span class="n">lobj</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">where</span><span class="p">);</span>
+        <span class="n">pushed</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+  
+    <span class="n">addReplyLongLong</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="p">(</span><span class="n">lobj</span> <span class="o">?</span> <span class="n">listTypeLength</span><span class="p">(</span><span class="n">lobj</span><span class="p">)</span> <span class="o">:</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pushed</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">char</span> <span class="o">*</span><span class="n">event</span> <span class="o">=</span> <span class="p">(</span><span class="n">where</span> <span class="o">==</span> <span class="n">LIST_HEAD</span><span class="p">)</span> <span class="o">?</span> <span class="s">&#34;lpush&#34;</span> <span class="o">:</span> <span class="s">&#34;rpush&#34;</span><span class="p">;</span>
 
-	<span class="nx">resStatus</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;key&#34;</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">resStatus</span><span class="p">.</span><span class="nf">Err</span><span class="p">()</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Get redis failed %v,cmd is %s  &#34;</span><span class="p">,</span><span class="nx">rdbCmdStatus</span><span class="p">.</span><span class="nf">Err</span><span class="p">(),</span><span class="nx">rdbCmdStatus</span><span class="p">.</span><span class="nf">String</span><span class="p">())</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
-
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">resStatus</span><span class="p">.</span><span class="nf">String</span><span class="p">())</span>
+        <span class="n">signalModifiedKey</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">db</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+        <span class="n">notifyKeyspaceEvent</span><span class="p">(</span><span class="n">NOTIFY_LIST</span><span class="p">,</span><span class="n">event</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">db</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">dirty</span> <span class="o">+=</span> <span class="n">pushed</span><span class="p">;</span>
 <span class="p">}</span>
+
+<span class="cm">/* The function pushes an element to the specified list object &#39;subject&#39;,
+</span><span class="cm"> * at head or tail position as specified by &#39;where&#39;.
+</span><span class="cm"> *
+</span><span class="cm"> * There is no need for the caller to increment the refcount of &#39;value&#39; as
+</span><span class="cm"> * the function takes care of it if needed. */</span>
+<span class="kt">void</span> <span class="nf">listTypePush</span><span class="p">(</span><span class="n">robj</span> <span class="o">*</span><span class="n">subject</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">value</span><span class="p">,</span> <span class="kt">int</span> <span class="n">where</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">subject</span><span class="o">-&gt;</span><span class="n">encoding</span> <span class="o">==</span> <span class="n">OBJ_ENCODING_QUICKLIST</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">where</span> <span class="o">==</span> <span class="n">LIST_HEAD</span><span class="p">)</span> <span class="o">?</span> <span class="nl">QUICKLIST_HEAD</span> <span class="p">:</span> <span class="n">QUICKLIST_TAIL</span><span class="p">;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">getDecodedObject</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+        <span class="n">size_t</span> <span class="n">len</span> <span class="o">=</span> <span class="n">sdslen</span><span class="p">(</span><span class="n">value</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">);</span>
+        <span class="c1">//推送数据
+</span><span class="c1"></span>      	<span class="n">quicklistPush</span><span class="p">(</span><span class="n">subject</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">,</span> <span class="n">value</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">pos</span><span class="p">);</span>
+        <span class="n">decrRefCount</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      	
+        <span class="n">serverPanic</span><span class="p">(</span><span class="s">&#34;Unknown list encoding&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="cm">/* Wrapper to allow argument-based switching between HEAD/TAIL pop */</span>
+<span class="kt">void</span> <span class="nf">quicklistPush</span><span class="p">(</span><span class="n">quicklist</span> <span class="o">*</span><span class="n">quicklist</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">value</span><span class="p">,</span> <span class="k">const</span> <span class="n">size_t</span> <span class="n">sz</span><span class="p">,</span>
+                   <span class="kt">int</span> <span class="n">where</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">where</span> <span class="o">==</span> <span class="n">QUICKLIST_HEAD</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">quicklistPushHead</span><span class="p">(</span><span class="n">quicklist</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">sz</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">where</span> <span class="o">==</span> <span class="n">QUICKLIST_TAIL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">quicklistPushTail</span><span class="p">(</span><span class="n">quicklist</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">sz</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/* Add new entry to head node of quicklist.
+</span><span class="cm"> *
+</span><span class="cm"> * Returns 0 if used existing head.
+</span><span class="cm"> * Returns 1 if new head created. */</span>
+<span class="kt">int</span> <span class="nf">quicklistPushHead</span><span class="p">(</span><span class="n">quicklist</span> <span class="o">*</span><span class="n">quicklist</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">value</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">sz</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">quicklistNode</span> <span class="o">*</span><span class="n">orig_head</span> <span class="o">=</span> <span class="n">quicklist</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">;</span>
+   	<span class="c1">//是否zip编码类型
+</span><span class="c1"></span>  	<span class="k">if</span> <span class="p">(</span><span class="n">likely</span><span class="p">(</span>
+            <span class="n">_quicklistNodeAllowInsert</span><span class="p">(</span><span class="n">quicklist</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">,</span> <span class="n">quicklist</span><span class="o">-&gt;</span><span class="n">fill</span><span class="p">,</span> <span class="n">sz</span><span class="p">)))</span> <span class="p">{</span>
+        <span class="n">quicklist</span><span class="o">-&gt;</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">zl</span> <span class="o">=</span>
+            <span class="n">ziplistPush</span><span class="p">(</span><span class="n">quicklist</span><span class="o">-&gt;</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">zl</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">sz</span><span class="p">,</span> <span class="n">ZIPLIST_HEAD</span><span class="p">);</span>
+        <span class="n">quicklistNodeUpdateSz</span><span class="p">(</span><span class="n">quicklist</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">quicklistNode</span> <span class="o">*</span><span class="n">node</span> <span class="o">=</span> <span class="n">quicklistCreateNode</span><span class="p">();</span>
+        <span class="n">node</span><span class="o">-&gt;</span><span class="n">zl</span> <span class="o">=</span> <span class="n">ziplistPush</span><span class="p">(</span><span class="n">ziplistNew</span><span class="p">(),</span> <span class="n">value</span><span class="p">,</span> <span class="n">sz</span><span class="p">,</span> <span class="n">ZIPLIST_HEAD</span><span class="p">);</span>
+
+        <span class="n">quicklistNodeUpdateSz</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+        <span class="n">_quicklistInsertNodeBefore</span><span class="p">(</span><span class="n">quicklist</span><span class="p">,</span> <span class="n">quicklist</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">,</span> <span class="n">node</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">quicklist</span><span class="o">-&gt;</span><span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="n">quicklist</span><span class="o">-&gt;</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">orig_head</span> <span class="o">!=</span> <span class="n">quicklist</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">);</span>
+<span class="p">}</span>
+
 
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="list">List</h1>
+</div><h2 id="常见命令-1">常见命令</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -275,7 +831,8 @@
 //rpoplpush(srckey, dstkey)：返回并删除名称为srckey的list的尾元素，并将该元素添加到名称为dstkey的list的头部
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><h2 id="简单使用">简单使用</h2>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -368,6 +925,281 @@
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="hash">Hash</h1>
+<h2 id="构成-2">构成</h2>
+<p> redis hash 数据结构底层采用压缩列表ziplist或linkedlist两种数据结构进行存储，首先以ziplist进行存储，在不满足ziplist的存储要求后转换为linkedlist列表。</p>
+<ol>
+<li>哈希对象保存的所有键值对的键和值的字符串长度都小于 <code>64</code> 字节（可以配置）；</li>
+<li>哈希对象保存的键值对数量小于 <code>512</code> 个（可以配置）；</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">hsetCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">created</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">robj</span> <span class="o">*</span><span class="n">o</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argc</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">addReplyErrorFormat</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="s">&#34;wrong number of arguments for &#39;%s&#39; command&#34;</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">cmd</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+  	<span class="c1">//不存在
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">((</span><span class="n">o</span> <span class="o">=</span> <span class="n">hashTypeLookupWriteOrCreate</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+  	<span class="c1">//尝试将ziplist 转换成hash 编码
+</span><span class="c1"></span>    <span class="n">hashTypeTryConversion</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argc</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">c</span><span class="o">-&gt;</span><span class="n">argc</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">created</span> <span class="o">+=</span> <span class="o">!</span><span class="n">hashTypeSet</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">,</span><span class="n">HASH_SET_COPY</span><span class="p">);</span>
+
+    <span class="cm">/* HMSET (deprecated) and HSET return value is different. */</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">cmdname</span> <span class="o">=</span> <span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">cmdname</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;s&#39;</span> <span class="o">||</span> <span class="n">cmdname</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;S&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="cm">/* HSET */</span>
+        <span class="n">addReplyLongLong</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">created</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="cm">/* HMSET */</span>
+        <span class="n">addReply</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">shared</span><span class="p">.</span><span class="n">ok</span><span class="p">);</span>
+    <span class="p">}</span>
+ 	 <span class="c1">// 发送键修改信号
+</span><span class="c1"></span>    <span class="n">signalModifiedKey</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">db</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  	<span class="c1">// 发送事件通知
+</span><span class="c1"></span>  <span class="n">notifyKeyspaceEvent</span><span class="p">(</span><span class="n">NOTIFY_HASH</span><span class="p">,</span><span class="s">&#34;hset&#34;</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">db</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">);</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">dirty</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="cm">/* Check the length of a number of objects to see if we need to convert a
+</span><span class="cm"> * ziplist to a real hash. Note that we only check string encoded objects
+</span><span class="cm"> * as their string length can be queried in constant time. */</span>
+<span class="kt">void</span> <span class="nf">hashTypeTryConversion</span><span class="p">(</span><span class="n">robj</span> <span class="o">*</span><span class="n">o</span><span class="p">,</span> <span class="n">robj</span> <span class="o">**</span><span class="n">argv</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">o</span><span class="o">-&gt;</span><span class="n">encoding</span> <span class="o">!=</span> <span class="n">OBJ_ENCODING_ZIPLIST</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">sdsEncodedObject</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&amp;&amp;</span>
+            <span class="n">sdslen</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">server</span><span class="p">.</span><span class="n">hash_max_ziplist_value</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">hashTypeConvert</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">OBJ_ENCODING_HT</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kt">int</span> <span class="nf">hashTypeSet</span><span class="p">(</span><span class="n">robj</span> <span class="o">*</span><span class="n">o</span><span class="p">,</span> <span class="n">sds</span> <span class="n">field</span><span class="p">,</span> <span class="n">sds</span> <span class="n">value</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">update</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  	<span class="c1">//ziplist 格式的编码
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">o</span><span class="o">-&gt;</span><span class="n">encoding</span> <span class="o">==</span> <span class="n">OBJ_ENCODING_ZIPLIST</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">zl</span><span class="p">,</span> <span class="o">*</span><span class="n">fptr</span><span class="p">,</span> <span class="o">*</span><span class="n">vptr</span><span class="p">;</span>
+
+        <span class="n">zl</span> <span class="o">=</span> <span class="n">o</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">;</span>
+        <span class="n">fptr</span> <span class="o">=</span> <span class="n">ziplistIndex</span><span class="p">(</span><span class="n">zl</span><span class="p">,</span> <span class="n">ZIPLIST_HEAD</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">fptr</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">fptr</span> <span class="o">=</span> <span class="n">ziplistFind</span><span class="p">(</span><span class="n">fptr</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">field</span><span class="p">,</span> <span class="n">sdslen</span><span class="p">(</span><span class="n">field</span><span class="p">),</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">fptr</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+                <span class="cm">/* Grab pointer to the value (fptr points to the field) */</span>
+                <span class="n">vptr</span> <span class="o">=</span> <span class="n">ziplistNext</span><span class="p">(</span><span class="n">zl</span><span class="p">,</span> <span class="n">fptr</span><span class="p">);</span>
+                <span class="n">serverAssert</span><span class="p">(</span><span class="n">vptr</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+                <span class="n">update</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+                <span class="cm">/* Delete value */</span>
+                <span class="n">zl</span> <span class="o">=</span> <span class="n">ziplistDelete</span><span class="p">(</span><span class="n">zl</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vptr</span><span class="p">);</span>
+
+                <span class="cm">/* Insert new value */</span>
+                <span class="n">zl</span> <span class="o">=</span> <span class="n">ziplistInsert</span><span class="p">(</span><span class="n">zl</span><span class="p">,</span> <span class="n">vptr</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">value</span><span class="p">,</span>
+                        <span class="n">sdslen</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+			
+      	<span class="c1">//不是更新
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">update</span><span class="p">)</span> <span class="p">{</span>
+            <span class="cm">/* Push new field/value pair onto the tail of the ziplist */</span>
+            <span class="n">zl</span> <span class="o">=</span> <span class="n">ziplistPush</span><span class="p">(</span><span class="n">zl</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">field</span><span class="p">,</span> <span class="n">sdslen</span><span class="p">(</span><span class="n">field</span><span class="p">),</span>
+                    <span class="n">ZIPLIST_TAIL</span><span class="p">);</span>
+            <span class="n">zl</span> <span class="o">=</span> <span class="n">ziplistPush</span><span class="p">(</span><span class="n">zl</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">value</span><span class="p">,</span> <span class="n">sdslen</span><span class="p">(</span><span class="n">value</span><span class="p">),</span>
+                    <span class="n">ZIPLIST_TAIL</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">o</span><span class="o">-&gt;</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">zl</span><span class="p">;</span>
+
+        <span class="cm">/* Check if the ziplist needs to be converted to a hash table */</span>
+      	<span class="c1">//大于 hash_max_ziplist_entries ,转换格式
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">hashTypeLength</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">server</span><span class="p">.</span><span class="n">hash_max_ziplist_entries</span><span class="p">)</span>
+            <span class="n">hashTypeConvert</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">OBJ_ENCODING_HT</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">o</span><span class="o">-&gt;</span><span class="n">encoding</span> <span class="o">==</span> <span class="n">OBJ_ENCODING_HT</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">dictEntry</span> <span class="o">*</span><span class="n">de</span> <span class="o">=</span> <span class="n">dictFind</span><span class="p">(</span><span class="n">o</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">,</span><span class="n">field</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">de</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">sdsfree</span><span class="p">(</span><span class="n">dictGetVal</span><span class="p">(</span><span class="n">de</span><span class="p">));</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">HASH_SET_TAKE_VALUE</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">dictGetVal</span><span class="p">(</span><span class="n">de</span><span class="p">)</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">dictGetVal</span><span class="p">(</span><span class="n">de</span><span class="p">)</span> <span class="o">=</span> <span class="n">sdsdup</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">update</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">sds</span> <span class="n">f</span><span class="p">,</span><span class="n">v</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">HASH_SET_TAKE_FIELD</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="n">field</span><span class="p">;</span>
+                <span class="n">field</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="n">sdsdup</span><span class="p">(</span><span class="n">field</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">HASH_SET_TAKE_VALUE</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">sdsdup</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">dictAdd</span><span class="p">(</span><span class="n">o</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">serverPanic</span><span class="p">(</span><span class="s">&#34;Unknown hash encoding&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* Free SDS strings we did not referenced elsewhere if the flags
+</span><span class="cm">     * want this function to be responsible. */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">HASH_SET_TAKE_FIELD</span> <span class="o">&amp;&amp;</span> <span class="n">field</span><span class="p">)</span> <span class="n">sdsfree</span><span class="p">(</span><span class="n">field</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">HASH_SET_TAKE_VALUE</span> <span class="o">&amp;&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="n">sdsfree</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">update</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>##常见命令</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -396,7 +1228,8 @@
 //hgetall(key)：返回名称为key的hash中所有的键（field）及其对应的value
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><h2 id="使用-1">使用</h2>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -459,6 +1292,159 @@
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="set">Set</h1>
+<h2 id="构成-3">构成</h2>
+<ul>
+<li><strong>intset</strong>（整数集合）：当集合中的元素都是整数且元素个数小于set-max-intset-entries配置（默认512个）时，</li>
+</ul>
+<p>　　　　Redis会选用intset来作为集合内部实现，从而减少内存的使用。</p>
+<ul>
+<li><strong>hashtable</strong>（哈希表）：当集合类型无法满足intset的条件时，Redis会使用hashtable作为集合的内部实现。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">saddCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">robj</span> <span class="o">*</span><span class="n">set</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span><span class="p">,</span> <span class="n">added</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">set</span> <span class="o">=</span> <span class="n">lookupKeyWrite</span><span class="p">(</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">db</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">set</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">set</span> <span class="o">=</span> <span class="n">setTypeCreate</span><span class="p">(</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">);</span>
+        <span class="n">dbAdd</span><span class="p">(</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">db</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">set</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">set</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">OBJ_SET</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">addReply</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">shared</span><span class="p">.</span><span class="n">wrongtypeerr</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">c</span><span class="o">-&gt;</span><span class="n">argc</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">setTypeAdd</span><span class="p">(</span><span class="n">set</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">))</span> <span class="n">added</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">added</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">signalModifiedKey</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">db</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+        <span class="n">notifyKeyspaceEvent</span><span class="p">(</span><span class="n">NOTIFY_SET</span><span class="p">,</span><span class="s">&#34;sadd&#34;</span><span class="p">,</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">db</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">dirty</span> <span class="o">+=</span> <span class="n">added</span><span class="p">;</span>
+    <span class="n">addReplyLongLong</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">added</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="cm">/* Add the specified value into a set.
+</span><span class="cm"> *
+</span><span class="cm"> * If the value was already member of the set, nothing is done and 0 is
+</span><span class="cm"> * returned, otherwise the new element is added and 1 is returned. */</span>
+<span class="kt">int</span> <span class="nf">setTypeAdd</span><span class="p">(</span><span class="n">robj</span> <span class="o">*</span><span class="n">subject</span><span class="p">,</span> <span class="n">sds</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">llval</span><span class="p">;</span>
+  	<span class="c1">//编码类型是 hashtable 
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">subject</span><span class="o">-&gt;</span><span class="n">encoding</span> <span class="o">==</span> <span class="n">OBJ_ENCODING_HT</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">dict</span> <span class="o">*</span><span class="n">ht</span> <span class="o">=</span> <span class="n">subject</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">;</span>
+        <span class="n">dictEntry</span> <span class="o">*</span><span class="n">de</span> <span class="o">=</span> <span class="n">dictAddRaw</span><span class="p">(</span><span class="n">ht</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">de</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">dictSetKey</span><span class="p">(</span><span class="n">ht</span><span class="p">,</span><span class="n">de</span><span class="p">,</span><span class="n">sdsdup</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+            <span class="n">dictSetVal</span><span class="p">(</span><span class="n">ht</span><span class="p">,</span><span class="n">de</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">subject</span><span class="o">-&gt;</span><span class="n">encoding</span> <span class="o">==</span> <span class="n">OBJ_ENCODING_INTSET</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isSdsRepresentableAsLongLong</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="o">&amp;</span><span class="n">llval</span><span class="p">)</span> <span class="o">==</span> <span class="n">C_OK</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">uint8_t</span> <span class="n">success</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">subject</span><span class="o">-&gt;</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">intsetAdd</span><span class="p">(</span><span class="n">subject</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">,</span><span class="n">llval</span><span class="p">,</span><span class="o">&amp;</span><span class="n">success</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">success</span><span class="p">)</span> <span class="p">{</span>
+                <span class="cm">/* Convert to regular set when the intset contains
+</span><span class="cm">                 * too many entries. */</span>
+              	<span class="c1">// 量过多，转换成 hashtable 
+</span><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">intsetLen</span><span class="p">(</span><span class="n">subject</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">server</span><span class="p">.</span><span class="n">set_max_intset_entries</span><span class="p">)</span>
+                    <span class="n">setTypeConvert</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span><span class="n">OBJ_ENCODING_HT</span><span class="p">);</span>
+                <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="cm">/* Failed to get integer from object, convert to regular set. */</span>
+            <span class="c1">// 量过多，转换成 hashtable 
+</span><span class="c1"></span>            <span class="n">setTypeConvert</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span><span class="n">OBJ_ENCODING_HT</span><span class="p">);</span>
+
+            <span class="cm">/* The set *was* an intset and this value is not integer
+</span><span class="cm">             * encodable, so dictAdd should always work. */</span>
+            <span class="n">serverAssert</span><span class="p">(</span><span class="n">dictAdd</span><span class="p">(</span><span class="n">subject</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">,</span><span class="n">sdsdup</span><span class="p">(</span><span class="n">value</span><span class="p">),</span><span class="nb">NULL</span><span class="p">)</span> <span class="o">==</span> <span class="n">DICT_OK</span><span class="p">);</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">serverPanic</span><span class="p">(</span><span class="s">&#34;Unknown set encoding&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="常见命令-2">常见命令</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -493,7 +1479,8 @@
 //srandmember(key) ：随机返回名称为key的set的一个元素
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><h2 id="使用-2">使用</h2>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -669,7 +1656,9 @@
 
 </code></pre></td></tr></table>
 </div>
-</div>
+</div><h1 id="参考">参考</h1>
+<p><a href="http://redisbook.com/preview/object/hash.html">http://redisbook.com/preview/object/hash.html</a></p>
+
     </div>
 
     <div class="post-copyright">
@@ -695,8 +1684,8 @@
             <span class="prev-text nav-default">62不同路径</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/post/leetcode/53%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/">
-            <span class="next-text nav-default">53最大子序和</span>
+        <a class="next" href="/post/redis/redis%E7%9F%A5%E8%AF%86%E7%82%B9/">
+            <span class="next-text nav-default">Redis数据类型使用</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>

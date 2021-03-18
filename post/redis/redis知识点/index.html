@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>白水飘萍</title>
+  <title>Redis数据类型使用 - 白水飘萍</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="白水飘萍" /><meta name="description" content="Hugo theme even example site." /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="白水飘萍" /><meta name="description" content="Redis 知识点 Redis 数据类 String - row （sds） - embstr (sds) - int List - ziplist - linkedList Hash - ziplist - hashtable Set - hashtable - inset Sorted Set - skiplist - ziplist Redis 的持久化化方式 RDB AOF 负载均衡 一致性hash 普通hash 为" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,9 +26,7 @@
 <meta name="generator" content="Hugo 0.75.1 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/" />
-  <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="白水飘萍" />
-  <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="白水飘萍" />
+<link rel="canonical" href="http://localhost:1313/post/redis/redis%E7%9F%A5%E8%AF%86%E7%82%B9/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -41,16 +39,24 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="白水飘萍" />
-<meta property="og:description" content="Hugo theme even example site." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://localhost:1313/" />
-<meta property="og:updated_time" content="2021-03-04T14:48:25+08:00" />
-<meta itemprop="name" content="白水飘萍">
-<meta itemprop="description" content="Hugo theme even example site.">
+<meta property="og:title" content="Redis数据类型使用" />
+<meta property="og:description" content="Redis 知识点 Redis 数据类 String - row （sds） - embstr (sds) - int List - ziplist - linkedList Hash - ziplist - hashtable Set - hashtable - inset Sorted Set - skiplist - ziplist Redis 的持久化化方式 RDB AOF 负载均衡 一致性hash 普通hash 为" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/redis/redis%E7%9F%A5%E8%AF%86%E7%82%B9/" />
+<meta property="article:published_time" content="2020-11-04T16:54:38+08:00" />
+<meta property="article:modified_time" content="2020-11-04T16:54:38+08:00" />
+<meta itemprop="name" content="Redis数据类型使用">
+<meta itemprop="description" content="Redis 知识点 Redis 数据类 String - row （sds） - embstr (sds) - int List - ziplist - linkedList Hash - ziplist - hashtable Set - hashtable - inset Sorted Set - skiplist - ziplist Redis 的持久化化方式 RDB AOF 负载均衡 一致性hash 普通hash 为">
+<meta itemprop="datePublished" content="2020-11-04T16:54:38+08:00" />
+<meta itemprop="dateModified" content="2020-11-04T16:54:38+08:00" />
+<meta itemprop="wordCount" content="108">
+
+
+
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="白水飘萍"/>
-<meta name="twitter:description" content="Hugo theme even example site."/>
+<meta name="twitter:title" content="Redis数据类型使用"/>
+<meta name="twitter:description" content="Redis 知识点 Redis 数据类 String - row （sds） - embstr (sds) - int List - ziplist - linkedList Hash - ziplist - hashtable Set - hashtable - inset Sorted Set - skiplist - ziplist Redis 的持久化化方式 RDB AOF 负载均衡 一致性hash 普通hash 为"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -115,94 +121,123 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <section id="posts" class="posts">
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/elk/elk%E9%83%A8%E7%BD%B2/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Docker 部署 ElasticSearch 拉取镜像 1 docker pull docker.elastic.co/elasticsearch/elasticsearch:7.9.0 运行镜像 ElasticSearch的默认端口是9200，我们把宿主环境9200端口映射到Docker容器中的9200
-    </div>
-    <div class="read-more">
-      <a href="/post/elk/elk%E9%83%A8%E7%BD%B2/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/leetcode/167%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      题目 给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。 函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 inde
-    </div>
-    <div class="read-more">
-      <a href="/post/leetcode/167%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/os/io/io%E6%A8%A1%E5%9E%8B/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      
-    </div>
-    <div class="read-more">
-      <a href="/post/os/io/io%E6%A8%A1%E5%9E%8B/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/scip/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E6%9E%84%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8A%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B02/">计算机程序构造和解释阅读笔记2_构造数据抽象</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      概述 为什么需要复合数据 Why do we want compound data in a programming language? For the same reasons that we want compound procedures: to elevate the conceptual level at which we can design our programs, to increase the modularity of our designs, and to enhance the expressive power of our language. Just as the ability to define procedures enables us to deal with
-    </div>
-    <div class="read-more">
-      <a href="/post/scip/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E6%9E%84%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8A%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B02/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    </section>
-  
-  <nav class="pagination">
-    <a class="prev" href="/page/25/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text">Prev</span>
-      </a>
+          <article class="post">
     
-  </nav>
+    <header class="post-header">
+      <h1 class="post-title">Redis数据类型使用</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-04 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Redis 知识点</p>
+<ul>
+<li>
+<p>Redis 数据类</p>
+<ul>
+<li>String
+- row （sds）
+- embstr (sds)
+- int</li>
+<li>List
+- ziplist
+- linkedList</li>
+<li>Hash
+- ziplist
+- hashtable</li>
+<li>Set
+- hashtable
+- inset</li>
+<li>Sorted Set
+- skiplist
+- ziplist</li>
+</ul>
+</li>
+<li>
+<p>Redis 的持久化化方式</p>
+<ul>
+<li>RDB</li>
+</ul>
+</li>
+<li>
+<p>AOF</p>
+</li>
+<li>
+<p>负载均衡</p>
+<ul>
+<li>一致性hash</li>
+<li>普通hash</li>
+<li>为什么需要一致性hash</li>
+</ul>
+</li>
+<li>
+<p>Redis 分布式锁</p>
+</li>
+<li>
+<p>Redis 的事件模式</p>
+<ul>
+<li>为什么是单线程</li>
+<li>I/O 模型</li>
+<li>Rector 模型</li>
+</ul>
+</li>
+</ul>
+<h1 id="参考">参考</h1>
+<p><a href="http://redisbook.com/preview/object/hash.html">http://redisbook.com/preview/object/hash.html</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">白水飘萍</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-04
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/redis/redis%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Redis数据类型使用</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/leetcode/53%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/">
+            <span class="next-text nav-default">53最大子序和</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
         
+
+  
+
+  
 
       </div>
     </main>
