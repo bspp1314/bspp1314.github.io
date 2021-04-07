@@ -17,6 +17,24 @@
     </item>
     
     <item>
+      <title>重组字符串</title>
+      <link>http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/%E9%81%8D%E5%8E%86%E6%96%87%E4%BB%B6%E8%A1%8C%E5%92%8Cawk/</link>
+      <pubDate>Thu, 04 Mar 2021 14:48:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/%E9%81%8D%E5%8E%86%E6%96%87%E4%BB%B6%E8%A1%8C%E5%92%8Cawk/</guid>
+      <description>1 2 3 4 5 6 7 8 #!/bin/bash lines=&amp;#34;1,linyuanpeng1,林远鹏\n2,linyuanpeng2,林远鹏2&amp;#34; echo -e $lines | while read</description>
+    </item>
+    
+    <item>
+      <title>重组字符串</title>
+      <link>http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/%E9%87%8D%E7%BB%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <pubDate>Thu, 04 Mar 2021 14:48:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/%E9%87%8D%E7%BB%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 #!/bin/bash users=&amp;#34;test1,test2,test3&amp;#34; array=(${users//,/ }) res=&amp;#34;&amp;#34; len=${#array[@]} echo $res for (( i=0;i &amp;lt; $len;i++ )) do if (( &amp;#34;$i+1&amp;#34; == $len ));then | res=$res\&amp;#39;${array[i]}\&amp;#39; else | res=$res\&amp;#39;${array[i]}\&amp;#39;\, fi done echo $res out &amp;#39;test1&amp;#39;,&amp;#39;test2&amp;#39;,&amp;#39;test3&amp;#39;</description>
+    </item>
+    
+    <item>
       <title>57插入区间</title>
       <link>http://localhost:1313/post/leetcode/57%E6%8F%92%E5%85%A5%E5%8C%BA%E9%97%B4/</link>
       <pubDate>Fri, 19 Feb 2021 13:41:18 +0800</pubDate>

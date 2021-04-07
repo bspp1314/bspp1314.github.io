@@ -49,7 +49,7 @@
 <meta itemprop="description" content="Redis里面使用skiplist是为了实现sorted set这种对外的数据结构。 我们知道在一般的有序链表中，我们需要查找数据的时间复杂度为">
 <meta itemprop="datePublished" content="2020-11-27T21:11:55+08:00" />
 <meta itemprop="dateModified" content="2020-11-27T21:11:55+08:00" />
-<meta itemprop="wordCount" content="1643">
+<meta itemprop="wordCount" content="2055">
 
 
 
@@ -138,9 +138,15 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#redis-中skiplist">Redis 中Skiplist</a></li>
-    <li><a href="#创建跳跃表">创建跳跃表</a></li>
-    <li><a href="#插入数据">插入数据</a></li>
+    <li><a href="#源码分析">源码分析</a>
+      <ul>
+        <li><a href="#数据结构">数据结构</a></li>
+        <li><a href="#随机算法">随机算法</a></li>
+        <li><a href="#创建跳跃表">创建跳跃表</a></li>
+        <li><a href="#插入数据">插入数据</a></li>
+        <li><a href="#删除节点">删除节点</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -165,7 +171,8 @@
 <li>上层链表是下层链表的子序列</li>
 <li>查找时从顶层向下，不断缩小搜索范围</li>
 </ul>
-<h1 id="redis-中skiplist">Redis 中Skiplist</h1>
+<h1 id="源码分析">源码分析</h1>
+<h2 id="数据结构">数据结构</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -184,43 +191,79 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="cm">/* ZSETs use a specialized version of Skiplists */</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">zskiplistNode</span> <span class="p">{</span>
-  	<span class="c1">// key 值
-</span><span class="c1"></span>    <span class="n">sds</span> <span class="n">ele</span><span class="p">;</span>
-  	<span class="c1">// value 值
-</span><span class="c1"></span>    <span class="kt">double</span> <span class="n">score</span><span class="p">;</span>
-  	<span class="c1">//后退指针 
-</span><span class="c1"></span>    <span class="k">struct</span> <span class="n">zskiplistNode</span> <span class="o">*</span><span class="n">backward</span><span class="p">;</span>
-   <span class="c1">//各层的前进指针
-</span><span class="c1"></span>    <span class="k">struct</span> <span class="n">zskiplistLevel</span> <span class="p">{</span>
-         <span class="c1">// 前进指针
-</span><span class="c1"></span>        <span class="k">struct</span> <span class="n">zskiplistNode</span> <span class="o">*</span><span class="n">forward</span><span class="p">;</span>
-        <span class="c1">//跨度  
-</span><span class="c1"></span>       <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">span</span><span class="p">;</span>
-    <span class="p">}</span> <span class="n">level</span><span class="p">[];</span>
-<span class="p">}</span> <span class="n">zskiplistNode</span><span class="p">;</span>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="o">*</span> <span class="nx">ZSETs</span> <span class="nx">use</span> <span class="nx">a</span> <span class="nx">specialized</span> <span class="nx">version</span> <span class="nx">of</span> <span class="nx">Skiplists</span> <span class="o">*/</span>
+<span class="nx">typedef</span> <span class="kd">struct</span> <span class="nx">zskiplistNode</span> <span class="p">{</span>
+    <span class="nx">sds</span> <span class="nx">ele</span><span class="p">;</span>
+    <span class="nx">double</span> <span class="nx">score</span><span class="p">;</span> <span class="c1">//分数
+</span><span class="c1"></span>    <span class="kd">struct</span> <span class="nx">zskiplistNode</span> <span class="o">*</span><span class="nx">backward</span><span class="p">;</span><span class="c1">//后向指针
+</span><span class="c1"></span>    <span class="kd">struct</span> <span class="nx">zskiplistLevel</span> <span class="p">{</span>
+        <span class="kd">struct</span> <span class="nx">zskiplistNode</span> <span class="o">*</span><span class="nx">forward</span><span class="p">;</span><span class="c1">//每一层中的前向指针
+</span><span class="c1"></span>        <span class="nx">unsigned</span> <span class="kt">int</span> <span class="nx">span</span><span class="p">;</span><span class="c1">//x.level[i].span 表示节点x在第i层到其下一个节点需跳过的节点数。注：两个相邻节点span为1
+</span><span class="c1"></span>    <span class="p">}</span> <span class="nx">level</span><span class="p">[];</span>
+<span class="p">}</span> <span class="nx">zskiplistNode</span><span class="p">;</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">zskiplist</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">zskiplistNode</span> <span class="o">*</span><span class="n">header</span><span class="p">,</span> <span class="o">*</span><span class="n">tail</span><span class="p">;</span>
-    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">length</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">level</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">zskiplist</span><span class="p">;</span>
+<span class="nx">typedef</span> <span class="kd">struct</span> <span class="nx">zskiplist</span> <span class="p">{</span>
+    <span class="kd">struct</span> <span class="nx">zskiplistNode</span> <span class="o">*</span><span class="nx">header</span><span class="p">,</span> <span class="o">*</span><span class="nx">tail</span><span class="p">;</span>
+    <span class="nx">unsigned</span> <span class="nx">long</span> <span class="nx">length</span><span class="p">;</span><span class="c1">//节点总数
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="nx">level</span><span class="p">;</span><span class="c1">//总层数 
+</span><span class="c1"></span><span class="p">}</span> <span class="nx">zskiplist</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>节点的分值(score属性)是一个double类型的浮点数，跳跃表中的所有节点都按分值从小到大来排序。</li>
 <li>节点的后退指针 ( backward 属性 ) 用于从表尾向表头方向访问节点：跟可以一次跳过多个节点的前进指针不同，因为每个节点只有一个后退指针，所以每次只能后退至前一个节点。</li>
 </ul>
-<h1 id="创建跳跃表">创建跳跃表</h1>
+<h2 id="随机算法">随机算法</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">zslRandomLevel</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">level</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">((</span><span class="n">random</span><span class="p">()</span><span class="o">&amp;</span><span class="mh">0xFFFF</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">ZSKIPLIST_P</span> <span class="o">*</span> <span class="mh">0xFFFF</span><span class="p">))</span>
+        <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">level</span><span class="o">&lt;</span><span class="n">ZSKIPLIST_MAXLEVEL</span><span class="p">)</span> <span class="o">?</span> <span class="nl">level</span> <span class="p">:</span> <span class="n">ZSKIPLIST_MAXLEVEL</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这个代码的伪代码大概如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">randomLevel</span><span class="p">()</span>
+    <span class="nl">level</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span>
+    <span class="c1">// random()返回一个[0...1)的随机数
+</span><span class="c1"></span>    <span class="k">while</span> <span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">p</span> <span class="n">and</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="n">MaxLevel</span> <span class="k">do</span>  
+        <span class="nl">level</span> <span class="p">:</span><span class="o">=</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">level</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其中 p = 0.25  MaxLevel = 32</p>
+<p>根据前面randomLevel()的伪码，我们很容易看出，产生越高的节点层数，概率越低。定量的分析如下：</p>
+<ul>
+<li>节点层数至少为1。而大于1的节点层数，满足一个概率分布。</li>
+<li>节点层数恰好等于1的概率为$ (1-p) $。</li>
+<li>节点层数恰好等于2的概率为$ p(1-p) $)。</li>
+<li>节点层数恰好等于3的概率为$ p^2(1-p) $。</li>
+<li>节点层数恰好等于4的概率为$ p^3(1-p) $。</li>
+<li>节点层数恰好等于32的概率为$ p^{31}(1-p) $。</li>
+</ul>
+<h2 id="创建跳跃表">创建跳跃表</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -264,8 +307,8 @@
     <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
   	<span class="c1">//创建头节点
 </span><span class="c1"></span>    <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">header</span> <span class="o">=</span> <span class="n">zslCreateNode</span><span class="p">(</span><span class="n">ZSKIPLIST_MAXLEVEL</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
-  	<span class="c1">//ZSKIPLIST_MAXLEVEL 32 ，也就是说可以容纳 2^64个值
-</span><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">ZSKIPLIST_MAXLEVEL</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">ZSKIPLIST_MAXLEVEL</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">header</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">forward</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
         <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">header</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">span</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="p">}</span>
@@ -285,7 +328,7 @@
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="插入数据">插入数据</h1>
+</div><h2 id="插入数据">插入数据</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -433,6 +476,55 @@
         <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">tail</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
     <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">length</span><span class="o">++</span><span class="p">;</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="删除节点">删除节点</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cm">/* Internal function used by zslDelete, zslDeleteRangeByScore and
+</span><span class="cm"> * zslDeleteRangeByRank. */</span>
+<span class="kt">void</span> <span class="nf">zslDeleteNode</span><span class="p">(</span><span class="n">zskiplist</span> <span class="o">*</span><span class="n">zsl</span><span class="p">,</span> <span class="n">zskiplistNode</span> <span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">zskiplistNode</span> <span class="o">**</span><span class="n">update</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">update</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">forward</span> <span class="o">==</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">update</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">span</span> <span class="o">+=</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">span</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">update</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">forward</span> <span class="o">=</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">forward</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">update</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">span</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">forward</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">x</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">forward</span><span class="o">-&gt;</span><span class="n">backward</span> <span class="o">=</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">backward</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">tail</span> <span class="o">=</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">backward</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">zsl</span><span class="o">-&gt;</span><span class="n">level</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">header</span><span class="o">-&gt;</span><span class="n">level</span><span class="p">[</span><span class="n">zsl</span><span class="o">-&gt;</span><span class="n">level</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">forward</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+        <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">level</span><span class="o">--</span><span class="p">;</span>
+    <span class="n">zsl</span><span class="o">-&gt;</span><span class="n">length</span><span class="o">--</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>

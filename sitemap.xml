@@ -23,6 +23,20 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/%E9%81%8D%E5%8E%86%E6%96%87%E4%BB%B6%E8%A1%8C%E5%92%8Cawk/</loc>
+    <lastmod>2021-03-04T14:48:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/%E9%87%8D%E7%BB%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</loc>
+    <lastmod>2021-03-04T14:48:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/post/leetcode/57%E6%8F%92%E5%85%A5%E5%8C%BA%E9%97%B4/</loc>
     <lastmod>2021-02-19T13:41:18+08:00</lastmod>
     <changefreq>weekly</changefreq>

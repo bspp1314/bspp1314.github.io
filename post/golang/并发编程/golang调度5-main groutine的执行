@@ -87,6 +87,10 @@ runtime.main 的主要功能有
 - 执行main.main函数
 - 从main.main函数返回后调用exit系统调用退出进程；
 
+![image-20210330165343463](image-20210330165343463.png)
+
+
+
 main groutine执行完就直接调用exit(0) 退出了整个进程了，它并没有返回到调用它的函数。然而我们又设置了 goroutine 退出时应该跳到 `runtime.goexit` 函数吗？回顾下我们是怎么到runtime.main 函数的
 
 ```go
