@@ -49,7 +49,7 @@
 <meta itemprop="description" content="Redis里面使用skiplist是为了实现sorted set这种对外的数据结构。 我们知道在一般的有序链表中，我们需要查找数据的时间复杂度为">
 <meta itemprop="datePublished" content="2020-11-27T21:11:55+08:00" />
 <meta itemprop="dateModified" content="2020-11-27T21:11:55+08:00" />
-<meta itemprop="wordCount" content="2055">
+<meta itemprop="wordCount" content="2033">
 
 
 
@@ -215,6 +215,7 @@
 <li>节点的分值(score属性)是一个double类型的浮点数，跳跃表中的所有节点都按分值从小到大来排序。</li>
 <li>节点的后退指针 ( backward 属性 ) 用于从表尾向表头方向访问节点：跟可以一次跳过多个节点的前进指针不同，因为每个节点只有一个后退指针，所以每次只能后退至前一个节点。</li>
 </ul>
+<p><img src="redis_skiplist.png" alt="img"></p>
 <h2 id="随机算法">随机算法</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -403,15 +404,19 @@
 </span><span class="lnt">70
 </span><span class="lnt">71
 </span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="cm">/* Insert a new node in the skiplist. Assumes the element does not already
 </span><span class="cm"> * exist (up to the caller to enforce that). The skiplist takes ownership
 </span><span class="cm"> * of the passed SDS string &#39;ele&#39;. */</span>
 <span class="n">zskiplistNode</span> <span class="o">*</span><span class="nf">zslInsert</span><span class="p">(</span><span class="n">zskiplist</span> <span class="o">*</span><span class="n">zsl</span><span class="p">,</span> <span class="kt">double</span> <span class="n">score</span><span class="p">,</span> <span class="n">sds</span> <span class="n">ele</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">zskiplistNode</span> <span class="o">*</span><span class="n">update</span><span class="p">[</span><span class="n">ZSKIPLIST_MAXLEVEL</span><span class="p">],</span> <span class="o">*</span><span class="n">x</span><span class="p">;</span><span class="c1">//插入节点函数的实现中有一个 update 数组，它里面记录的是每一层中位于插入节点的前一个节
-</span><span class="c1"></span>    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">rank</span><span class="p">[</span><span class="n">ZSKIPLIST_MAXLEVEL</span><span class="p">];</span><span class="c1">//记录的是每一层中位于插入节点的前一个节点的排名，也就是 update 数组中每个节点的排名，
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">level</span><span class="p">;</span>
+  	<span class="c1">// update数组用来记录每一层的最后一个分数小于待插入score的节点
+</span><span class="c1"></span>    <span class="n">zskiplistNode</span> <span class="o">*</span><span class="n">update</span><span class="p">[</span><span class="n">ZSKIPLIST_MAXLEVEL</span><span class="p">],</span> <span class="o">*</span><span class="n">x</span><span class="p">;</span>
+ 	 <span class="c1">//rank数组用来记录上述插入位置的上一个节点的排名，以便于最后更新span值。
+</span><span class="c1"></span>    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">rank</span><span class="p">[</span><span class="n">ZSKIPLIST_MAXLEVEL</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">level</span><span class="p">;</span>
 
     <span class="n">serverAssert</span><span class="p">(</span><span class="o">!</span><span class="n">isnan</span><span class="p">(</span><span class="n">score</span><span class="p">));</span>
    <span class="c1">// 在各个层中查找节点的插入位置
@@ -532,6 +537,7 @@
 <p><a href="https://www.w3cschool.cn/hdclil/pea3uozt.html">https://www.w3cschool.cn/hdclil/pea3uozt.html</a></p>
 <p>Redis内部数据结构详解(6)——skiplist <a href="http://zhangtielei.com/posts/blog-redis-skiplist.html">http://zhangtielei.com/posts/blog-redis-skiplist.html</a></p>
 <p>Redis源码阅读笔记&ndash;跳跃表zskiplist <a href="https://zhuanlan.zhihu.com/p/49295806">https://zhuanlan.zhihu.com/p/49295806</a></p>
+<p>Redis Internal Data Structure : Skiplist <a href="http://blog.wjin.org/posts/redis-internal-data-structure-skiplist.html">http://blog.wjin.org/posts/redis-internal-data-structure-skiplist.html</a></p>
 
     </div>
 

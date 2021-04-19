@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="白水飘萍" /><meta name="description" content="题目 给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。 函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 inde" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="白水飘萍" /><meta name="description" content="1 2 3 4 5 6 7 8  start_date=2021-04-01 end_date=2021-04-11 start_sec=`date -d &amp;#34;$start_date&amp;#34; &amp;#34;&#43;%s&amp;#34;` end_sec=`date -d &amp;#34;$end_date&amp;#34; &amp;#34;&#43;%s&amp;#34;` for((i=start_sec;i&amp;lt;=end_sec;i&#43;=86400)); do day=$(date -d &amp;#34;@$i&amp;#34; &amp;#34;&#43;%Y-%m-%d&amp;#34;) echo $day done   " /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.75.1 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/leetcode/167%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" />
+<link rel="canonical" href="http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/linux%E6%97%B6%E9%97%B4/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,21 +40,21 @@
 
 
 <meta property="og:title" content="" />
-<meta property="og:description" content="题目 给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。 函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 inde" />
+<meta property="og:description" content="1 2 3 4 5 6 7 8  start_date=2021-04-01 end_date=2021-04-11 start_sec=`date -d &#34;$start_date&#34; &#34;&#43;%s&#34;` end_sec=`date -d &#34;$end_date&#34; &#34;&#43;%s&#34;` for((i=start_sec;i&lt;=end_sec;i&#43;=86400)); do day=$(date -d &#34;@$i&#34; &#34;&#43;%Y-%m-%d&#34;) echo $day done   " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/leetcode/167%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" />
+<meta property="og:url" content="http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/linux%E6%97%B6%E9%97%B4/" />
 
 <meta itemprop="name" content="">
-<meta itemprop="description" content="题目 给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。 函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 inde">
+<meta itemprop="description" content="1 2 3 4 5 6 7 8  start_date=2021-04-01 end_date=2021-04-11 start_sec=`date -d &#34;$start_date&#34; &#34;&#43;%s&#34;` end_sec=`date -d &#34;$end_date&#34; &#34;&#43;%s&#34;` for((i=start_sec;i&lt;=end_sec;i&#43;=86400)); do day=$(date -d &#34;@$i&#34; &#34;&#43;%Y-%m-%d&#34;) echo $day done   ">
 
-<meta itemprop="wordCount" content="293">
+<meta itemprop="wordCount" content="27">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="题目 给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。 函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 inde"/>
+<meta name="twitter:description" content="1 2 3 4 5 6 7 8  start_date=2021-04-01 end_date=2021-04-11 start_sec=`date -d &#34;$start_date&#34; &#34;&#43;%s&#34;` end_sec=`date -d &#34;$end_date&#34; &#34;&#43;%s&#34;` for((i=start_sec;i&lt;=end_sec;i&#43;=86400)); do day=$(date -d &#34;@$i&#34; &#34;&#43;%Y-%m-%d&#34;) echo $day done   "/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -134,87 +134,33 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#题目">题目</a></li>
-    <li><a href="#解答">解答</a></li>
-  </ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
-      <h1 id="题目">题目</h1>
-<p>给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。<!--more--></p>
-<p>函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。</p>
-<p>说明:</p>
-<p>返回的下标值（index1 和 index2）不是从零开始的。
-你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。</p>
-<p>示例:</p>
-<div class="highlight"><div class="chroma">
+      <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">输入: numbers = [2, 7, 11, 15], target = 9
-输出: [1,2]
-解释: 2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">start_date</span><span class="o">=</span>2021-04-01
+<span class="nv">end_date</span><span class="o">=</span>2021-04-11
+<span class="nv">start_sec</span><span class="o">=</span><span class="sb">`</span>date -d <span class="s2">&#34;</span><span class="nv">$start_date</span><span class="s2">&#34;</span> <span class="s2">&#34;+%s&#34;</span><span class="sb">`</span>
+<span class="nv">end_sec</span><span class="o">=</span><span class="sb">`</span>date -d <span class="s2">&#34;</span><span class="nv">$end_date</span><span class="s2">&#34;</span> <span class="s2">&#34;+%s&#34;</span><span class="sb">`</span>
+<span class="k">for</span><span class="o">((</span><span class="nv">i</span><span class="o">=</span>start_sec<span class="p">;</span>i&lt;<span class="o">=</span>end_sec<span class="p">;</span><span class="nv">i</span><span class="o">+=</span>86400<span class="o">))</span><span class="p">;</span> <span class="k">do</span>
+    <span class="nv">day</span><span class="o">=</span><span class="k">$(</span>date -d <span class="s2">&#34;@</span><span class="nv">$i</span><span class="s2">&#34;</span> <span class="s2">&#34;+%Y-%m-%d&#34;</span><span class="k">)</span>
+    <span class="nb">echo</span> <span class="nv">$day</span>
+<span class="k">done</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="解答">解答</h1>
-<p>非常简单的一个题目，直接看代码即可</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">twoSum</span><span class="p">(</span><span class="nx">numbers</span> <span class="p">[]</span><span class="kt">int</span><span class="p">,</span> <span class="nx">target</span> <span class="kt">int</span><span class="p">)</span> <span class="p">[]</span><span class="kt">int</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{}</span>
-    <span class="p">}</span>
-
-    <span class="nx">left</span> <span class="o">:=</span> <span class="mi">0</span> 
-    <span class="nx">right</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span> 
-
-    <span class="k">for</span> <span class="nx">left</span> <span class="p">&lt;</span> <span class="nx">right</span> <span class="p">{</span>
-        <span class="nx">sum</span> <span class="o">:=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">left</span><span class="p">]</span> <span class="o">+</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">right</span><span class="p">]</span>
-        <span class="k">if</span> <span class="nx">sum</span> <span class="o">==</span> <span class="nx">target</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="nx">left</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="nx">right</span><span class="o">+</span><span class="mi">1</span><span class="p">}</span>
-        <span class="p">}</span><span class="k">else</span> <span class="k">if</span> <span class="nx">sum</span> <span class="p">&gt;</span> <span class="nx">target</span><span class="p">{</span>
-            <span class="nx">right</span><span class="o">--</span> 
-        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-            <span class="nx">left</span><span class="o">++</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
 </div>
-</div><p>时间复杂度 $ O(n) $</p>
-<p>空间复杂度 $ O(1) $</p>
-
     </div>
 
     <div class="post-copyright">
@@ -235,12 +181,12 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        <a class="prev" href="/post/elk/elk%E9%83%A8%E7%BD%B2/">
+        <a class="prev" href="/post/leetcode/167%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default"></span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/linux%E6%97%B6%E9%97%B4/">
+        <a class="next" href="/post/os/io/io%E6%A8%A1%E5%9E%8B/">
             <span class="next-text nav-default"></span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>

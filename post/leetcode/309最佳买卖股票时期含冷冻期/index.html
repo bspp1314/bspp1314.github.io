@@ -49,7 +49,7 @@
 <meta itemprop="description" content="题目 给定一个整数数组，其中第 i 个元素代表了第 i 天的股票价格 。 设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（">
 <meta itemprop="datePublished" content="2020-11-09T11:38:47+08:00" />
 <meta itemprop="dateModified" content="2020-11-09T11:38:47+08:00" />
-<meta itemprop="wordCount" content="652">
+<meta itemprop="wordCount" content="694">
 
 
 
@@ -170,8 +170,8 @@
 </div><h1 id="解答">解答</h1>
 <p>同样是一个股票的题目，我们用同样的思路来分析。由于包含冷冻期，那么我们操作会导致三种状态</p>
 <ul>
-<li>卖出，未持有股票 dp[i][0]</li>
-<li>买入，持有股票 dp[i][1]</li>
+<li>未持有股票，且不处于冷冻期。 dp[i][0],</li>
+<li>持有股票 dp[i][1]</li>
 <li>冷冻期 dp[i][2]</li>
 </ul>
 <p>我们分别一个来写其的动态转移方程</p>
@@ -215,6 +215,8 @@ $$</p>
 </span><span class="lnt">24
 </span><span class="lnt">25
 </span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">maxProfit</span><span class="p">(</span><span class="nx">prices</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
@@ -223,9 +225,9 @@ $$</p>
     <span class="p">}</span>
     
 	<span class="nx">dp</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([][</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="nx">prices</span><span class="p">))</span>
-	<span class="nx">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span>  <span class="mi">0</span>               <span class="c1">//sell max(dp[i-1][0],dp[i] + prices[i])
-</span><span class="c1"></span>	<span class="nx">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span>  <span class="mi">0</span> <span class="o">-</span> <span class="nx">prices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1">// buy  max(dp[i-1][1],dp[i-1][2] - prices[i])
-</span><span class="c1"></span>	<span class="nx">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="p">=</span>  <span class="mi">0</span>      				 <span class="c1">// block
+	<span class="nx">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span>  <span class="mi">0</span>            <span class="c1">// 未持有股票   
+</span><span class="c1"></span>	<span class="nx">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span>  <span class="o">-</span><span class="nx">prices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1">// 持有股票 
+</span><span class="c1"></span>	<span class="nx">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="p">=</span>  <span class="mi">0</span>      			<span class="c1">// 冷冻期	
 </span><span class="c1"></span>
 	<span class="nx">max</span> <span class="o">:=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
 		<span class="k">if</span> <span class="nx">a</span> <span class="p">&gt;</span> <span class="nx">b</span> <span class="p">{</span>
@@ -236,9 +238,11 @@ $$</p>
 	<span class="p">}</span>
 
 	<span class="k">for</span> <span class="nx">i</span><span class="o">:=</span><span class="mi">1</span><span class="p">;</span><span class="nx">i</span><span class="p">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="nx">prices</span><span class="p">);</span><span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-		<span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="nf">max</span><span class="p">(</span><span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nx">prices</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>  <span class="c1">// sell
-</span><span class="c1"></span>		<span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="nf">max</span><span class="p">(</span><span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="nx">prices</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="c1">// buy
-</span><span class="c1"></span>		<span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="p">=</span> <span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1">// 前一天就是不持有/前一天持有，
+</span><span class="c1"></span>		<span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="nf">max</span><span class="p">(</span><span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nx">prices</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> 
+    <span class="c1">//前一天就持有/前一天是冷冻期，今天进行买入
+</span><span class="c1"></span>		<span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="nf">max</span><span class="p">(</span><span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="nx">prices</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> 
+		<span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="p">=</span> <span class="nx">dp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 	<span class="p">}</span>
 
 	<span class="k">return</span> <span class="nx">dp</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">prices</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
