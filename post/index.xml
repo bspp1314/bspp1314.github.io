@@ -1226,15 +1226,6 @@
     
     <item>
       <title></title>
-      <link>http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/linux%E6%97%B6%E9%97%B4/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/linux/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B0%8F%E8%84%9A%E6%9C%AC/linux%E6%97%B6%E9%97%B4/</guid>
-      <description>1 2 3 4 5 6 7 8  start_date=2021-04-01 end_date=2021-04-11 start_sec=`date -d &amp;#34;$start_date&amp;#34; &amp;#34;+%s&amp;#34;` end_sec=`date -d &amp;#34;$end_date&amp;#34; &amp;#34;+%s&amp;#34;` for((i=start_sec;i&amp;lt;=end_sec;i+=86400)); do day=$(date -d &amp;#34;@$i&amp;#34; &amp;#34;+%Y-%m-%d&amp;#34;) echo $day done   </description>
-    </item>
-    
-    <item>
-      <title></title>
       <link>http://localhost:1313/post/os/io/io%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
